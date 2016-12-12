@@ -39,14 +39,19 @@ export GREG_REMOTE_URL=https://$WSO2_GATEWAY:$GREG_HTTPS_PORT/registry
 export MYSQL_VERSION=5.7.10
 export MYSQL_ROOT_PASSWORD=password
 
-# BRS is just another ESB - WIP
+# BRS is just another ESB
 export BRS_HTTPS_PORT=9448
 export BRS_HTTP_PORT=9768
-# Not sure if these are needed
 export BRS_SSO_SERVICE_PROVIDER=service-provider-brs
 export BRS_SSO_ACS_URL=https://$WSO2_GATEWAY:$BRS_HTTPS_PORT/acs
 
-# AS WIP
+# AS
+# TODO: WIP
+export AS_VERSION=5.3.0
+export AS_HTTPS_PORT=9449
+export AS_HTTP_PORT=9769
+export AS_SSO_SERVICE_PROVIDER=service-provider-as
+export AS_SSO_ACS_URL=https://$WSO2_GATEWAY:$AS_HTTPS_PORT/acs
 
 # Move templates into conf - original repo just replaced variables in the committed files which was dumb
 rm -r conf/*
@@ -76,6 +81,14 @@ authenticatorConfig(){
         sp=$GREG_SSO_SERVICE_PROVIDER
         acs_url=$GREG_SSO_ACS_URL
         ;;
+      brs )
+        sp=$BRS_SSO_SERVICE_PROVIDER
+        acs_url=$BRS_SSO_ACS_URL
+        ;;
+      wso2as )
+        sp=$AS_SSO_SERVICE_PROVIDER
+        acs_url=$AS_SSO_ACS_URL
+        ;;
     esac
     sed -i "" \
       -e "s/\$SSO_SERVICE_PROVIDER/$sp/g" \
@@ -91,6 +104,7 @@ for dir in conf/*; do
   fi
 done
 
+##TODO: Might have to add entries here for brs and as, haven't yet
 find conf -type f -name '*.xml' -exec sed -i "" \
   -e "s/\$WSO2_GATEWAY/$WSO2_GATEWAY/g" \
   -e "s/\$APIM_SSO_SERVICE_PROVIDER/$APIM_SSO_SERVICE_PROVIDER/g" \
