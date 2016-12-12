@@ -1,0 +1,78 @@
+version: '2'
+services:
+    mysql:
+        image: mysql:$MYSQL_VERSION
+        environment:
+            - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+        volumes:
+            - ./scripts/mysql:/docker-entrypoint-initdb.d
+            - ./conf/mysql/:/etc/mysql/conf.d
+            - /var/lib/mysql
+    esb:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - $ESB_HTTPS_PORT:9443
+            - $ESB_HTTP_PORT:9763
+        volumes:
+            - ./conf/wso2esb/master-datasources.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2esb/registry.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/registry.xml
+            - ./conf/wso2esb/authenticators.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/security/authenticators.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2esb-$ESB_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
+    # brs:
+    #     image: eristoddle/wso2esb:5.0.0
+    #     ports:
+    #
+    #     volumes:
+
+    greg:
+        image: eristoddle/wso2greg:5.3.0
+        command: -Dsetup
+        ports:
+            - $GREG_HTTPS_PORT:9443
+            - $GREG_HTTP_PORT:9763
+        volumes:
+            - ./conf/wso2greg/master-datasources.xml:/opt/wso2greg-$GREG_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2greg/authenticators.xml:/opt/wso2greg-$GREG_VERSION/repository/conf/security/authenticators.xml
+            - ./conf/wso2greg/registry.xml:/opt/wso2greg-$GREG_VERSION/repository/conf/registry.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2greg-$GREG_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+    dss:
+        image: eristoddle/wso2dss:3.5.1
+        ports:
+            - $DSS_HTTPS_PORT:9443
+            - $DSS_HTTP_PORT:9763
+        volumes:
+            - ./conf/wso2dss/master-datasources.xml:/opt/wso2dss-$DSS_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2dss/registry.xml:/opt/wso2dss-$DSS_VERSION/repository/conf/registry.xml
+            - ./conf/wso2dss/authenticators.xml:/opt/wso2dss-$DSS_VERSION/repository/conf/security/authenticators.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2dss-$DSS_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+    is:
+        image: eristoddle/wso2is:5.2.0
+        hostname: wso2identity
+        ports:
+            - $IS_HTTPS_PORT:9443
+            - $IS_HTTP_PORT:9763
+        volumes:
+            - ./conf/wso2is/master-datasources.xml:/opt/wso2is-$IS_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2is/carbon.xml:/opt/wso2is-$IS_VERSION/repository/conf/carbon.xml
+            - ./conf/wso2is/registry.xml:/opt/wso2is-$IS_VERSION/repository/conf/registry.xml
+            - ./conf/wso2is/user-mgt.xml:/opt/wso2is-$IS_VERSION/repository/conf/user-mgt.xml
+            - ./conf/wso2is/sso-idp-config.xml:/opt/wso2is-$IS_VERSION/repository/conf/security/sso-idp-config.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2is-$IS_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
+    am:
+        image: eristoddle/wso2am:2.0.0
+        ports:
+            - $APIM_HTTPS_PORT:9443
+            - $APIM_HTTP_PORT:9763
+        volumes:
+            - ./conf/wso2am/master-datasources.xml:/opt/wso2am-$APIM_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2am/registry.xml:/opt/wso2am-$APIM_VERSION/repository/conf/registry.xml
+            - ./conf/wso2am/authenticators.xml:/opt/wso2am-$APIM_VERSION/repository/conf/security/authenticators.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2am-$APIM_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
+    # as:
+    #     image: eristoddle/wso2as:5.3.0
+    #     ports:
+    #
+    #     volumes:
