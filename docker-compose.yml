@@ -8,6 +8,7 @@ services:
             - ./scripts/mysql:/docker-entrypoint-initdb.d
             - ./conf/mysql/:/etc/mysql/conf.d
             - /var/lib/mysql
+
     esb:
         image: eristoddle/wso2esb:5.0.0
         ports:
@@ -29,6 +30,7 @@ services:
             - ./conf/brs/registry.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/registry.xml
             - ./conf/brs/authenticators.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/security/authenticators.xml
             - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2esb-$ESB_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
     greg:
         image: eristoddle/wso2greg:5.3.0
         command: -Dsetup
@@ -40,6 +42,7 @@ services:
             - ./conf/wso2greg/authenticators.xml:/opt/wso2greg-$GREG_VERSION/repository/conf/security/authenticators.xml
             - ./conf/wso2greg/registry.xml:/opt/wso2greg-$GREG_VERSION/repository/conf/registry.xml
             - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2greg-$GREG_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
     dss:
         image: eristoddle/wso2dss:3.5.1
         ports:
@@ -50,6 +53,7 @@ services:
             - ./conf/wso2dss/registry.xml:/opt/wso2dss-$DSS_VERSION/repository/conf/registry.xml
             - ./conf/wso2dss/authenticators.xml:/opt/wso2dss-$DSS_VERSION/repository/conf/security/authenticators.xml
             - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2dss-$DSS_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+
     is:
         image: eristoddle/wso2is:5.2.0
         hostname: wso2identity
