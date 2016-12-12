@@ -48,6 +48,10 @@ export BRS_SSO_ACS_URL=https://$WSO2_GATEWAY:$BRS_HTTPS_PORT/acs
 
 # AS WIP
 
+# Move templates into conf - original repo just replaced variables in the committed files which was dumb
+rm -r conf/*
+cp -r ./conf-templates/. ./conf
+
 # This function will copy the conf/common/authenticators.xml template to each component with the inlined parameters replaced
 # with appropriate values for each component.
 authenticatorConfig(){

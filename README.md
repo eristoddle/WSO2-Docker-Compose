@@ -7,4 +7,4 @@ For now, since the bases are pretty generic, I have a repo of the dockerfiles at
 ## Getting Started
 
 - Make sure you have docker installed.
-- Run `docker-compose up` in this projects directory
+- Since the developer I "borrowed" some of the scripts from uses env variables in the docker-compose file, you will have to run `up.sh` to set these variables and bring the network up instead of the running `docker-compose up`. I do plan on changing this.
