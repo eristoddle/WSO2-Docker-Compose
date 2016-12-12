@@ -19,12 +19,16 @@ services:
             - ./conf/wso2esb/authenticators.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/security/authenticators.xml
             - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2esb-$ESB_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
 
-    # brs:
-    #     image: eristoddle/wso2esb:5.0.0
-    #     ports:
-    #
-    #     volumes:
-
+    brs:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - $BRS_HTTPS_PORT:9443
+            - $BRS_HTTP_PORT:9763
+        volumes:
+            - ./conf/brs/master-datasources.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/datasources/master-datasources.xml
+            - ./conf/brs/registry.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/registry.xml
+            - ./conf/brs/authenticators.xml:/opt/wso2esb-$ESB_VERSION/repository/conf/security/authenticators.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/wso2esb-$ESB_VERSION/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
     greg:
         image: eristoddle/wso2greg:5.3.0
         command: -Dsetup

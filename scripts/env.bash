@@ -39,6 +39,15 @@ export GREG_REMOTE_URL=https://$WSO2_GATEWAY:$GREG_HTTPS_PORT/registry
 export MYSQL_VERSION=5.7.10
 export MYSQL_ROOT_PASSWORD=password
 
+# BRS is just another ESB - WIP
+export BRS_HTTPS_PORT=9448
+export BRS_HTTP_PORT=9768
+# Not sure if these are needed
+export BRS_SSO_SERVICE_PROVIDER=service-provider-brs
+export BRS_SSO_ACS_URL=https://$WSO2_GATEWAY:$BRS_HTTPS_PORT/acs
+
+# AS WIP
+
 # This function will copy the conf/common/authenticators.xml template to each component with the inlined parameters replaced
 # with appropriate values for each component.
 authenticatorConfig(){
