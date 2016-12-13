@@ -1,0 +1,50 @@
+version: '2'
+services:
+    mysql:
+        image: mysql:5.7.10
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+
+    esb:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9443:9443
+            - 9763:9763
+
+    brs:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9444:9443
+            - 9764:9763
+
+    greg:
+        image: eristoddle/wso2greg:5.3.0
+        command: -Dsetup
+        ports:
+            - 9445:9443
+            - 9765:9763
+
+    dss:
+        image: eristoddle/wso2dss:3.5.1
+        ports:
+            - 9446:9443
+            - 9766:9763
+
+    is:
+        image: eristoddle/wso2is:5.2.0
+        hostname: wso2identity
+        ports:
+            - 9447:9443
+            - 9767:9763
+
+    am:
+        image: eristoddle/wso2am:2.0.0
+        ports:
+            - 9448:9443
+            - 9768:9763
+
+    as:
+        image: eristoddle/wso2as:5.3.0
+        ports:
+            - 9449:9443
+            - 9769:9763

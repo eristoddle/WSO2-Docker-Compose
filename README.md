@@ -17,11 +17,25 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles. I
 
 ### Running with Rancher
 
-*WIP
+Rancher will currently only run on a Linux host. So installation on Linux is simple. For Mac (and possibly Windows), you will have to use a different process.
 
- Rancher for Mac installation procedures ( I followed #4 after trying the other 3 and not quite getting it, but I think by that point I had finally figured out I had to use docker-machine to build a vm for Rancher and then run all the docker commands, etc inside that vm. #4 explains this better than the first 3)
+- You will still need Docker for Mac installed.
+- You will also need Virtualbox.
+- You will be using docker-machine commands instead of docker from your actual physical machine.
+- You will be using docker commands inside the vm you built for Rancher.
+
+Most of the steps I learned from this post: https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/. But it didn't really cover adding hosts.
+
+- The first thing you need to do after following the steps in that post, is create a host after you browse to the Rancher web address.
+- I used the 192.168.99.100 address that was already in first form for adding hosts.
+- On the second form, I did nothing other than run the command listed at the bottom in the newly created vm. If you followed the instructions in the post above and you're Rancher vm is named `rancheros`, then you would run `docker-machine ssh rancheros` to get shell access to the box and then run the command from the Rancher UI there.
+- Click the Close button at the bottom and your new host should show up in a few seconds.
+
+WIP: Forgot about volumes in Rancher. You can use the rancher-compose.yml  file in the meantime to paste into the docker-compose.yml form when creating a new stack. It has no volumes and hence will run. I will be doing more research on using synced volumes when developing vs using volumes in production. I am thinking most of the configuration files synced in this project for playing around with could just be wrapped up in the docker images.
+
+
+### Additional Using Rancher on Mac instructions
 
 - https://github.com/rancher/10acre-ranch
 - https://media-glass.es/launching-a-local-rancher-cluster-1422b89b0477#.2wmywby6g
 - https://gist.github.com/eristoddle/0e72b777f2c0d9fb99fe01c185f6720e
-- https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/
