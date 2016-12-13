@@ -6,32 +6,17 @@
 export COMPOSE_PROJECT_NAME=wso2
 export WSO2_GATEWAY=192.168.99.100
 
-export IS_VERSION=5.2.0
-export IS_HTTPS_PORT=9443
-export IS_HTTP_PORT=9763
 export IS_SAML_SSO_URL=https://$WSO2_GATEWAY:$IS_HTTPS_PORT/samlsso
 
-export APIM_VERSION=2.0.0
-export APIM_HTTPS_PORT=9444
-export APIM_HTTP_PORT=9764
 export APIM_SSO_SERVICE_PROVIDER=service-provider-apim
 export APIM_SSO_ACS_URL=https://$WSO2_GATEWAY:$APIM_HTTPS_PORT/acs
 
-export ESB_VERSION=5.0.0
-export ESB_HTTPS_PORT=9445
-export ESB_HTTP_PORT=9765
 export ESB_SSO_SERVICE_PROVIDER=service-provider-esb
 export ESB_SSO_ACS_URL=https://$WSO2_GATEWAY:$ESB_HTTPS_PORT/acs
 
-export DSS_VERSION=3.5.1
-export DSS_HTTPS_PORT=9446
-export DSS_HTTP_PORT=9766
 export DSS_SSO_SERVICE_PROVIDER=service-provider-dss
 export DSS_SSO_ACS_URL=https://$WSO2_GATEWAY:$DSS_HTTPS_PORT/acs
 
-export GREG_VERSION=5.3.0
-export GREG_HTTPS_PORT=9447
-export GREG_HTTP_PORT=9767
 export GREG_SSO_SERVICE_PROVIDER=service-provider-greg
 export GREG_SSO_ACS_URL=https://$WSO2_GATEWAY:$GREG_HTTPS_PORT/acs
 export GREG_REMOTE_URL=https://$WSO2_GATEWAY:$GREG_HTTPS_PORT/registry
@@ -40,16 +25,11 @@ export MYSQL_VERSION=5.7.10
 export MYSQL_ROOT_PASSWORD=password
 
 # BRS is just another ESB
-export BRS_HTTPS_PORT=9448
-export BRS_HTTP_PORT=9768
 export BRS_SSO_SERVICE_PROVIDER=service-provider-brs
 export BRS_SSO_ACS_URL=https://$WSO2_GATEWAY:$BRS_HTTPS_PORT/acs
 
 # AS
 # TODO: WIP
-export AS_VERSION=5.3.0
-export AS_HTTPS_PORT=9449
-export AS_HTTP_PORT=9769
 export AS_SSO_SERVICE_PROVIDER=service-provider-as
 export AS_SSO_ACS_URL=https://$WSO2_GATEWAY:$AS_HTTPS_PORT/acs
 
