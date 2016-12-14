@@ -31,8 +31,7 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 - On the second form, I did nothing other than run the command listed at the bottom in the newly created vm. If you followed the instructions in the post above and you're Rancher vm is named `rancheros`, then you would run `docker-machine ssh rancheros` to get shell access to the box and then run the command from the Rancher UI there.
 - Click the Close button at the bottom and your new host should show up in a few seconds.
 
-WIP: Forgot about volumes in Rancher. You can use the rancher-compose.yml  file in the meantime to paste into the docker-compose.yml form when creating a new stack. It has no volumes and hence will run. I will be doing more research on using synced volumes when developing vs using volumes in production. I am thinking most of the configuration files synced in this project for playing around with could just be wrapped up in the docker images.
-
+WIP: Forgot about volumes in Rancher. You can use the dokcer-compose-rancher-dev.yml  file in the meantime to paste into the docker-compose.yml form when creating a new stack. It has no volumes and hence will run. I will be doing more research on using synced volumes when developing vs using volumes in production. I am thinking most of the configuration files synced in this project for playing around with could just be wrapped up in the docker images or in a shared volume that gets created in this project from the conf directory.
 
 ### Additional Using Rancher on Mac instructions
 
