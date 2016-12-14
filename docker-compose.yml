@@ -26,10 +26,10 @@ services:
             - 9444:9443
             - 9764:9763
         volumes:
-            - ./conf/brs/master-datasources.xml:/opt/brs-5.0.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/brs/registry.xml:/opt/brs-5.0.0/repository/conf/registry.xml
-            - ./conf/brs/authenticators.xml:/opt/brs-5.0.0/repository/conf/security/authenticators.xml
-            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/brs-5.0.0/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+            - ./conf/brs/master-datasources.xml:/opt/esb-5.0.0/repository/conf/datasources/master-datasources.xml
+            - ./conf/brs/registry.xml:/opt/esb-5.0.0/repository/conf/registry.xml
+            - ./conf/brs/authenticators.xml:/opt/esb-5.0.0/repository/conf/security/authenticators.xml
+            - ./lib/mysql-connector-java-5.1.38-bin.jar:/opt/esb-5.0.0/repository/components/lib/mysql-connector-java-5.1.38-bin.jar
 
     greg:
         image: eristoddle/wso2greg:5.3.0
