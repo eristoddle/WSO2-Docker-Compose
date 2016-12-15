@@ -10,7 +10,7 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles. I
 
 - Make sure you have docker installed.
 - You will have to run `prep-conf.sh` to set some environment variables and create the final configuration files for the WSO2 apps. Then run `docker-compose up`
-- To manage the boxes through a UI on your dev machine, check out http://portainer.io/
+- To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000.
 - This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
 - The ports for each box can be found in the `docker-compose.yml` file. The https port Applications run by the application server can found at http://localhost:9769/docs etc.
@@ -31,7 +31,7 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 - On the second form, I did nothing other than run the command listed at the bottom in the newly created vm. If you followed the instructions in the post above and you're Rancher vm is named `rancheros`, then you would run `docker-machine ssh rancheros` to get shell access to the box and then run the command from the Rancher UI there.
 - Click the Close button at the bottom and your new host should show up in a few seconds.
 
-WIP: Forgot about volumes in Rancher. You can use the dokcer-compose-rancher-dev.yml  file in the meantime to paste into the docker-compose.yml form when creating a new stack. It has no volumes and hence will run. I will be doing more research on using synced volumes when developing vs using volumes in production. I am thinking most of the configuration files synced in this project for playing around with could just be wrapped up in the docker images or in a shared volume that gets created in this project from the conf directory.
+WIP: Forgot about volumes in Rancher. You can use the docker-compose-rancher-dev.yml  file in the meantime to paste into the docker-compose.yml form when creating a new stack. It has no volumes and hence will run. I will be doing more research on using synced volumes when developing vs using volumes in production. I am thinking most of the configuration files synced in this project for playing around with could just be wrapped up in the docker images or in a shared volume that gets created in this project from the conf directory.
 
 ### Additional Using Rancher on Mac instructions
 
