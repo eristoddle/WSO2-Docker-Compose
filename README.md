@@ -2,7 +2,9 @@
 
 ## Docker base images
 
-I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles. I used that repo to build the base boxes and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
+I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles.  That repo can be used to create generic docker images of wso2 applications using a Centos 7 base image. The base image Dockerfile is also included in that repo. The base image should only have to be updated to update Centos. The wso2 images should only have to be updated to install a new version of WSO2.
+
+I used that repo to build the base image and wso2 images and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
 
 ## Getting Started
 
@@ -13,7 +15,7 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles. I
 - To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000.
 - This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
-- The ports for each box can be found in the `docker-compose.yml` file. The https port Applications run by the application server can found at http://localhost:9769/docs etc.
+- The ports for each box can be found in the `docker-compose.yml` file.
 
 ### Local Urls with Docker Compose
 
@@ -38,7 +40,10 @@ Rancher will currently only run on a Linux host. So installation on Linux is sim
 - You will be using docker commands inside the vm you built for Rancher.
 
 #### Creating a Rancher Instance
-Most of the steps I learned from this post: https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/. But it didn't really cover adding hosts.
+
+NOTE: Not necessary for local development, but for playing with a production level environment locally.
+
+Most of the steps I learned from this post: https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/.
 
 - Run `docker-machine create -d virtualbox --virtualbox-boot2docker-url https://releases.rancher.com/os/latest/rancheros.iso rancheros` to create the docker host for rancheros
 - Log in to the machine with `docker-machine ssh rancheros`
@@ -65,8 +70,19 @@ Because stuff happens.
 - Stop all containers: `docker stop $(docker ps -a -q)`
 - Remove all containers: `docker rm $(docker ps -a -q)`
 
-### Additional Using Rancher on Mac instructions
+#### Configuring an insecure registry in Rancher
 
-- https://github.com/rancher/10acre-ranch
-- https://media-glass.es/launching-a-local-rancher-cluster-1422b89b0477#.2wmywby6g
-- https://gist.github.com/eristoddle/0e72b777f2c0d9fb99fe01c185f6720e
+Normally you would edit the config file at `/etc/default/docker`. Not so in RancherOS. It has a configuration file at `/var/lib/rancher/conf/docker`. You will add this line to that file: `--insecure-registry 192.168.99.100:5000` and then restart docker with the command listed above.
+
+Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set the FDQN to the IP of Rancher, which in my case was `192.168.99.100`. Let it do it's thing after it launches. It takes quite a while, 5-10 minutes locally. I tried clicking things during the process because I thought I had to, but that broke the container.
+
+You may have to stop the virtualbox image and up the memory if it crashes.
+
+## WSO2 Development - WIP
+
+Artifacts for Carbon Apps (C-App) get added directly to `< CARBON_HOME>/repository/deployment/server/carbonapps`.
+
+See these links:
+- https://docs.wso2.com/display/TS110/Creating+and+Deploying+C-App
+- https://docs.wso2.com/display/DVS380/Packaging+Artifacts+Into+Deployable+Archives
+- http://wso2.com/library/articles/2015/10/article-wso2-developer-studio-development-and-deployment-best-practices/
