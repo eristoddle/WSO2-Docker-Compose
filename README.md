@@ -28,7 +28,7 @@ Rancher will currently only run on a Linux host. So installation on Linux is sim
 Most of the steps I learned from this post: https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/. But it didn't really cover adding hosts.
 
 - Run `docker-machine create -d virtualbox --virtualbox-boot2docker-url https://releases.rancher.com/os/latest/rancheros.iso rancheros` to create the docker host for rancheros
-- Log in to the machine with `docker-machine ssh rancheros`.
+- Log in to the machine with `docker-machine ssh rancheros`
 - Then run `sudo docker run -d --restart=always -p 8080:8080 rancher/server` inside this new host to start rancher.
 
 #### Managing the Rancher Instance
@@ -43,6 +43,14 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container we will use as a volume. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
 
 This means the image created from this docker file must be pushed to a private repo and tagged. Then referenced in the docker compose yaml file for that environment.
+
+#### Other Rancher/Docker commands
+
+Because stuff happens.
+
+- To restart docker running in RancherOS: `sudo ros service restart`
+- Stop all containers: `docker stop $(docker ps -a -q)`
+- Remove all containers: `docker rm $(docker ps -a -q)`
 
 ### Additional Using Rancher on Mac instructions
 
