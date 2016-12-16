@@ -9,11 +9,24 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles. I
 ### Running with docker-compose
 
 - Make sure you have docker installed.
-- You will have to run `prep-conf.sh` to set some environment variables and create the final configuration files for the WSO2 apps. Then run `docker-compose up`
+- Run `docker-compose up`
 - To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000.
 - This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
 - The ports for each box can be found in the `docker-compose.yml` file. The https port Applications run by the application server can found at http://localhost:9769/docs etc.
+
+### Local Urls with Docker Compose
+
+Default user: admin
+Default password: admin
+
+- ESB: https://localhost:9443/carbon/admin/login.jsp
+- BRS: https://localhost:9444/carbon/admin/login.jsp
+- GREG: https://localhost:9445/carbon/admin/login.jsp
+- DSS: https://localhost:9446/carbon/admin/login.jsp
+- IS: https://localhost:9447/carbon/admin/login.jsp
+- AM: https://localhost:9448/carbon/admin/login.jsp
+- AS: https://localhost:9449/carbon/admin/login.jsp
 
 ### Running with Rancher
 

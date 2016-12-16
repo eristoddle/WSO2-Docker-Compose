@@ -8,5 +8,4 @@
 FROM busybox:latest
 VOLUME ["/conf"]
 COPY ./conf /tmp-conf
-COPY ./scripts /tmp-conf/scripts
 CMD cp -R /tmp-conf/* /conf/
