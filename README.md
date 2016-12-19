@@ -62,13 +62,15 @@ Locally we can sync the volumes to our development machine. On remote hosts, we 
 
 This means the image created from this docker file must be pushed to a private repo and tagged. Then referenced in the docker compose yaml file for that environment.
 
-#### Other Rancher/Docker commands
+#### Other Rancher/Docker commands & quirks
 
 Because stuff happens.
 
 - To restart docker running in RancherOS: `sudo ros service restart`
 - Stop all containers: `docker stop $(docker ps -a -q)`
 - Remove all containers: `docker rm $(docker ps -a -q)`
+
+If you make a mistake creating a stack and try again and get errors about a name not being unique the second time, try a new name for a stack.
 
 #### Configuring an insecure registry in Rancher
 
