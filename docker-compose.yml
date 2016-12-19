@@ -46,7 +46,7 @@ services:
             - 9446:9443
             - 9766:9763
         volumes:
-            - ./conf/wso2dss/repository/conf/datasources/master-datasources.xml:/opt/wso2dss-3.5.1repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2dss/repository/conf/datasources/master-datasources.xml:/opt/wso2dss-3.5.1/repository/conf/datasources/master-datasources.xml
             - ./conf/wso2dss/repository/conf/registry.xml:/opt/wso2dss-3.5.1/repository/conf/registry.xml
             - ./conf/wso2dss/repository/conf/security/authenticators.xml:/opt/wso2dss-3.5.1/repository/conf/security/authenticators.xml
 
