@@ -8,6 +8,8 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 ## Getting Started
 
+**For a local dev environment, all you have to worry about is the docker-compose section**
+
 ### Running with docker-compose
 
 - Make sure you have docker installed.
@@ -30,7 +32,9 @@ Default password: admin
 - AM: https://localhost:9448/carbon/admin/login.jsp
 - AS: https://localhost:9449/carbon/admin/login.jsp
 
-### Running with Rancher
+## Running with Rancher
+
+NOTE: Not necessary for local development, but for playing with a production level environment locally.
 
 Rancher will currently only run on a Linux host. So installation on Linux is simple. For Mac (and possibly Windows), you will have to use a different process.
 
@@ -39,9 +43,7 @@ Rancher will currently only run on a Linux host. So installation on Linux is sim
 - You will be using docker-machine commands instead of docker from your actual physical machine.
 - You will be using docker commands inside the vm you built for Rancher.
 
-#### Creating a Rancher Instance
-
-NOTE: Not necessary for local development, but for playing with a production level environment locally.
+### Creating a Rancher Instance
 
 Most of the steps I learned from this post: https://www.webuildinternet.com/2016/09/06/how-to-install-rancheros-and-rancher/.
 
@@ -49,14 +51,32 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 - Log in to the machine with `docker-machine ssh rancheros`
 - Then run `sudo docker run -d --restart=always -p 8080:8080 rancher/server` inside this new host to start rancher.
 
-#### Managing the Rancher Instance
+### Managing the Rancher Instance
 
 - The first thing you need to do after following the steps in that post, is create a host after you browse to the Rancher web address.
 - I used the 192.168.99.100 address that was already in first form for adding hosts.
 - On the second form, I did nothing other than run the command listed at the bottom in the newly created vm. If you followed the instructions in the post above and you're Rancher vm is named `rancheros`, then you would run `docker-machine ssh rancheros` to get shell access to the box and then run the command from the Rancher UI there.
 - Click the Close button at the bottom and your new host should show up in a few seconds.
 
-#### Volumes in Environments other than Local
+### Other Rancher/Docker commands & quirks
+
+Because stuff happens.
+
+- To restart docker running in RancherOS: `sudo ros service restart`
+- Stop all containers: `docker stop $(docker ps -a -q)`
+- Remove all containers: `docker rm $(docker ps -a -q)`
+
+If you make a mistake creating a stack and try again and get errors about a name not being unique the second time, try a new name for a stack.
+
+### Configuring an insecure registry in Rancher
+
+Normally you would edit the config file at `/etc/default/docker`. Not so in RancherOS. It has a configuration file at `/var/lib/rancher/conf/docker`. You will add this line to that file: `--insecure-registry 192.168.99.100:5000` and then restart docker with the command listed above.
+
+Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set the FDQN to the IP of Rancher, which in my case was `192.168.99.100`. Let it do it's thing after it launches. It takes quite a while, 5-10 minutes locally. I tried clicking things during the process because I thought I had to, but that broke the container.
+
+You may have to stop the virtualbox image and up the memory if it crashes.
+
+## Volumes in Environments other than Local
 
 Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
 
@@ -68,23 +88,26 @@ This is an old method for doing this and probably should be changed to use volum
 - NFS
 After some research on the what would work best for us.
 
-#### Other Rancher/Docker commands & quirks
+## AWS Elastic Beanstalk - WIP
 
-Because stuff happens.
+Follow the instructions here: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker-eblocal.html
 
-- To restart docker running in RancherOS: `sudo ros service restart`
-- Stop all containers: `docker stop $(docker ps -a -q)`
-- Remove all containers: `docker rm $(docker ps -a -q)`
 
-If you make a mistake creating a stack and try again and get errors about a name not being unique the second time, try a new name for a stack.
+### More AWS/Docker Reading
 
-#### Configuring an insecure registry in Rancher
+- https://github.com/hopsoft/relay/wiki/How-to-Deploy-Docker-apps-to-Elastic-Beanstalk
+- https://blog.mebooks.co.nz/automating-elastic-beanstalk/
+- http://prakhar.me/docker-curriculum/
+- https://blog.mikesir87.io/2016/04/pushing-to-ecr-using-jenkins-pipeline-plugin/
 
-Normally you would edit the config file at `/etc/default/docker`. Not so in RancherOS. It has a configuration file at `/var/lib/rancher/conf/docker`. You will add this line to that file: `--insecure-registry 192.168.99.100:5000` and then restart docker with the command listed above.
+### Notes
 
-Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set the FDQN to the IP of Rancher, which in my case was `192.168.99.100`. Let it do it's thing after it launches. It takes quite a while, 5-10 minutes locally. I tried clicking things during the process because I thought I had to, but that broke the container.
+- Currently there is a bug in the version of Docker that Elastic Beanstalk uses. Running `eb local run` will throw an error like this: `ERROR: ValueError :: Extra data:`. In this case, just use `docker pull` to pull all the images you need first and then the Beanstalk command will work. See: https://forums.docker.com/t/cant-use-docker-due-to-valueerror-extra-data-known-issue/19535/3.
 
-You may have to stop the virtualbox image and up the memory if it crashes.
+### More Docker Reading
+
+- https://github.com/veggiemonk/awesome-docker
+- https://www.katacoda.com/
 
 ## WSO2 Development - WIP
 
