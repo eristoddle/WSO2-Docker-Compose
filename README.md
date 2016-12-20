@@ -58,9 +58,15 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 
 #### Volumes in Environments other than Local
 
-Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container we will use as a volume. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
+Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
 
 This means the image created from this docker file must be pushed to a private repo and tagged. Then referenced in the docker compose yaml file for that environment.
+
+This is an old method for doing this and probably should be changed to use volume drivers like:
+- Flocker
+- Convoy
+- NFS
+After some research on the what would work best for us.
 
 #### Other Rancher/Docker commands & quirks
 
