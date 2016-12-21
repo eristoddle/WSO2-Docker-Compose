@@ -5,8 +5,8 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD=password
         volumes:
-            - ./conf/scripts/mysql:/docker-entrypoint-initdb.d
-            - ./conf/mysql/:/etc/mysql/conf.d
+            - ./conf/wso2scripts/mysql:/docker-entrypoint-initdb.d
+            - ./conf/wso2mysql/:/etc/mysql/conf.d
             - /var/lib/mysql
 
     esb:
@@ -15,9 +15,9 @@ services:
             - 9443:9443
             - 9763:9763
         volumes:
-            - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/opt/wso2esb-5.0.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2esb/repository/conf/registry.xml:/opt/wso2esb-5.0.0/repository/conf/registry.xml
-            - ./conf/wso2esb/repository/conf/security/authenticators.xml:/opt/wso2esb-5.0.0/repository/conf/security/authenticators.xml
+            - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2esb/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
+            - ./conf/wso2esb/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
 
     brs:
         image: eristoddle/wso2esb:5.0.0
@@ -25,9 +25,9 @@ services:
             - 9444:9443
             - 9764:9763
         volumes:
-            - ./conf/brs/repository/conf/datasources/master-datasources.xml:/opt/wso2esb-5.0.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/brs/repository/conf/registry.xml:/opt/wso2esb-5.0.0/repository/conf/registry.xml
-            - ./conf/brs/repository/conf/security/authenticators.xml:/opt/wso2esb-5.0.0/repository/conf/security/authenticators.xml
+            - ./conf/wso2brs/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2brs/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
+            - ./conf/wso2brs/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
 
     greg:
         image: eristoddle/wso2greg:5.3.0
@@ -36,9 +36,9 @@ services:
             - 9445:9443
             - 9765:9763
         volumes:
-            - ./conf/wso2greg/repository/conf/datasources/master-datasources.xml:/opt/wso2greg-5.3.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2greg/repository/conf/security/authenticators.xml:/opt/wso2greg-5.3.0/repository/conf/security/authenticators.xml
-            - ./conf/wso2greg/repository/conf/registry.xml:/opt/wso2greg-5.3.0/repository/conf/registry.xml
+            - ./conf/wso2greg/repository/conf/datasources/master-datasources.xml:/opt/wso2greg/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2greg/repository/conf/security/authenticators.xml:/opt/wso2greg/repository/conf/security/authenticators.xml
+            - ./conf/wso2greg/repository/conf/registry.xml:/opt/wso2greg/repository/conf/registry.xml
 
     dss:
         image: eristoddle/wso2dss:3.5.1
@@ -46,9 +46,9 @@ services:
             - 9446:9443
             - 9766:9763
         volumes:
-            - ./conf/wso2dss/repository/conf/datasources/master-datasources.xml:/opt/wso2dss-3.5.1/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2dss/repository/conf/registry.xml:/opt/wso2dss-3.5.1/repository/conf/registry.xml
-            - ./conf/wso2dss/repository/conf/security/authenticators.xml:/opt/wso2dss-3.5.1/repository/conf/security/authenticators.xml
+            - ./conf/wso2dss/repository/conf/datasources/master-datasources.xml:/opt/wso2dss/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2dss/repository/conf/registry.xml:/opt/wso2dss/repository/conf/registry.xml
+            - ./conf/wso2dss/repository/conf/security/authenticators.xml:/opt/wso2dss/repository/conf/security/authenticators.xml
 
     is:
         image: eristoddle/wso2is:5.2.0
@@ -57,11 +57,11 @@ services:
             - 9447:9443
             - 9767:9763
         volumes:
-            - ./conf/wso2is/repository/conf/datasources/master-datasources.xml:/opt/wso2is-5.2.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2is/repository/conf/carbon.xml:/opt/wso2is-5.2.0/repository/conf/carbon.xml
-            - ./conf/wso2is/repository/conf/registry.xml:/opt/wso2is-5.2.0/repository/conf/registry.xml
-            - ./conf/wso2is/repository/conf/user-mgt.xml:/opt/wso2is-5.2.0/repository/conf/user-mgt.xml
-            - ./conf/wso2is/repository/conf/security/sso-idp-config.xml:/opt/wso2is-5.2.0/repository/conf/security/sso-idp-config.xml
+            - ./conf/wso2is/repository/conf/datasources/master-datasources.xml:/opt/wso2is/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2is/repository/conf/carbon.xml:/opt/wso2is/repository/conf/carbon.xml
+            - ./conf/wso2is/repository/conf/registry.xml:/opt/wso2is/repository/conf/registry.xml
+            - ./conf/wso2is/repository/conf/user-mgt.xml:/opt/wso2is/repository/conf/user-mgt.xml
+            - ./conf/wso2is/repository/conf/security/sso-idp-config.xml:/opt/wso2is/repository/conf/security/sso-idp-config.xml
 
     am:
         image: eristoddle/wso2am:2.0.0
@@ -69,9 +69,9 @@ services:
             - 9448:9443
             - 9768:9763
         volumes:
-            - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/opt/wso2am-2.0.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2am/repository/conf/registry.xml:/opt/wso2am-2.0.0/repository/conf/registry.xml
-            - ./conf/wso2am/repository/conf/security/authenticators.xml:/opt/wso2am-2.0.0/repository/conf/security/authenticators.xml
+            - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/opt/wso2am/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2am/repository/conf/registry.xml:/opt/wso2am/repository/conf/registry.xml
+            - ./conf/wso2am/repository/conf/security/authenticators.xml:/opt/wso2am/repository/conf/security/authenticators.xml
 
     as:
         image: eristoddle/wso2as:5.3.0
@@ -79,6 +79,6 @@ services:
             - 9449:9443
             - 9769:9763
         volumes:
-            - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/opt/wso2as-5.3.0/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2as/repository/conf/registry.xml:/opt/wso2as-5.3.0/repository/conf/registry.xml
-            - ./conf/wso2as/repository/conf/security/authenticators.xml:/opt/wso2as-5.3.0/repository/conf/security/authenticators.xml
+            - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/opt/wso2as/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2as/repository/conf/registry.xml:/opt/wso2as/repository/conf/registry.xml
+            - ./conf/wso2as/repository/conf/security/authenticators.xml:/opt/wso2as/repository/conf/security/authenticators.xml

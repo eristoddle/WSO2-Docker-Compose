@@ -3,14 +3,22 @@ version: '2'
 services:
     confdata:
         # TODO: Temporarily pulling generic config volume from dockerhub to test things. Change this.
-        # This the container built from the Dockerfile in this project
+        # This the image built from the Dockerfile in this project
         image: eristoddle/wso2-dev-config
         container_name: confdata
         labels:
-            io.rancher.container.start_once: true
+            io.rancher.container.start_once: 'true'
             io.rancher.container.pull_image: always
         volumes:
-            - /opt:/conf
+            - /opt/wso2am:/conf/wso2am
+            - /opt/wso2as:/conf/wso2as
+            - /opt/wso2brs:/conf/wso2brs
+            - /opt/wso2dss:/conf/wso2dss
+            - /opt/wso2esb:/conf/wso2esb
+            - /opt/wso2greg:/conf/wso2greg
+            - /opt/wso2is:/conf/wso2is
+            - /opt/wso2mysql:/conf/wso2mysql
+            - /opt/wso2scripts:/conf/wso2scripts
     mysql:
         image: mysql:5.7.10
         environment:
@@ -18,8 +26,8 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/scripts/mysql:/docker-entrypoint-initdb.d
-            - /opt/mysql/:/etc/mysql/conf.d
+            - /opt/wso2scripts/mysql:/docker-entrypoint-initdb.d
+            - /opt/wso2mysql/:/etc/mysql/conf.d
             - /var/lib/mysql
 
     esb:
@@ -41,10 +49,11 @@ services:
             - 9764:9763
         depends_on:
             - confdata
+        # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
         volumes:
-            - /opt/brs/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
-            - /opt/brs/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
-            - /opt/brs/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
+            - /opt/wso2brs/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2brs/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
+            - /opt/wso2brs/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
 
     greg:
         image: eristoddle/wso2greg:5.3.0
