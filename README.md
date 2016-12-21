@@ -57,6 +57,7 @@ Most of the steps I learned from this post: https://www.webuildinternet.com/2016
 - I used the 192.168.99.100 address that was already in first form for adding hosts.
 - On the second form, I did nothing other than run the command listed at the bottom in the newly created vm. If you followed the instructions in the post above and you're Rancher vm is named `rancheros`, then you would run `docker-machine ssh rancheros` to get shell access to the box and then run the command from the Rancher UI there.
 - Click the Close button at the bottom and your new host should show up in a few seconds.
+- I found that starting the vm with 6gb of ram instead of the default 1gb makes things come up quickly. I tried 4gb and it came up but you had to wait longer. To change the vm's settings, first run `docker-machine stop rancheros`. Then run Virtualbox and find the vm and change it's setting to have more memory. I also added 2 cores from the processor instead of 1. Then you can restart Rancher again with `docker-machine start rancheros`.
 
 ### Other Rancher/Docker commands & quirks
 
@@ -65,8 +66,6 @@ Because stuff happens.
 - To restart docker running in RancherOS: `sudo ros service restart`
 - Stop all containers: `docker stop $(docker ps -a -q)`
 - Remove all containers: `docker rm $(docker ps -a -q)`
-
-If you make a mistake creating a stack and try again and get errors about a name not being unique the second time, try a new name for a stack.
 
 ### Configuring an insecure registry in Rancher
 
