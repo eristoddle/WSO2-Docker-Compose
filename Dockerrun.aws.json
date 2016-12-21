@@ -1,0 +1,40 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [{
+        "name": "mysql",
+        "host": {
+            "sourcePath": "/var/lib/mysql"
+        }
+    }],
+    "containerDefinitions": [{
+        "name": "confdata",
+        "image": "eristoddle/wso2-dev-config",
+        "essential": false,
+        "memory": 16,
+        "mountPoints": [{
+            "sourceVolume": "confdata",
+            "containerPath": "/tmp/wso2-conf"
+        }]
+    }, {
+        "name": "mysql",
+        "image": "mysql:5.7.10",
+        "essential": true,
+        "memory": 128,
+        "environment": [
+            {
+                "name": "MYSQL_ROOT_PASSWORD",
+                "value": "password"
+            }
+        ],
+        "mountPoints": [{
+            "sourceVolume": "mysql",
+            "containerPath": "/var/lib/mysql"
+        }, {
+            "sourceVolume": "confdata",
+            "containerPath": "/conf/scripts/mysql:/docker-entrypoint-initdb.d"
+        }, {
+            "sourceVolume": "confdata",
+            "containerPath": "/conf/scripts/mysql:/docker-entrypoint-initdb.d"
+        }]
+    }]
+}
