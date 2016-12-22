@@ -19,6 +19,7 @@ services:
             - ./conf/wso2esb/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
             - ./conf/wso2esb/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
 
+    # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
     brs:
         image: eristoddle/wso2esb:5.0.0
         ports:
