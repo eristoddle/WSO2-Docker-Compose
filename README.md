@@ -10,6 +10,11 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 **For a local dev environment, all you have to worry about is the docker-compose section**
 
+## TODO and BUGS
+
+- Currently working on SSO and getting that right, so things aren't working 100% together yet.
+- If you have problems, you can comment out the volumes sections in the docker-compose.yml file until the configuration files are working correctly just to run the applications.
+
 ### Running with docker-compose
 
 - Make sure you have docker installed.
@@ -18,17 +23,18 @@ I used that repo to build the base image and wso2 images and push the images to 
 - This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
 - The ports for each box can be found in the `docker-compose.yml` file.
+- For SSO, you will have to edit the /etc/hosts file on your laptop and add the host `wso2identity` to `127.0.0.1`.
 
 ### Local Urls with Docker Compose
 
 Default user: admin
 Default password: admin
 
-- ESB: https://localhost:9443/carbon/admin/login.jsp
+- ESB: https://localhost:9447/carbon/admin/login.jsp
 - BRS: https://localhost:9444/carbon/admin/login.jsp
 - GREG: https://localhost:9445/carbon/admin/login.jsp
 - DSS: https://localhost:9446/carbon/admin/login.jsp
-- IS: https://localhost:9447/carbon/admin/login.jsp
+- IS: https://localhost:9443/carbon/admin/login.jsp
 - AM: https://localhost:9448/carbon/admin/login.jsp
 - AS: https://localhost:9449/carbon/admin/login.jsp
 
