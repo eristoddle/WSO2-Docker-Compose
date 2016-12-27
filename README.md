@@ -34,7 +34,10 @@ Default password: admin
 
 ### When You Don't Need to Run the Whole Stack
 
-Just comment out the images you don't want to run in the docker-compose.yml file.
+Just comment out the images you don't want to run in the docker-compose.yml file. The following you will need to have running due to configuration files looking for them:
+
+- wso2mysql
+- is
 
 ## Running with Rancher
 

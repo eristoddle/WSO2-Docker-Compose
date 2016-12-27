@@ -19,7 +19,7 @@ services:
             - /opt/wso2is:/conf/wso2is
             - /opt/wso2mysql:/conf/wso2mysql
             - /opt/wso2scripts:/conf/wso2scripts
-    mysql:
+    wso2mysql:
         image: mysql:5.7.10
         environment:
             - MYSQL_ROOT_PASSWORD=password

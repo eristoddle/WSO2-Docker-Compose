@@ -34,9 +34,9 @@
             <Parameter name="LoginPage">/carbon/admin/login.jsp</Parameter>
             <Parameter name="NameIDPolicyFormat">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</Parameter>
 
-            <Parameter name="ServiceProviderID">service-provider-apim</Parameter>
-            <Parameter name="IdentityProviderSSOServiceURL">https://192.168.99.100:/samlsso</Parameter>
-            <Parameter name="AssertionConsumerServiceURL">https://192.168.99.100:/acs</Parameter>
+            <Parameter name="ServiceProviderID">service-provider-as</Parameter>
+            <Parameter name="IdentityProviderSSOServiceURL">https://localhost:9447/samlsso</Parameter>
+            <Parameter name="AssertionConsumerServiceURL">https://localhost:9443/acs</Parameter>
 
             <!-- <Parameter name="IdPCertAlias">wso2carbon</Parameter> -->
             <!-- <Parameter name="ResponseSignatureValidationEnabled">false</Parameter> -->
@@ -49,18 +49,18 @@
             <!-- <Parameter name="ProvisioningDefaultRole">admin</Parameter> -->
             <!-- <Parameter name="IsSuperAdminRoleRequired">true</Parameter> -->
 	</Config>
-	
+
 	<!-- If this authenticator should skip any URI from authentication, specify it under "SkipAuthentication"
 	<SkipAuthentication>
             <UrlContains></UrlContains>
         </SkipAuthentication> -->
-	
+
 	<!-- If this authenticator should skip any URI from session validation, specify it under "SkipAuthentication
         <SkipSessionValidation>
             <UrlContains></UrlContains>
         </SkipSessionValidation> -->
     </Authenticator>
- 
+
   <!-- Authenticator Configurations for MutualSSLAuthenticator -->
   <!--Authenticator name="MutualSSLAuthenticator" disabled="false">
     <Priority>5</Priority>

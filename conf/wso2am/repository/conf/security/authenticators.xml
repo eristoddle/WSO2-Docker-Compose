@@ -35,8 +35,8 @@
             <Parameter name="NameIDPolicyFormat">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</Parameter>
 
             <Parameter name="ServiceProviderID">service-provider-apim</Parameter>
-            <Parameter name="IdentityProviderSSOServiceURL">https://192.168.99.100:/samlsso</Parameter>
-            <Parameter name="AssertionConsumerServiceURL">https://192.168.99.100:/acs</Parameter>
+            <Parameter name="IdentityProviderSSOServiceURL">https://localhost:9447/samlsso</Parameter>
+            <Parameter name="AssertionConsumerServiceURL">https://localhost:9443/acs</Parameter>
 
             <!-- <Parameter name="IdPCertAlias">wso2carbon</Parameter> -->
             <!-- <Parameter name="ResponseSignatureValidationEnabled">false</Parameter> -->
