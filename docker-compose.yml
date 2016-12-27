@@ -15,7 +15,7 @@ services:
     esb:
         image: eristoddle/wso2esb:5.0.0
         ports:
-            - 9443:9443
+            - 9447:9443
             - 9763:9763
         volumes:
             - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
@@ -58,7 +58,7 @@ services:
         image: eristoddle/wso2is:5.2.0
         hostname: wso2identity
         ports:
-            - 9447:9443
+            - 9443:9443
             - 9767:9763
         volumes:
             - ./conf/wso2is/repository/conf/datasources/master-datasources.xml:/mnt/wso2is/repository/conf/datasources/master-datasources.xml
