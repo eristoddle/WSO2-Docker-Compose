@@ -32,6 +32,10 @@ Default password: admin
 - AM: https://localhost:9448/carbon/admin/login.jsp
 - AS: https://localhost:9449/carbon/admin/login.jsp
 
+### When You Don't Need to Run the Whole Stack
+
+Just comment out the images you don't want to run in the docker-compose.yml file.
+
 ## Running with Rancher
 
 NOTE: Not necessary for local development, but for playing with a production level environment locally.
@@ -86,22 +90,6 @@ This is an old method for doing this and probably should be changed to use volum
 - Convoy
 - NFS
 After some research on the what would work best for us.
-
-## AWS Elastic Beanstalk - WIP
-
-Follow the instructions here: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker-eblocal.html
-
-
-### More AWS/Docker Reading
-
-- https://github.com/hopsoft/relay/wiki/How-to-Deploy-Docker-apps-to-Elastic-Beanstalk
-- https://blog.mebooks.co.nz/automating-elastic-beanstalk/
-- http://prakhar.me/docker-curriculum/
-- https://blog.mikesir87.io/2016/04/pushing-to-ecr-using-jenkins-pipeline-plugin/
-
-### Notes
-
-- Currently there is a bug in the version of Docker that Elastic Beanstalk uses. Running `eb local run` will throw an error like this: `ERROR: ValueError :: Extra data:`. In this case, just use `docker pull` to pull all the images you need first and then the Beanstalk command will work. See: https://forums.docker.com/t/cant-use-docker-due-to-valueerror-extra-data-known-issue/19535/3.
 
 ### More Docker Reading
 

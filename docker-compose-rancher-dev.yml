@@ -38,9 +38,9 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2esb/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
-            - /opt/wso2esb/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
+            - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - /opt/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
 
     brs:
         image: eristoddle/wso2esb:5.0.0
@@ -51,9 +51,9 @@ services:
             - confdata
         # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
         volumes:
-            - /opt/wso2brs/repository/conf/datasources/master-datasources.xml:/opt/wso2esb/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2brs/repository/conf/registry.xml:/opt/wso2esb/repository/conf/registry.xml
-            - /opt/wso2brs/repository/conf/security/authenticators.xml:/opt/wso2esb/repository/conf/security/authenticators.xml
+            - /opt/wso2brs/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - /opt/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
 
     greg:
         image: eristoddle/wso2greg:5.3.0
@@ -64,9 +64,9 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2greg/repository/conf/datasources/master-datasources.xml:/opt/wso2greg/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2greg/repository/conf/security/authenticators.xml:/opt/wso2greg/repository/conf/security/authenticators.xml
-            - /opt/wso2greg/repository/conf/registry.xml:/opt/wso2greg/repository/conf/registry.xml
+            - /opt/wso2greg/repository/conf/datasources/master-datasources.xml:/mnt/wso2greg/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2greg/repository/conf/security/authenticators.xml:/mnt/wso2greg/repository/conf/security/authenticators.xml
+            - /opt/wso2greg/repository/conf/registry.xml:/mnt/wso2greg/repository/conf/registry.xml
 
     dss:
         image: eristoddle/wso2dss:3.5.1
@@ -76,9 +76,9 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2dss/repository/conf/datasources/master-datasources.xml:/opt/wso2dss/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2dss/repository/conf/registry.xml:/opt/wso2dss/repository/conf/registry.xml
-            - /opt/wso2dss/repository/conf/security/authenticators.xml:/opt/wso2dss/repository/conf/security/authenticators.xml
+            - /opt/wso2dss/repository/conf/datasources/master-datasources.xml:/mnt/wso2dss/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2dss/repository/conf/registry.xml:/mnt/wso2dss/repository/conf/registry.xml
+            - /opt/wso2dss/repository/conf/security/authenticators.xml:/mnt/wso2dss/repository/conf/security/authenticators.xml
 
     is:
         image: eristoddle/wso2is:5.2.0
@@ -89,11 +89,11 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2is/repository/conf/datasources/master-datasources.xml:/opt/wso2is/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2is/repository/conf/carbon.xml:/opt/wso2is/repository/conf/carbon.xml
-            - /opt/wso2is/repository/conf/registry.xml:/opt/wso2is/repository/conf/registry.xml
-            - /opt/wso2is/repository/conf/user-mgt.xml:/opt/wso2is/repository/conf/user-mgt.xml
-            - /opt/wso2is/repository/conf/security/sso-idp-config.xml:/opt/wso2is/repository/conf/security/sso-idp-config.xml
+            - /opt/wso2is/repository/conf/datasources/master-datasources.xml:/mnt/wso2is/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2is/repository/conf/carbon.xml:/mnt/wso2is/repository/conf/carbon.xml
+            - /opt/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
+            - /opt/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
+            - /opt/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
 
     am:
         image: eristoddle/wso2am:2.0.0
@@ -103,9 +103,9 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2am/repository/conf/datasources/master-datasources.xml:/opt/wso2am/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2am/repository/conf/registry.xml:/opt/wso2am/repository/conf/registry.xml
-            - /opt/wso2am/repository/conf/security/authenticators.xml:/opt/wso2am/repository/conf/security/authenticators.xml
+            - /opt/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
+            - /opt/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
 
     as:
         image: eristoddle/wso2as:5.3.0
@@ -115,6 +115,6 @@ services:
         depends_on:
             - confdata
         volumes:
-            - /opt/wso2as/repository/conf/datasources/master-datasources.xml:/opt/wso2as/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2as/repository/conf/registry.xml:/opt/wso2as/repository/conf/registry.xml
-            - /opt/wso2as/repository/conf/security/authenticators.xml:/opt/wso2as/repository/conf/security/authenticators.xml
+            - /opt/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
+            - /opt/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
