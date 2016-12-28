@@ -1,19 +1,23 @@
 # Docker WSO2 Project
 
+## TODO and BUGS
+
+- I can only currently get single sign on to work when I create service providers through the running Identity Server. Using the ssh-idp-config.xml in the wso2is conf folder doesn't seem to be working to load these values. So once running in docker-compose, for now, you have to login to the Identity Server at https://localhost:9443 using admin:admin and add the other wso2 applications as service providers, explained [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
+- The internal Mysql database for the api manager is currently not being set up correctly.
+
+
+
 ## Docker base images
 
 I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles.  That repo can be used to create generic docker images of wso2 applications using a Centos 7 base image. The base image Dockerfile is also included in that repo. The base image should only have to be updated to update Centos. The wso2 images should only have to be updated to install a new version of WSO2.
 
 I used that repo to build the base image and wso2 images and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
 
+
+
 ## Getting Started
 
 **For a local dev environment, all you have to worry about is the docker-compose section**
-
-## TODO and BUGS
-
-- Currently working on SSO and getting that right, so things aren't working 100% together yet.
-- If you have problems, you can comment out the volumes sections in the docker-compose.yml file until the configuration files are working correctly just to run the applications.
 
 ### Running with docker-compose
 
@@ -44,6 +48,9 @@ Just comment out the images you don't want to run in the docker-compose.yml file
 
 - wso2mysql
 - is
+- greg
+
+
 
 ## Running with Rancher
 
@@ -88,7 +95,9 @@ Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set th
 
 You may have to stop the virtualbox image and up the memory if it crashes.
 
-## Volumes in Environments other than Local
+
+
+## Volumes in Environments Other Than Local
 
 Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
 
@@ -98,14 +107,45 @@ This is an old method for doing this and probably should be changed to use volum
 - Flocker
 - Convoy
 - NFS
-After some research on the what would work best for us.
+  After some research on the what would work best for us.
 
-### More Docker Reading
+
+
+## More Docker Reading
 
 - https://github.com/veggiemonk/awesome-docker
 - https://www.katacoda.com/
 
-## WSO2 Development - WIP
+
+
+## WSO2 Development
+
+### Governance Registry Persistance
+
+The [Governance Registry](http://wso2.com/products/governance-registry/) is used to provide a shared governance partition backed by a MySQL database, as documented [here](https://docs.wso2.com/display/ESB490/Governance+Partition+in+a+Remote+Registry). The database `registrydb` is created by the `scripts/mysql/greg-init.sql` script on-start.
+
+To test the shared governance partition set-up, navigate to the `/_system/governance` registry from any of the web consoles. Add or modify some resources, and expect the changes to be seen in the web consoles of other components. Note that caching is disabled in the `registry.xml` file of each component.
+
+There are two others adjustments I had to make to get this to work:
+
+1. Override the default MySQL `sql-mode` using the `conf/mysql/my.cnf` script to remove the [`NO_ZERO_IN_DATE`](http://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_in_date) and [`NO_ZERO_DATE`](http://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_date) restrictions. WSO2 uses `DEFAULT 0` in some of their timestamp queries.
+2. Disable SSL by setting the `useSSL` parameter in the JDBC connection string as seen in the `conf//master-datasources.xml` scripts.
+
+### Single Sign-On
+
+The [Identity Server](http://wso2.com/products/identity-server/) is configured to support web browser-based SSO across all the components based on the steps described [here](https://docs.wso2.com/display/IS510/Configuring+SAML2+Single-Sign-On+Across+Different+WSO2+Products). A MySQL database is used as the [backing data source to store registry and user manager data](https://docs.wso2.com/display/IS510/Setting+up+MySQL). The database `identitydb` is created by the `scripts/mysql/is-init.sql` script on-start.
+
+Instead of defining the service provider for each component via the administrator console, I specified them in the `sso-idp-config.xml` file in accordance to this [example](https://docs.wso2.com/display/IS510/Configuring+a+SP+and+IdP+Using+Configuration+Files). There is an issue with logout where the Identity Server throws an `ERROR {org.wso2.carbon.identity.sso.saml.processors.LogoutRequestProcessor} - No Established Sessions corresponding to Session Indexes provided.` exception.
+
+Since I am using Docker machine, I have to add the Identity Server hostname (`wso2identity`) to my `/etc/hosts` file. Refer to [Usage](https://github.com/ihcsim/compose-wso2#usage) section on the updates necessary for the `/etc/hosts` file. Otherwise, by default, all the Identity Server SSO web applications will redirect SAML requests back to `localhost`.
+
+*NOTE*: I still had to login to the Identity Server and add the service provider there. For some reason I have yet to get the sso-idp-config.xml file in the wso2is conf to load these on launch. See details [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
+
+### Port Offsets
+
+I am using port offsets in the carbon.xml files to prevent ports from colliding internally when doing SSO. You will also notice this in the docker-compose.yml file.
+
+### Artifacts
 
 Artifacts for Carbon Apps (C-App) get added directly to `< CARBON_HOME>/repository/deployment/server/carbonapps`.
 

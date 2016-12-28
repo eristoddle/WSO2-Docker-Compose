@@ -36,7 +36,7 @@
 
             <Parameter name="ServiceProviderID">service-provider-apim</Parameter>
             <Parameter name="IdentityProviderSSOServiceURL">https://localhost:9443/samlsso</Parameter>
-            <Parameter name="AssertionConsumerServiceURL">https://localhost:9443/acs</Parameter>
+            <Parameter name="AssertionConsumerServiceURL">https://localhost:9448/acs</Parameter>
 
             <!-- <Parameter name="IdPCertAlias">wso2carbon</Parameter> -->
             <!-- <Parameter name="ResponseSignatureValidationEnabled">false</Parameter> -->
