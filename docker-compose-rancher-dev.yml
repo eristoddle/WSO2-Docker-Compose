@@ -19,75 +19,21 @@ services:
             - /opt/wso2is:/conf/wso2is
             - /opt/wso2mysql:/conf/wso2mysql
             - /opt/wso2scripts:/conf/wso2scripts
-    mysql:
+    wso2mysql:
         image: mysql:5.7.10
         environment:
             - MYSQL_ROOT_PASSWORD=password
-        depends_on:
-            - confdata
         volumes:
             - /opt/wso2scripts/mysql:/docker-entrypoint-initdb.d
             - /opt/wso2mysql/:/etc/mysql/conf.d
             - /var/lib/mysql
 
-    esb:
-        image: eristoddle/wso2esb:5.0.0
-        ports:
-            - 9443:9443
-            - 9763:9763
-        depends_on:
-            - confdata
-        volumes:
-            - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
-            - /opt/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
-
-    brs:
-        image: eristoddle/wso2esb:5.0.0
-        ports:
-            - 9444:9443
-            - 9764:9763
-        depends_on:
-            - confdata
-        # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
-        volumes:
-            - /opt/wso2brs/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
-            - /opt/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
-
-    greg:
-        image: eristoddle/wso2greg:5.3.0
-        command: -Dsetup
-        ports:
-            - 9445:9443
-            - 9765:9763
-        depends_on:
-            - confdata
-        volumes:
-            - /opt/wso2greg/repository/conf/datasources/master-datasources.xml:/mnt/wso2greg/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2greg/repository/conf/security/authenticators.xml:/mnt/wso2greg/repository/conf/security/authenticators.xml
-            - /opt/wso2greg/repository/conf/registry.xml:/mnt/wso2greg/repository/conf/registry.xml
-
-    dss:
-        image: eristoddle/wso2dss:3.5.1
-        ports:
-            - 9446:9443
-            - 9766:9763
-        depends_on:
-            - confdata
-        volumes:
-            - /opt/wso2dss/repository/conf/datasources/master-datasources.xml:/mnt/wso2dss/repository/conf/datasources/master-datasources.xml
-            - /opt/wso2dss/repository/conf/registry.xml:/mnt/wso2dss/repository/conf/registry.xml
-            - /opt/wso2dss/repository/conf/security/authenticators.xml:/mnt/wso2dss/repository/conf/security/authenticators.xml
-
     is:
         image: eristoddle/wso2is:5.2.0
         hostname: wso2identity
         ports:
-            - 9447:9443
-            - 9767:9763
-        depends_on:
-            - confdata
+            - 9443:9443
+            - 9763:9763
         volumes:
             - /opt/wso2is/repository/conf/datasources/master-datasources.xml:/mnt/wso2is/repository/conf/datasources/master-datasources.xml
             - /opt/wso2is/repository/conf/carbon.xml:/mnt/wso2is/repository/conf/carbon.xml
@@ -95,26 +41,70 @@ services:
             - /opt/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
             - /opt/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
 
-    am:
+    esb:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9444:9444
+            - 9764:9764
+        volumes:
+            - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - /opt/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
+            - /opt/wso2esb/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+
+    greg:
+        image: eristoddle/wso2greg:5.3.0
+        command: -Dsetup
+        ports:
+            - 9445:9445
+            - 9765:9765
+        volumes:
+            - /opt/wso2greg/repository/conf/datasources/master-datasources.xml:/mnt/wso2greg/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2greg/repository/conf/security/authenticators.xml:/mnt/wso2greg/repository/conf/security/authenticators.xml
+            - /opt/wso2greg/repository/conf/registry.xml:/mnt/wso2greg/repository/conf/registry.xml
+            - /opt/wso2greg/repository/conf/carbon.xml:/mnt/wso2greg/repository/conf/carbon.xml
+
+    # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
+    brs:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9446:9446
+            - 9766:9766
+        volumes:
+            - /opt/wso2brs/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - /opt/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
+            - /opt/wso2brs/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+
+    dss:
+        image: eristoddle/wso2dss:3.5.1
+        ports:
+            - 9447:9447
+            - 9767:9767
+        volumes:
+            - /opt/wso2dss/repository/conf/datasources/master-datasources.xml:/mnt/wso2dss/repository/conf/datasources/master-datasources.xml
+            - /opt/wso2dss/repository/conf/registry.xml:/mnt/wso2dss/repository/conf/registry.xml
+            - /opt/wso2dss/repository/conf/security/authenticators.xml:/mnt/wso2dss/repository/conf/security/authenticators.xml
+            - /opt/wso2dss/repository/conf/carbon.xml:/mnt/wso2dss/repository/conf/carbon.xml
+
+    apim:
         image: eristoddle/wso2am:2.0.0
         ports:
-            - 9448:9443
-            - 9768:9763
-        depends_on:
-            - confdata
+            - 9448:9448
+            - 9768:9768
         volumes:
             - /opt/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
             - /opt/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
             - /opt/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
+            - /opt/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
 
     as:
         image: eristoddle/wso2as:5.3.0
         ports:
-            - 9449:9443
-            - 9769:9763
-        depends_on:
-            - confdata
+            - 9449:9449
+            - 9769:9769
         volumes:
             - /opt/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
             - /opt/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
             - /opt/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
+            - /opt/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
