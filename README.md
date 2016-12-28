@@ -3,7 +3,6 @@
 ## TODO and BUGS
 
 - I can only currently get single sign on to work when I create service providers through the running Identity Server. Using the ssh-idp-config.xml in the wso2is conf folder doesn't seem to be working to load these values. So once running in docker-compose, for now, you have to login to the Identity Server at https://localhost:9443 using admin:admin and add the other wso2 applications as service providers, explained [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
-- The internal Mysql database for the api manager is currently not being set up correctly.
 
 
 
