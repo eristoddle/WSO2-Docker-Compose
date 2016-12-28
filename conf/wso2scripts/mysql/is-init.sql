@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS identitydb;
 
-GRANT ALL ON identitydb.* TO isadmin@'%' IDENTIFIED BY "password";
+GRANT ALL ON identitydb.* TO root@'%' IDENTIFIED BY "password";
 
 FLUSH PRIVILEGES;
 

@@ -78,7 +78,7 @@
       <definition type="RDBMS">
         <configuration>
           <url>jdbc:mysql://wso2mysql:3306/identitydb?useSSL=false</url>
-          <username>isadmin</username>
+          <username>root</username>
           <password>password</password>
           <driverClassName>com.mysql.jdbc.Driver</driverClassName>
           <maxActive>80</maxActive>
