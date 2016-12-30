@@ -6,7 +6,9 @@ services:
         image: portainer/portainer
         ports:
             - 9000:9000
-            
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
     wso2mysql:
         image: mysql:5.7.10
         environment:
