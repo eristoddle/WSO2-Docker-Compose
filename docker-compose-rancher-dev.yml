@@ -40,6 +40,7 @@ services:
             - /opt/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
             - /opt/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
             - /opt/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
+            - /opt/wso2is/repository/conf/identity/service-providers:/mnt/wso2is/repository/conf/identity/service-providers
 
     esb:
         image: eristoddle/wso2esb:5.0.0
@@ -51,6 +52,7 @@ services:
             - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
             - /opt/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
             - /opt/wso2esb/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+            - /opt/wso2esb/repository/conf/axis2/axis2.xml:/mnt/wso2esb/repository/conf/axis2/axis2.xml
 
     greg:
         image: eristoddle/wso2greg:5.3.0
