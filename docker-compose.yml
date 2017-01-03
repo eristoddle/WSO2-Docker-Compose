@@ -2,8 +2,9 @@ version: '2'
 services:
     # Portainer to manage your containers locally
     # Interface located at http://localhost:9000
+    # The fix432 tag may be changed to latest, once latest isn't broken
     portainer:
-        image: portainer/portainer
+        image: portainer/portainer:fix432
         ports:
             - 9000:9000
         volumes:
