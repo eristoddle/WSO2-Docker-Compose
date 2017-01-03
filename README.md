@@ -165,7 +165,15 @@ SEE:
 
 ## EC2 Deployment
 
-### Converting the configuration
+### Using ecs-cli
+
+For this use the `docker-compose-rancher-dev.yml` file.
+
+SEE: https://github.com/aws/amazon-ecs-cli
+
+### Converting the configuration to a task definition
+
+NOTE: This should not be necessary with ecs-cli
 
 I found this library that will convert between various container configurations: https://github.com/micahhausler/container-transform
 
