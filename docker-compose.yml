@@ -9,6 +9,26 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
 
+    # NOTE: Not used in local environment
+    # confdata:
+    #     # TODO: Temporarily pulling generic config volume from dockerhub to test things. Change this.
+    #     # This the image built from the Dockerfile in this project
+    #     image: eristoddle/wso2-dev-config
+    #     container_name: confdata
+    #     labels:
+    #         io.rancher.container.start_once: 'true'
+    #         io.rancher.container.pull_image: always
+    #     volumes:
+    #         - /opt/wso2am:/conf/wso2am
+    #         - /opt/wso2as:/conf/wso2as
+    #         - /opt/wso2brs:/conf/wso2brs
+    #         - /opt/wso2dss:/conf/wso2dss
+    #         - /opt/wso2esb:/conf/wso2esb
+    #         - /opt/wso2greg:/conf/wso2greg
+    #         - /opt/wso2is:/conf/wso2is
+    #         - /opt/wso2mysql:/conf/wso2mysql
+    #         - /opt/wso2scripts:/conf/wso2scripts
+
     wso2mysql:
         image: mysql:5.7.10
         environment:
@@ -27,8 +47,6 @@ services:
         ports:
             - 9443:9443
             - 9763:9763
-            # NOTE: Dev only to connect to H2 database
-            - 8082:8082
         volumes:
             - ./conf/wso2is/repository/conf/datasources/master-datasources.xml:/mnt/wso2is/repository/conf/datasources/master-datasources.xml
             - ./conf/wso2is/repository/conf/carbon.xml:/mnt/wso2is/repository/conf/carbon.xml

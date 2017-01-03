@@ -1,0 +1,516 @@
+{
+    "containerDefinitions": [
+        {
+            "essential": true,
+            "image": "eristoddle/wso2as:5.3.0",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2as/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2as/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2AsRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2as/repository/conf/security/authenticators.xml",
+                    "sourceVolume": "_ConfWso2AsRepositoryConfSecurityAuthenticators_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2as/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2AsRepositoryConfCarbon_Xml"
+                }
+            ],
+            "name": "as",
+            "portMappings": [
+                {
+                    "containerPort": 9449,
+                    "hostPort": 9449
+                },
+                {
+                    "containerPort": 9769,
+                    "hostPort": 9769
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "image": "eristoddle/wso2esb:5.0.0",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2BrsRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2BrsRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/security/authenticators.xml",
+                    "sourceVolume": "_ConfWso2BrsRepositoryConfSecurityAuthenticators_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2BrsRepositoryConfCarbon_Xml"
+                }
+            ],
+            "name": "brs",
+            "portMappings": [
+                {
+                    "containerPort": 9446,
+                    "hostPort": 9446
+                },
+                {
+                    "containerPort": 9766,
+                    "hostPort": 9766
+                }
+            ]
+        },
+        {
+            "dockerLabels": {
+                "io.rancher.container.pull_image": "always",
+                "io.rancher.container.start_once": "true"
+            },
+            "essential": true,
+            "image": "eristoddle/wso2-dev-config",
+            "mountPoints": [
+                {
+                    "containerPath": "/conf/wso2am",
+                    "sourceVolume": "OptWso2Am"
+                },
+                {
+                    "containerPath": "/conf/wso2as",
+                    "sourceVolume": "OptWso2As"
+                },
+                {
+                    "containerPath": "/conf/wso2brs",
+                    "sourceVolume": "OptWso2Brs"
+                },
+                {
+                    "containerPath": "/conf/wso2dss",
+                    "sourceVolume": "OptWso2Dss"
+                },
+                {
+                    "containerPath": "/conf/wso2esb",
+                    "sourceVolume": "OptWso2Esb"
+                },
+                {
+                    "containerPath": "/conf/wso2greg",
+                    "sourceVolume": "OptWso2Greg"
+                },
+                {
+                    "containerPath": "/conf/wso2is",
+                    "sourceVolume": "OptWso2Is"
+                },
+                {
+                    "containerPath": "/conf/wso2mysql",
+                    "sourceVolume": "OptWso2Mysql"
+                },
+                {
+                    "containerPath": "/conf/wso2scripts",
+                    "sourceVolume": "OptWso2Scripts"
+                }
+            ],
+            "name": "confdata"
+        },
+        {
+            "essential": true,
+            "image": "eristoddle/wso2dss:3.5.1",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2dss/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2DssRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2dss/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2DssRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2dss/repository/conf/security/authenticators.xml",
+                    "sourceVolume": "_ConfWso2DssRepositoryConfSecurityAuthenticators_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2dss/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2DssRepositoryConfCarbon_Xml"
+                }
+            ],
+            "name": "dss",
+            "portMappings": [
+                {
+                    "containerPort": 9447,
+                    "hostPort": 9447
+                },
+                {
+                    "containerPort": 9767,
+                    "hostPort": 9767
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "image": "eristoddle/wso2esb_features:5.0.0",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2EsbRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/security/authenticators.xml",
+                    "sourceVolume": "_ConfWso2EsbRepositoryConfSecurityAuthenticators_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2EsbRepositoryConfCarbon_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/axis2/axis2.xml",
+                    "sourceVolume": "_ConfWso2EsbRepositoryConfAxis2Axis2_Xml"
+                }
+            ],
+            "name": "esb",
+            "portMappings": [
+                {
+                    "containerPort": 9444,
+                    "hostPort": 9444
+                },
+                {
+                    "containerPort": 9764,
+                    "hostPort": 9764
+                }
+            ]
+        },
+        {
+            "command": [
+                "-Dsetup"
+            ],
+            "essential": true,
+            "image": "eristoddle/wso2greg:5.3.0",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2greg/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2GregRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2greg/repository/conf/security/authenticators.xml",
+                    "sourceVolume": "_ConfWso2GregRepositoryConfSecurityAuthenticators_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2greg/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2GregRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2greg/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2GregRepositoryConfCarbon_Xml"
+                }
+            ],
+            "name": "greg",
+            "portMappings": [
+                {
+                    "containerPort": 9445,
+                    "hostPort": 9445
+                },
+                {
+                    "containerPort": 9765,
+                    "hostPort": 9765
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "image": "eristoddle/wso2is_features:5.2.0",
+            "mountPoints": [
+                {
+                    "containerPath": "/mnt/wso2is/repository/conf/datasources/master-datasources.xml",
+                    "sourceVolume": "_ConfWso2IsRepositoryConfDatasourcesMaster-Datasources_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2is/repository/conf/carbon.xml",
+                    "sourceVolume": "_ConfWso2IsRepositoryConfCarbon_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2is/repository/conf/registry.xml",
+                    "sourceVolume": "_ConfWso2IsRepositoryConfRegistry_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2is/repository/conf/user-mgt.xml",
+                    "sourceVolume": "_ConfWso2IsRepositoryConfUser-Mgt_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2is/repository/conf/security/sso-idp-config.xml",
+                    "sourceVolume": "_ConfWso2IsRepositoryConfSecuritySso-Idp-Config_Xml"
+                }
+            ],
+            "name": "is",
+            "portMappings": [
+                {
+                    "containerPort": 9443,
+                    "hostPort": 9443
+                },
+                {
+                    "containerPort": 9763,
+                    "hostPort": 9763
+                }
+            ]
+        },
+        {
+            "environment": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "password"
+                }
+            ],
+            "essential": true,
+            "image": "mysql:5.7.10",
+            "mountPoints": [
+                {
+                    "containerPath": "/docker-entrypoint-initdb.d",
+                    "sourceVolume": "_ConfWso2ScriptsMysql"
+                },
+                {
+                    "containerPath": "/etc/mysql/conf.d",
+                    "sourceVolume": "_ConfWso2Mysql"
+                },
+                {
+                    "containerPath": "/var/lib/mysql",
+                    "sourceVolume": "VarLibMysql"
+                }
+            ],
+            "name": "wso2mysql"
+        }
+    ],
+    "family": "",
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "./conf/wso2greg/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2GregRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2greg/repository/conf/security/authenticators.xml"
+            },
+            "name": "_ConfWso2GregRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2greg/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2GregRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2greg/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2GregRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2am"
+            },
+            "name": "OptWso2Am"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as"
+            },
+            "name": "OptWso2As"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2brs"
+            },
+            "name": "OptWso2Brs"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2dss"
+            },
+            "name": "OptWso2Dss"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb"
+            },
+            "name": "OptWso2Esb"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg"
+            },
+            "name": "OptWso2Greg"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is"
+            },
+            "name": "OptWso2Is"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2mysql"
+            },
+            "name": "OptWso2Mysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2scripts"
+            },
+            "name": "OptWso2Scripts"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2scripts/mysql"
+            },
+            "name": "_ConfWso2ScriptsMysql"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2mysql/"
+            },
+            "name": "_ConfWso2Mysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/lib/mysql"
+            },
+            "name": "VarLibMysql"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2brs/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2BrsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2brs/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2BrsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2brs/repository/conf/security/authenticators.xml"
+            },
+            "name": "_ConfWso2BrsRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2brs/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2BrsRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2is/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2IsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2is/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2IsRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2is/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2IsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2is/repository/conf/user-mgt.xml"
+            },
+            "name": "_ConfWso2IsRepositoryConfUser-Mgt_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2is/repository/conf/security/sso-idp-config.xml"
+            },
+            "name": "_ConfWso2IsRepositoryConfSecuritySso-Idp-Config_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2dss/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2DssRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2dss/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2DssRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2dss/repository/conf/security/authenticators.xml"
+            },
+            "name": "_ConfWso2DssRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2dss/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2DssRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2esb/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2esb/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2EsbRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2esb/repository/conf/security/authenticators.xml"
+            },
+            "name": "_ConfWso2EsbRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2esb/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2EsbRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2esb/repository/conf/axis2/axis2.xml"
+            },
+            "name": "_ConfWso2EsbRepositoryConfAxis2Axis2_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2as/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "_ConfWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2as/repository/conf/registry.xml"
+            },
+            "name": "_ConfWso2AsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2as/repository/conf/security/authenticators.xml"
+            },
+            "name": "_ConfWso2AsRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "./conf/wso2as/repository/conf/carbon.xml"
+            },
+            "name": "_ConfWso2AsRepositoryConfCarbon_Xml"
+        }
+    ]
+}

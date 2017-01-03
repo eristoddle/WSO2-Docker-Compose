@@ -2,11 +2,7 @@
 
 ## TODO and BUGS
 
-- I can only currently get single sign on to work when I create service providers through the running Identity Server. Using the ssh-idp-config.xml in the wso2is conf folder doesn't seem to be working to load these values. So once running in docker-compose, for now, you have to login to the Identity Server at https://localhost:9443 using admin:admin and add the other wso2 applications as service providers, explained [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers). It is pretty simple although becomes a hassle. I can walk you through it quicker than the link. If you don't call `docker-compose down` and just `Ctrl C` the process, the settings will stay for next time.
-  - Details: http://stackoverflow.com/questions/29915287/how-to-add-service-provider-and-identity-provider-in-wso2-is-configuration-file
-- The first time you call `docker-compose up` or when you call it after you call `docker-compose down`, the mysql container will have to build the database. Sometimes, various wso2 apps will crash because the data provider is not ready in time. `Ctrl C` to kill the process and then running `docker-compose up` again will fix this, because by then the databases have been built. There is a way to have the other containers wait until the mysql container is ready. I get that fix in eventually
-
-
+- The first time you call `docker-compose up` or when you call it after you call `docker-compose down`, the mysql container will have to build the database. Sometimes, various wso2 apps will crash because the data provider is not ready in time. `Ctrl C` to kill the process and then running `docker-compose up` again will fix this, because by then the databases have been built. There is a way to have the other containers wait until the mysql container is ready. I get that fix in eventually.
 
 ## Docker base images
 
@@ -14,7 +10,7 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles.  
 
 I used that repo to build the base image and wso2 images and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
 
-#### Custom Images
+## Custom Images
 
 - The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
 
@@ -96,8 +92,6 @@ Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set th
 
 You may have to stop the virtualbox image and up the memory if it crashes.
 
-
-
 ## Volumes in Environments Other Than Local
 
 Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
@@ -109,8 +103,6 @@ This is an old method for doing this and probably should be changed to use volum
 - Convoy
 - NFS
   After some research on the what would work best for us.
-
-
 
 ## More Docker Reading
 
@@ -170,3 +162,16 @@ SEE:
 SEE:
 - http://wso2.com/library/articles/2011/04/integrate-rules-soa/
 - http://wso2.com/library/articles/2013/05/eclipse-plugin-wso2-business-rules-server/
+
+## EC2 Deployment
+
+### Converting the configuration
+
+I found this library that will convert between various container configurations: https://github.com/micahhausler/container-transform
+
+I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (without installing anything):
+```
+cat docker-compose.yml | docker run --rm -i micahhausler/container-transform
+```
+
+The aws task definition spec does have other parameters which aren't in the docker-compose file and are optional. You also have to double check that the volumes from the confdata image jive with the volumes the other images will use.
