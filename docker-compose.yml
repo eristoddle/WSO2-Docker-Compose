@@ -27,7 +27,7 @@ services:
         ports:
             - 9443:9443
             - 9763:9763
-            # Following dev only to connect to H2 database
+            # NOTE: Dev only to connect to H2 database
             - 8082:8082
         volumes:
             - ./conf/wso2is/repository/conf/datasources/master-datasources.xml:/mnt/wso2is/repository/conf/datasources/master-datasources.xml
@@ -37,17 +37,17 @@ services:
             - ./conf/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
             - ./conf/wso2is/repository/conf/identity/service-providers:/mnt/wso2is/repository/conf/identity/service-providers
 
-    # esb:
-    #     image: eristoddle/wso2esb_features:5.0.0
-    #     ports:
-    #         - 9444:9444
-    #         - 9764:9764
-    #     volumes:
-    #         - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
-    #         - ./conf/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
-    #         - ./conf/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
-    #         - ./conf/wso2esb/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
-    #         - ./conf/wso2esb/repository/conf/axis2/axis2.xml:/mnt/wso2esb/repository/conf/axis2/axis2.xml
+    esb:
+        image: eristoddle/wso2esb_features:5.0.0
+        ports:
+            - 9444:9444
+            - 9764:9764
+        volumes:
+            - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - ./conf/wso2esb/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
+            - ./conf/wso2esb/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+            - ./conf/wso2esb/repository/conf/axis2/axis2.xml:/mnt/wso2esb/repository/conf/axis2/axis2.xml
 
     greg:
         image: eristoddle/wso2greg:5.3.0
@@ -62,16 +62,16 @@ services:
             - ./conf/wso2greg/repository/conf/carbon.xml:/mnt/wso2greg/repository/conf/carbon.xml
 
     # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
-    # brs:
-    #     image: eristoddle/wso2esb:5.0.0
-    #     ports:
-    #         - 9446:9446
-    #         - 9766:9766
-    #     volumes:
-    #         - ./conf/wso2brs/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
-    #         - ./conf/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
-    #         - ./conf/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
-    #         - ./conf/wso2brs/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+    brs:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9446:9446
+            - 9766:9766
+        volumes:
+            - ./conf/wso2brs/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
+            - ./conf/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
+            - ./conf/wso2brs/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
 
     dss:
         image: eristoddle/wso2dss:3.5.1
@@ -84,24 +84,24 @@ services:
             - ./conf/wso2dss/repository/conf/security/authenticators.xml:/mnt/wso2dss/repository/conf/security/authenticators.xml
             - ./conf/wso2dss/repository/conf/carbon.xml:/mnt/wso2dss/repository/conf/carbon.xml
 
-    apim:
-        image: eristoddle/wso2am:2.0.0
-        ports:
-            - 9448:9448
-            - 9768:9768
-        volumes:
-            - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
-            - ./conf/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
-            - ./conf/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
-
-    # as:
-    #     image: eristoddle/wso2as:5.3.0
+    # apim:
+    #     image: eristoddle/wso2am:2.0.0
     #     ports:
-    #         - 9449:9449
-    #         - 9769:9769
+    #         - 9448:9448
+    #         - 9768:9768
     #     volumes:
-    #         - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
-    #         - ./conf/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
-    #         - ./conf/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
-    #         - ./conf/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
+    #         - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
+    #         - ./conf/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
+    #         - ./conf/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
+    #         - ./conf/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
+
+    as:
+        image: eristoddle/wso2as:5.3.0
+        ports:
+            - 9449:9449
+            - 9769:9769
+        volumes:
+            - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
+            - ./conf/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
+            - ./conf/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
