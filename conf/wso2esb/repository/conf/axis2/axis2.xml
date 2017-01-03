@@ -186,8 +186,8 @@
                          class="org.apache.synapse.format.hessian.HessianMessageFormatter"/-->
         <!--messageFormatter contentType=""
                          class="org.apache.synapse.format.hessian.HessianMessageFormatter"/-->
-        <!--messageFormatter contentType="application/edi-hl7"
-                         class="org.wso2.carbon.business.messaging.hl7.message.HL7MessageFormatter"/-->
+        <messageFormatter contentType="application/edi-hl7"
+                         class="org.wso2.carbon.business.messaging.hl7.message.HL7MessageFormatter"/>
     </messageFormatters>
 
     <!-- ================================================= -->
@@ -228,8 +228,8 @@
                         class="org.apache.synapse.format.hessian.HessianMessageBuilder"/-->
         <!--messageBuilder contentType=""
                          class="org.apache.synapse.format.hessian.HessianMessageBuilder"/-->
-        <!--messageBuilder contentType="application/edi-hl7"
-                        class="org.wso2.carbon.business.messaging.hl7.message.HL7MessageBuilder"/-->
+        <messageBuilder contentType="application/edi-hl7"
+                        class="org.wso2.carbon.business.messaging.hl7.message.HL7MessageBuilder"/>
     </messageBuilders>
 
     <!-- ================================================= -->
@@ -356,7 +356,7 @@
     <transportReceiver name="fix" class="org.apache.synapse.transport.fix.FIXTransportListener"/>
     -->
 
-    <!--transportReceiver name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportListener"/-->
+    <transportReceiver name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportListener"/>
 
     <!-- SAP Transport Listeners -->
     <!-- <transportReceiver name="idoc" class="org.wso2.carbon.transports.sap.SAPTransportListener"/> -->
@@ -443,7 +443,7 @@
     <transportSender name="fix" class="org.apache.synapse.transport.fix.FIXTransportSender"/>
     -->
 
-    <!--transportSender name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportSender"/-->
+    <transportSender name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportSender"/>
 
     <!-- SAP Transport Senders -->
     <!-- <transportSender name="idoc" class="org.wso2.carbon.transports.sap.SAPTransportSender"/> -->

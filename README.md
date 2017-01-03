@@ -1,7 +1,5 @@
 # Docker WSO2 Project
 
-
-
 ## TODO and BUGS
 
 - I can only currently get single sign on to work when I create service providers through the running Identity Server. Using the ssh-idp-config.xml in the wso2is conf folder doesn't seem to be working to load these values. So once running in docker-compose, for now, you have to login to the Identity Server at https://localhost:9443 using admin:admin and add the other wso2 applications as service providers, explained [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers). It is pretty simple although becomes a hassle. I can walk you through it quicker than the link. If you don't call `docker-compose down` and just `Ctrl C` the process, the settings will stay for next time.
@@ -15,6 +13,10 @@
 I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles.  That repo can be used to create generic docker images of wso2 applications using a Centos 7 base image. The base image Dockerfile is also included in that repo. The base image should only have to be updated to update Centos. The wso2 images should only have to be updated to install a new version of WSO2.
 
 I used that repo to build the base image and wso2 images and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
+
+#### Custom Images
+
+- The ESB image with the _features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
 
 
 

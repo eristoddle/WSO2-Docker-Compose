@@ -34,7 +34,7 @@
             <Parameter name="LoginPage">/carbon/admin/login.jsp</Parameter>
             <Parameter name="NameIDPolicyFormat">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</Parameter>
 
-            <Parameter name="ServiceProviderID">service-provider-esb</Parameter>
+            <Parameter name="ServiceProviderID">service-provider-esb1</Parameter>
             <Parameter name="IdentityProviderSSOServiceURL">https://localhost:9443/samlsso</Parameter>
             <Parameter name="AssertionConsumerServiceURL">https://localhost:9444/acs</Parameter>
 
