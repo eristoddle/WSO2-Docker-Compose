@@ -169,9 +169,13 @@ SEE:
 
 I found this library that will convert between various container configurations: https://github.com/micahhausler/container-transform
 
-I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (without installing anything):
+I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (using Docker, without installing anything, because it requires Python 3 if installed locally):
 ```
-cat docker-compose.yml | docker run --rm -i micahhausler/container-transform
+cat docker-compose-rancher-dev.yml | docker run --rm -i micahhausler/container-transform
 ```
 
-The aws task definition spec does have other parameters which aren't in the docker-compose file and are optional. You also have to double check that the volumes from the confdata image jive with the volumes the other images will use.
+Notice I used the Rancher configuration file, because it uses configuration files from the confdata volume. I then had to modify the result:
+- I removed the Rancher specific tags
+- I set the `essential` parameter of the confdata container to false because it comes up, creates it's volumes and then stops.
+
+The aws task definition spec does have other parameters which aren't in the docker-compose file and are optional. SEE: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
