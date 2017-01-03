@@ -35,7 +35,6 @@ services:
             - ./conf/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
             - ./conf/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
             - ./conf/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
-            - ./conf/wso2is/repository/conf/identity/service-providers:/mnt/wso2is/repository/conf/identity/service-providers
 
     esb:
         image: eristoddle/wso2esb_features:5.0.0

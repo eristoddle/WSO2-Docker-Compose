@@ -16,9 +16,7 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 #### Custom Images
 
-- The ESB image with the _features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
-
-
+- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
 
 ## Getting Started
 
@@ -54,8 +52,6 @@ Just comment out the images you don't want to run in the docker-compose.yml file
 - wso2mysql
 - is
 - greg
-
-
 
 ## Running with Rancher
 
@@ -121,8 +117,6 @@ This is an old method for doing this and probably should be changed to use volum
 - https://github.com/veggiemonk/awesome-docker
 - https://www.katacoda.com/
 
-
-
 ## WSO2 Development
 
 ### Governance Registry Persistance
@@ -146,15 +140,33 @@ Since I am using Docker machine, I have to add the Identity Server hostname (`ws
 
 *NOTE*: I still had to login to the Identity Server and add the service provider there. For some reason I have yet to get the sso-idp-config.xml file in the wso2is conf to load these on launch. See details [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
 
+I have created an image which has these service providers set up already, but it's a manually built image. I plan on scripting this by populating the correct tables in the database.
+
 ### Port Offsets
 
 I am using port offsets in the carbon.xml files to prevent ports from colliding internally when doing SSO. You will also notice this in the docker-compose.yml file.
 
-### Artifacts
+### Connecting the ESB and DSS
 
-Artifacts for Carbon Apps (C-App) get added directly to `< CARBON_HOME>/repository/deployment/server/carbonapps`.
+The DSS image has drivers preinstalled for Mysql, Sql Server and Postgres.
 
-See these links:
-- https://docs.wso2.com/display/TS110/Creating+and+Deploying+C-App
-- https://docs.wso2.com/display/DVS380/Packaging+Artifacts+Into+Deployable+Archives
-- http://wso2.com/library/articles/2015/10/article-wso2-developer-studio-development-and-deployment-best-practices/
+SEE:
+- http://kalpads.blogspot.com/2012/07/implement-mdm-pattern-using-wso2-esb.html
+- http://chathurikaerandi.blogspot.com/2016/05/how-do-i-integrate-wso2-esb-and-wso2.html
+
+### Creating an API in the ESB
+
+SEE:
+- https://docs.wso2.com/display/ESB490/Creating+APIs
+- http://wso2.com/library/articles/2012/09/get-cup-coffee-wso2-way/
+
+### Using the Governance Registry
+
+SEE:
+- http://wso2.com/library/articles/2015/07/article-multi-environment-artifact-management-for-wso2-products-using-wso2-governance-registry/
+
+### Using the Business Rules Server
+
+SEE:
+- http://wso2.com/library/articles/2011/04/integrate-rules-soa/
+- http://wso2.com/library/articles/2013/05/eclipse-plugin-wso2-business-rules-server/
