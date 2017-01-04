@@ -34,6 +34,7 @@ services:
             - ./conf/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
             - ./conf/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
             - ./conf/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
+            - ./conf/wso2is/repository/conf/axis2/axis2.xml:/mnt/wso2is/repository/conf/axis2/axis2.xml
 
     esb:
         image: eristoddle/wso2esb_features:5.0.0
@@ -58,6 +59,7 @@ services:
             - ./conf/wso2greg/repository/conf/security/authenticators.xml:/mnt/wso2greg/repository/conf/security/authenticators.xml
             - ./conf/wso2greg/repository/conf/registry.xml:/mnt/wso2greg/repository/conf/registry.xml
             - ./conf/wso2greg/repository/conf/carbon.xml:/mnt/wso2greg/repository/conf/carbon.xml
+            - ./conf/wso2greg/repository/conf/axis2/axis2.xml:/mnt/wso2greg/repository/conf/axis2/axis2.xml
 
     # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
     brs:
@@ -94,6 +96,7 @@ services:
     #         - ./conf/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
     #         - ./conf/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
     #         - ./conf/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
+    #         - ./conf/wso2am/repository/conf/axis2/axis2.xml:/mnt/wso2am/repository/conf/axis2/axis2.xml
 
     as:
         image: eristoddle/wso2as:5.3.0
