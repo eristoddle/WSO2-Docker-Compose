@@ -217,6 +217,10 @@
                 {
                     "containerPath": "/mnt/wso2greg/repository/conf/axis2/axis2.xml",
                     "sourceVolume": "OptWso2GregRepositoryConfAxis2Axis2_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2greg/repository/resources/lifecycles/ServiceLifeCycle.xml",
+                    "sourceVolume": "OptWso2GregRepositoryResourcesLifecyclesServicelifecycle_Xml"
                 }
             ],
             "name": "greg",
@@ -302,120 +306,6 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/datasources/master-datasources.xml"
-            },
-            "name": "OptWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/registry.xml"
-            },
-            "name": "OptWso2AsRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/security/authenticators.xml"
-            },
-            "name": "OptWso2AsRepositoryConfSecurityAuthenticators_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2AsRepositoryConfCarbon_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/axis2/axis2.xml"
-            },
-            "name": "OptWso2AsRepositoryConfAxis2Axis2_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/datasources/master-datasources.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/registry.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/security/authenticators.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfSecurityAuthenticators_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfCarbon_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/axis2/axis2.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfAxis2Axis2_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2am"
-            },
-            "name": "OptWso2Am"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as"
-            },
-            "name": "OptWso2As"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2brs"
-            },
-            "name": "OptWso2Brs"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2dss"
-            },
-            "name": "OptWso2Dss"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb"
-            },
-            "name": "OptWso2Esb"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2greg"
-            },
-            "name": "OptWso2Greg"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is"
-            },
-            "name": "OptWso2Is"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2mysql"
-            },
-            "name": "OptWso2Mysql"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2scripts"
-            },
-            "name": "OptWso2Scripts"
-        },
-        {
-            "host": {
                 "sourcePath": "/opt/wso2greg/repository/conf/datasources/master-datasources.xml"
             },
             "name": "OptWso2GregRepositoryConfDatasourcesMaster-Datasources_Xml"
@@ -443,6 +333,42 @@
                 "sourcePath": "/opt/wso2greg/repository/conf/axis2/axis2.xml"
             },
             "name": "OptWso2GregRepositoryConfAxis2Axis2_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg/repository/resources/lifecycles/ServiceLifeCycle.xml"
+            },
+            "name": "OptWso2GregRepositoryResourcesLifecyclesServicelifecycle_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "OptWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/registry.xml"
+            },
+            "name": "OptWso2AsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/security/authenticators.xml"
+            },
+            "name": "OptWso2AsRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/carbon.xml"
+            },
+            "name": "OptWso2AsRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/axis2/axis2.xml"
+            },
+            "name": "OptWso2AsRepositoryConfAxis2Axis2_Xml"
         },
         {
             "host": {
@@ -512,6 +438,36 @@
         },
         {
             "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/registry.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/security/authenticators.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/carbon.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/axis2/axis2.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfAxis2Axis2_Xml"
+        },
+        {
+            "host": {
                 "sourcePath": "/opt/wso2brs/repository/conf/datasources/master-datasources.xml"
             },
             "name": "OptWso2BrsRepositoryConfDatasourcesMaster-Datasources_Xml"
@@ -557,6 +513,60 @@
                 "sourcePath": "/var/lib/mysql"
             },
             "name": "VarLibMysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2am"
+            },
+            "name": "OptWso2Am"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as"
+            },
+            "name": "OptWso2As"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2brs"
+            },
+            "name": "OptWso2Brs"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2dss"
+            },
+            "name": "OptWso2Dss"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb"
+            },
+            "name": "OptWso2Esb"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg"
+            },
+            "name": "OptWso2Greg"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is"
+            },
+            "name": "OptWso2Is"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2mysql"
+            },
+            "name": "OptWso2Mysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2scripts"
+            },
+            "name": "OptWso2Scripts"
         }
     ]
 }

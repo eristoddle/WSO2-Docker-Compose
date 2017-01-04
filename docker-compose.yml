@@ -60,6 +60,7 @@ services:
             - ./conf/wso2greg/repository/conf/registry.xml:/mnt/wso2greg/repository/conf/registry.xml
             - ./conf/wso2greg/repository/conf/carbon.xml:/mnt/wso2greg/repository/conf/carbon.xml
             - ./conf/wso2greg/repository/conf/axis2/axis2.xml:/mnt/wso2greg/repository/conf/axis2/axis2.xml
+            - ./conf/wso2greg/repository/resources/lifecycles/ServiceLifeCycle.xml:/mnt/wso2greg/repository/resources/lifecycles/ServiceLifeCycle.xml
 
     # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
     brs:
