@@ -19,6 +19,10 @@
                 {
                     "containerPath": "/mnt/wso2as/repository/conf/carbon.xml",
                     "sourceVolume": "OptWso2AsRepositoryConfCarbon_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2as/repository/conf/axis2/axis2.xml",
+                    "sourceVolume": "OptWso2AsRepositoryConfAxis2Axis2_Xml"
                 }
             ],
             "name": "as",
@@ -52,6 +56,10 @@
                 {
                     "containerPath": "/mnt/wso2esb/repository/conf/carbon.xml",
                     "sourceVolume": "OptWso2BrsRepositoryConfCarbon_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2esb/repository/conf/axis2/axis2.xml",
+                    "sourceVolume": "OptWso2BrsRepositoryConfAxis2Axis2_Xml"
                 }
             ],
             "name": "brs",
@@ -128,6 +136,10 @@
                 {
                     "containerPath": "/mnt/wso2dss/repository/conf/carbon.xml",
                     "sourceVolume": "OptWso2DssRepositoryConfCarbon_Xml"
+                },
+                {
+                    "containerPath": "/mnt/wso2dss/repository/conf/axis2/axis2.xml",
+                    "sourceVolume": "OptWso2DssRepositoryConfAxis2Axis2_Xml"
                 }
             ],
             "name": "dss",
@@ -282,27 +294,135 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/opt/wso2dss/repository/conf/datasources/master-datasources.xml"
+                "sourcePath": "/opt/wso2esb/repository/conf/datasources/master-datasources.xml"
             },
-            "name": "OptWso2DssRepositoryConfDatasourcesMaster-Datasources_Xml"
+            "name": "OptWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2dss/repository/conf/registry.xml"
+                "sourcePath": "/opt/wso2esb/repository/conf/registry.xml"
             },
-            "name": "OptWso2DssRepositoryConfRegistry_Xml"
+            "name": "OptWso2EsbRepositoryConfRegistry_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2dss/repository/conf/security/authenticators.xml"
+                "sourcePath": "/opt/wso2esb/repository/conf/security/authenticators.xml"
             },
-            "name": "OptWso2DssRepositoryConfSecurityAuthenticators_Xml"
+            "name": "OptWso2EsbRepositoryConfSecurityAuthenticators_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2dss/repository/conf/carbon.xml"
+                "sourcePath": "/opt/wso2esb/repository/conf/carbon.xml"
             },
-            "name": "OptWso2DssRepositoryConfCarbon_Xml"
+            "name": "OptWso2EsbRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2esb/repository/conf/axis2/axis2.xml"
+            },
+            "name": "OptWso2EsbRepositoryConfAxis2Axis2_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2scripts/mysql"
+            },
+            "name": "OptWso2ScriptsMysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2mysql/"
+            },
+            "name": "OptWso2Mysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/lib/mysql"
+            },
+            "name": "VarLibMysql"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "OptWso2IsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is/repository/conf/carbon.xml"
+            },
+            "name": "OptWso2IsRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is/repository/conf/registry.xml"
+            },
+            "name": "OptWso2IsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is/repository/conf/user-mgt.xml"
+            },
+            "name": "OptWso2IsRepositoryConfUser-Mgt_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2is/repository/conf/security/sso-idp-config.xml"
+            },
+            "name": "OptWso2IsRepositoryConfSecuritySso-Idp-Config_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "OptWso2GregRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg/repository/conf/security/authenticators.xml"
+            },
+            "name": "OptWso2GregRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg/repository/conf/registry.xml"
+            },
+            "name": "OptWso2GregRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2greg/repository/conf/carbon.xml"
+            },
+            "name": "OptWso2GregRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/datasources/master-datasources.xml"
+            },
+            "name": "OptWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/registry.xml"
+            },
+            "name": "OptWso2AsRepositoryConfRegistry_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/security/authenticators.xml"
+            },
+            "name": "OptWso2AsRepositoryConfSecurityAuthenticators_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/carbon.xml"
+            },
+            "name": "OptWso2AsRepositoryConfCarbon_Xml"
+        },
+        {
+            "host": {
+                "sourcePath": "/opt/wso2as/repository/conf/axis2/axis2.xml"
+            },
+            "name": "OptWso2AsRepositoryConfAxis2Axis2_Xml"
         },
         {
             "host": {
@@ -360,45 +480,33 @@
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2scripts/mysql"
+                "sourcePath": "/opt/wso2dss/repository/conf/datasources/master-datasources.xml"
             },
-            "name": "OptWso2ScriptsMysql"
+            "name": "OptWso2DssRepositoryConfDatasourcesMaster-Datasources_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2mysql/"
+                "sourcePath": "/opt/wso2dss/repository/conf/registry.xml"
             },
-            "name": "OptWso2Mysql"
+            "name": "OptWso2DssRepositoryConfRegistry_Xml"
         },
         {
             "host": {
-                "sourcePath": "/var/lib/mysql"
+                "sourcePath": "/opt/wso2dss/repository/conf/security/authenticators.xml"
             },
-            "name": "VarLibMysql"
+            "name": "OptWso2DssRepositoryConfSecurityAuthenticators_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/datasources/master-datasources.xml"
+                "sourcePath": "/opt/wso2dss/repository/conf/carbon.xml"
             },
-            "name": "OptWso2AsRepositoryConfDatasourcesMaster-Datasources_Xml"
+            "name": "OptWso2DssRepositoryConfCarbon_Xml"
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/registry.xml"
+                "sourcePath": "/opt/wso2dss/repository/conf/axis2/axis2.xml"
             },
-            "name": "OptWso2AsRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/security/authenticators.xml"
-            },
-            "name": "OptWso2AsRepositoryConfSecurityAuthenticators_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2as/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2AsRepositoryConfCarbon_Xml"
+            "name": "OptWso2DssRepositoryConfAxis2Axis2_Xml"
         },
         {
             "host": {
@@ -426,87 +534,9 @@
         },
         {
             "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/datasources/master-datasources.xml"
+                "sourcePath": "/opt/wso2brs/repository/conf/axis2/axis2.xml"
             },
-            "name": "OptWso2EsbRepositoryConfDatasourcesMaster-Datasources_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/registry.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/security/authenticators.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfSecurityAuthenticators_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfCarbon_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2esb/repository/conf/axis2/axis2.xml"
-            },
-            "name": "OptWso2EsbRepositoryConfAxis2Axis2_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2greg/repository/conf/datasources/master-datasources.xml"
-            },
-            "name": "OptWso2GregRepositoryConfDatasourcesMaster-Datasources_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2greg/repository/conf/security/authenticators.xml"
-            },
-            "name": "OptWso2GregRepositoryConfSecurityAuthenticators_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2greg/repository/conf/registry.xml"
-            },
-            "name": "OptWso2GregRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2greg/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2GregRepositoryConfCarbon_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is/repository/conf/datasources/master-datasources.xml"
-            },
-            "name": "OptWso2IsRepositoryConfDatasourcesMaster-Datasources_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is/repository/conf/carbon.xml"
-            },
-            "name": "OptWso2IsRepositoryConfCarbon_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is/repository/conf/registry.xml"
-            },
-            "name": "OptWso2IsRepositoryConfRegistry_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is/repository/conf/user-mgt.xml"
-            },
-            "name": "OptWso2IsRepositoryConfUser-Mgt_Xml"
-        },
-        {
-            "host": {
-                "sourcePath": "/opt/wso2is/repository/conf/security/sso-idp-config.xml"
-            },
-            "name": "OptWso2IsRepositoryConfSecuritySso-Idp-Config_Xml"
+            "name": "OptWso2BrsRepositoryConfAxis2Axis2_Xml"
         }
     ]
 }

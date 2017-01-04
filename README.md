@@ -179,7 +179,7 @@ I found this library that will convert between various container configurations:
 
 I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (using Docker, without installing anything, because it requires Python 3 if installed locally):
 ```
-cat docker-compose-rancher-dev.yml | docker run --rm -i micahhausler/container-transform
+cat docker-compose-rancher-dev.yml | docker run --rm -i micahhausler/container-transform > dev-aws-ecs-task-definition.json
 ```
 
 Notice I used the Rancher configuration file, because it uses configuration files from the confdata volume. I then had to modify the result:

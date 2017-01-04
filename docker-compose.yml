@@ -70,6 +70,7 @@ services:
             - ./conf/wso2brs/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
             - ./conf/wso2brs/repository/conf/security/authenticators.xml:/mnt/wso2esb/repository/conf/security/authenticators.xml
             - ./conf/wso2brs/repository/conf/carbon.xml:/mnt/wso2esb/repository/conf/carbon.xml
+            - ./conf/wso2brs/repository/conf/axis2/axis2.xml:/mnt/wso2esb/repository/conf/axis2/axis2.xml
 
     dss:
         image: eristoddle/wso2dss:3.5.1
@@ -81,6 +82,7 @@ services:
             - ./conf/wso2dss/repository/conf/registry.xml:/mnt/wso2dss/repository/conf/registry.xml
             - ./conf/wso2dss/repository/conf/security/authenticators.xml:/mnt/wso2dss/repository/conf/security/authenticators.xml
             - ./conf/wso2dss/repository/conf/carbon.xml:/mnt/wso2dss/repository/conf/carbon.xml
+            - ./conf/wso2dss/repository/conf/axis2/axis2.xml:/mnt/wso2dss/repository/conf/axis2/axis2.xml
 
     # apim:
     #     image: eristoddle/wso2am:2.0.0
@@ -103,3 +105,4 @@ services:
             - ./conf/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
             - ./conf/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
             - ./conf/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
+            - ./conf/wso2as/repository/conf/axis2/axis2.xml:/mnt/wso2as/repository/conf/axis2/axis2.xml
