@@ -56,10 +56,10 @@
       </jndiConfig>
       <definition type="RDBMS">
         <configuration>
-          <url>jdbc:mysql://wso2mysql:3306/registrydb?useSSL=false</url>
-          <username>root</username>
+          <url>jdbc:postgresql://wso2postgres:5432/registrydb?useSSL=false</url>
+          <username>wso2user</username>
           <password>password</password>
-          <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+          <driverClassName>org.postgresql.Driver</driverClassName>
           <maxActive>80</maxActive>
           <maxWait>60000</maxWait>
           <testOnBorrow>true</testOnBorrow>

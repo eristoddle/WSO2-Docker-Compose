@@ -1,0 +1,84 @@
+<!-- SEE https://docs.wso2.com/display/Carbon440/Installing+Features+using+pom+Files -->
+<!-- NOTE: Not currently being used. Here for experiments -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wso2.sample</groupId>
+    <artifactId>bardavon-esb-profile</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Bardavon ESB Profile</name>
+    <url>http://wso2.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wso2.maven</groupId>
+                <artifactId>carbon-p2-plugin</artifactId>
+                <version>1.5.4</version>
+                <executions>
+                    <execution>
+                        <id>feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>$profile</profile>
+                            <metadataRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</metadataRepository>
+                            <artifactRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</artifactRepository>
+                            <destination>repository/components</destination>
+                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
+                            <features>
+                                <feature>
+                                    <id>org.wso2.carbon.hl7.feature.group</id>
+                                    <version>4.6.6</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <replace token="false" value="true" dir="repository/components/$profile/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>wso2-maven-releases-repository</id>
+            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>wso2-maven-snapshots-repository</id>
+            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
