@@ -19,14 +19,16 @@ services:
             - /opt/wso2is:/conf/wso2is
             - /opt/wso2mysql:/conf/wso2mysql
             - /opt/wso2scripts:/conf/wso2scripts
-    wso2mysql:
-        image: mysql:5.7.10
+
+    wso2postgres:
+        image: postgres:9.6
         environment:
-            - MYSQL_ROOT_PASSWORD=password
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=wso2user
         volumes:
-            - /opt/wso2scripts/mysql:/docker-entrypoint-initdb.d
-            - /opt/wso2mysql/:/etc/mysql/conf.d
-            - /var/lib/mysql
+            - /opt/wso2scripts/postgres-init:/docker-entrypoint-initdb.d
+            - /var/lib/postgresql/data
+            - /opt/wso2scripts/postgres-sql:/tmp/postgres-sql
 
     is:
         image: eristoddle/wso2is_features:5.2.0
