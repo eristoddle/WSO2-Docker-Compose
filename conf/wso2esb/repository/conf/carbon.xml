@@ -677,17 +677,17 @@
 	<!--Uses the embedded API Manager by default. If you want to use an external
 	API Manager instance to manage APIs, configure below  externalAPIManager-->
 
-	<Enabled>true</Enabled>
+	<Enabled>false</Enabled>
 
 	<!--Uncomment and configure API Gateway and
 	Publisher URLs to use external API Manager instance-->
 
-	<!--ExternalAPIManager>
+	<!-- <ExternalAPIManager>
 
-		<APIGatewayURL>http://localhost:8281</APIGatewayURL>
-		<APIPublisherURL>http://localhost:8281/publisher</APIPublisherURL>
+		<APIGatewayURL>http://localhost:9448</APIGatewayURL>
+		<APIPublisherURL>http://localhost:9448/publisher</APIPublisherURL>
 
-	</ExternalAPIManager-->
+	</ExternalAPIManager> -->
 
 	<LoadAPIContextsInServerStartup>true</LoadAPIContextsInServerStartup>
    </APIManagement>

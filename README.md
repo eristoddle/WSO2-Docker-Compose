@@ -2,9 +2,7 @@
 
 ## TODO and BUGS
 
-- I can only currently get single sign on to work when I create service providers through the running Identity Server. Using the ssh-idp-config.xml in the wso2is conf folder doesn't seem to be working to load these values. So once running in docker-compose, for now, you have to login to the Identity Server at https://localhost:9443 using admin:admin and add the other wso2 applications as service providers, explained [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
-
-
+- The first time you call `docker-compose up` or when you call it after you call `docker-compose down`, the mysql container will have to build the database. Sometimes, various wso2 apps will crash because the data provider is not ready in time. `Ctrl C` to kill the process and then running `docker-compose up` again will fix this, because by then the databases have been built. There is a way to have the other containers wait until the mysql container is ready. I get that fix in eventually.
 
 ## Docker base images
 
@@ -12,7 +10,9 @@ I have a repo of the dockerfiles at https://github.com/eristoddle/dockerfiles.  
 
 I used that repo to build the base image and wso2 images and push the images to my Docker Hub account: https://hub.docker.com/u/eristoddle/
 
+## Custom Images
 
+- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 - Make sure you have docker installed.
 - Run `docker-compose up`
-- To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000.
+- To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000. I added this to the docker-compose file.
 - This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
 - The ports for each box can be found in the `docker-compose.yml` file.
@@ -48,8 +48,6 @@ Just comment out the images you don't want to run in the docker-compose.yml file
 - wso2mysql
 - is
 - greg
-
-
 
 ## Running with Rancher
 
@@ -94,8 +92,6 @@ Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set th
 
 You may have to stop the virtualbox image and up the memory if it crashes.
 
-
-
 ## Volumes in Environments Other Than Local
 
 Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
@@ -108,14 +104,10 @@ This is an old method for doing this and probably should be changed to use volum
 - NFS
   After some research on the what would work best for us.
 
-
-
 ## More Docker Reading
 
 - https://github.com/veggiemonk/awesome-docker
 - https://www.katacoda.com/
-
-
 
 ## WSO2 Development
 
@@ -140,15 +132,58 @@ Since I am using Docker machine, I have to add the Identity Server hostname (`ws
 
 *NOTE*: I still had to login to the Identity Server and add the service provider there. For some reason I have yet to get the sso-idp-config.xml file in the wso2is conf to load these on launch. See details [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
 
+I have created an image which has these service providers set up already, but it's a manually built image. I plan on scripting this by populating the correct tables in the database.
+
 ### Port Offsets
 
 I am using port offsets in the carbon.xml files to prevent ports from colliding internally when doing SSO. You will also notice this in the docker-compose.yml file.
 
-### Artifacts
+### Connecting the ESB and DSS
 
-Artifacts for Carbon Apps (C-App) get added directly to `< CARBON_HOME>/repository/deployment/server/carbonapps`.
+The DSS image has drivers preinstalled for Mysql, Sql Server and Postgres.
 
-See these links:
-- https://docs.wso2.com/display/TS110/Creating+and+Deploying+C-App
-- https://docs.wso2.com/display/DVS380/Packaging+Artifacts+Into+Deployable+Archives
-- http://wso2.com/library/articles/2015/10/article-wso2-developer-studio-development-and-deployment-best-practices/
+SEE:
+- http://kalpads.blogspot.com/2012/07/implement-mdm-pattern-using-wso2-esb.html
+- http://chathurikaerandi.blogspot.com/2016/05/how-do-i-integrate-wso2-esb-and-wso2.html
+
+### Creating an API in the ESB
+
+SEE:
+- https://docs.wso2.com/display/ESB490/Creating+APIs
+- http://wso2.com/library/articles/2012/09/get-cup-coffee-wso2-way/
+
+### Using the Governance Registry
+
+SEE:
+- http://wso2.com/library/articles/2015/07/article-multi-environment-artifact-management-for-wso2-products-using-wso2-governance-registry/
+
+### Using the Business Rules Server
+
+SEE:
+- http://wso2.com/library/articles/2011/04/integrate-rules-soa/
+- http://wso2.com/library/articles/2013/05/eclipse-plugin-wso2-business-rules-server/
+
+## EC2 Deployment
+
+### Using ecs-cli
+
+For this use the `docker-compose-rancher-dev.yml` file.
+
+SEE: https://github.com/aws/amazon-ecs-cli
+
+### Converting the configuration to a task definition
+
+NOTE: This should not be necessary with ecs-cli
+
+I found this library that will convert between various container configurations: https://github.com/micahhausler/container-transform
+
+I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (using Docker, without installing anything, because it requires Python 3 if installed locally):
+```
+cat docker-compose-rancher-dev.yml | docker run --rm -i micahhausler/container-transform > dev-aws-ecs-task-definition.json
+```
+
+Notice I used the Rancher configuration file, because it uses configuration files from the confdata volume. I then had to modify the result:
+- I removed the Rancher specific tags
+- I set the `essential` parameter of the confdata container to false because it comes up, creates it's volumes and then stops.
+
+The aws task definition spec does have other parameters which aren't in the docker-compose file and are optional. SEE: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
