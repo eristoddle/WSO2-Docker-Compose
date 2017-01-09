@@ -75,7 +75,7 @@
     <remoteInstance url="https://greg:9443/registry">
       <id>instanceid</id>
       <dbConfig>remote_registry</dbConfig>
-      <cacheId>root@jdbc:mysql://wso2mysql:3306/registrydb</cacheId>
+      <cacheId>wso2user@jdbc:postgresql://wso2postgres:5432/registrydb</cacheId>
       <readOnly>false</readOnly>
       <enableCache>false</enableCache>
       <registryRoot>/</registryRoot>

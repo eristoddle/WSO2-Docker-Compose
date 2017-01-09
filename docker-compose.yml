@@ -4,7 +4,7 @@ services:
     # Interface located at http://localhost:9000
     # The fix432 tag may be changed to latest, once latest isn't broken
     portainer:
-        image: portainer/portainer:fix432
+        image: portainer/portainer:latest
         ports:
             - 9000:9000
         volumes:
