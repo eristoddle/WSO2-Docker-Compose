@@ -41,7 +41,7 @@ services:
             - /opt/wso2is/repository/conf/carbon.xml:/mnt/wso2is/repository/conf/carbon.xml
             - /opt/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
             - /opt/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
-            - /opt/wso2is/repository/conf/security/sso-idp-config.xml:/mnt/wso2is/repository/conf/security/sso-idp-config.xml
+            # - /opt/wso2is/repository/conf/identity/sso-idp-config.xml:/mnt/wso2is/repository/conf/identity/sso-idp-config.xml
             - /opt/wso2is/repository/conf/axis2/axis2.xml:/mnt/wso2is/repository/conf/axis2/axis2.xml
 
     esb:

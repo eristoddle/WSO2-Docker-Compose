@@ -13,6 +13,16 @@ I used that repo to build the base image and wso2 images and push the images to 
 ## Custom Images
 
 - The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
+- The IS image is custom. I load all the applications up as service providers for SSO and then wrap up the result as an image. This should be able to be done with the sso-idp-config.xml file but it is not parsing the file correctly. Here is the service provider data:
+
+Application  |  Service Provider Name |  Assertion Consumer Service Url
+--|---|--
+ ESB | service-provider-esb  |  https://localhost:9444/acs
+GREG  | service-provider-greg  |  https://localhost:9445/acs
+BRS  | service-provider-brs  |  https://localhost:9446/acs
+DSS  | service-provider-dss  |  https://localhost:9447/acs
+AM  | service-provider-apim  |  https://localhost:9448/acs
+AS  | service-provider-as  |  https://localhost:9449/acs
 
 ## Getting Started
 
