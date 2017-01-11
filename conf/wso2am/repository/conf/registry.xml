@@ -24,7 +24,7 @@
 
     <!-- This handler provides resource retention locking for the resources -->
 
-    <handler class="org.wso2.carbon.registry.extensions.handlers.RetentionHandler" 
+    <handler class="org.wso2.carbon.registry.extensions.handlers.RetentionHandler"
             methods="PUT,DELETE,MOVE,RENAME,IMPORT,COPY,ADD_ASSOCIATION,REMOVE_ASSOCIATION,RESTORE,RESTORE_VERSION">
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.URLMatcher">
             <property name="pattern">.*</property>
@@ -38,13 +38,13 @@
         <property name="disableWSDLValidation">true</property-->
         <property name="disableSymlinkCreation">true</property>
         <property name="schemaLocationConfiguration" type="xml">
-            <location>/trunk/schemas/</location>            
+            <location>/trunk/schemas/</location>
 	</property>
         <property name="wsdlLocationConfiguration" type="xml">
-            <location>/trunk/wsdls/</location>            
+            <location>/trunk/wsdls/</location>
 	</property>
         <property name="policyLocationConfiguration" type="xml">
-            <location>/trunk/policies/</location>            
+            <location>/trunk/policies/</location>
 	</property>
 
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
@@ -89,7 +89,7 @@
             <key>dev</key>
             <key>qa</key>
             <key>live</key>
-        </property>        
+        </property>
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
             <property name="mediaType">application/vnd.wso2-service+xml</property>
         </filter>
@@ -101,7 +101,7 @@
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
             <property name="mediaType">application/vnd.wso2-service+xml</property>
         </filter>
-    </handler>    
+    </handler>
 
 
    <!--This handler delete the subscription hierarcy generated in the notifications path when a subscription is deleted directly -->
@@ -130,7 +130,7 @@
 
     <handler class="org.wso2.carbon.registry.extensions.handlers.PolicyMediaTypeHandler">
 	<property name="policyLocationConfiguration" type="xml">
-            <location>/trunk/policies/</location>            
+            <location>/trunk/policies/</location>
 	</property>
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
             <property name="mediaType">application/policy+xml</property>
@@ -143,7 +143,7 @@
         <!--property name="disableSchemaValidation">true</property-->
         <property name="disableSymlinkCreation">true</property>
         <property name="locationConfiguration" type="xml">
-            <location>/trunk/schemas/</location>            
+            <location>/trunk/schemas/</location>
         </property>
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
             <property name="mediaType">application/x-xsd+xml</property>
@@ -222,11 +222,16 @@
     <remoteInstance url="https://greg:9443/registry">
       <id>instanceid</id>
       <dbConfig>remote_registry</dbConfig>
-      <cacheId>root@jdbc:mysql://wso2mysql:3306/registrydb</cacheId>
+      <cacheId>wso2user@jdbc:postgresql://wso2postgres:5432/registrydb</cacheId>
       <readOnly>false</readOnly>
       <enableCache>false</enableCache>
       <registryRoot>/</registryRoot>
     </remoteInstance>
+
+    <!-- <mount path="/_system/config" overwrite="true">
+        <instanceId>mountInstance</instanceId>
+        <targetPath>/_system/config</targetPath>
+    </mount> -->
 
     <!-- This defines the mount configuration to be used with the remote instance and the target path for the mount -->
     <mount path="/_system/governance" overwrite="true">
@@ -274,7 +279,7 @@
 
 
     <!-- This static configuration is suppose to be modified before any data being loaded to the registry (i.e.: before the first startup) -->
-    
+
     <staticConfiguration>
         <versioningProperties>true</versioningProperties>
         <versioningComments>true</versioningComments>
@@ -285,11 +290,11 @@
     </staticConfiguration>
 
     <!-- This enables auto-versioning of resources (non-collection). Whenever a resource is updated a new version will be created -->
-  
+
     <versionResourcesOnChange>false</versionResourcesOnChange>
-    
+
     <!-- This enables JMX management for G-Reg -->
-    
+
     <jmx enabled="false">
         <service name="InvocationStatistics" enabled="true"/>
         <service name="Activities" enabled="true"/>
@@ -297,30 +302,30 @@
         <service name="Subscriptions" enabled="true"/>
         <service name="Events" enabled="true"/>
     </jmx>
-    
+
     <!-- If you need to use a Remote Human Task to provide the Work List functionality instead of the Embedded Human Task or if you want
-         to use Work List notifications, uncomment the following configuration. Please note that you need to provide the credentials 
+         to use Work List notifications, uncomment the following configuration. Please note that you need to provide the credentials
          and URL to connect to the remote instance (ex:- remote BPS server) if you are planning to use a Remote Human Task. You should
          provide credentials and URL to connect to the local instance if you simply want to use Work List notifications. -->
-    
+
     <!--workList serverURL="local://services/" remote="false">
         <username>admin</username>
         <password>admin</password>
     </workList-->
-    
-    <!-- Sample SCM configuration. Please note that checkOutURL, workingDir, and mountPoint are mandatory for each connection. 
+
+    <!-- Sample SCM configuration. Please note that checkOutURL, workingDir, and mountPoint are mandatory for each connection.
          The update frequency is in minutes. Setting readOnly would disable checkIn even if the checkInURL is set. The credentials
          are to connect to the corresponding repository and must be provided if required. -->
-    
+
     <!--scm>
         <connection checkOutURL="scm:svn:http://svn.wso2.org/repos/wso2" workingDir="/valid/filesystem/path" mountPoint="/_system/foo" checkInURL="" readOnly="" updateFrequency="">
         	<username>admin</username>
         	<password>admin</password>
         </connection>
     </scm-->
-    
+
     <!-- This defines the list of scheduled tasks for the registry -->
-    
+
     <!--tasks>
         <task name="TaskName" class="com.foo.TaskClass">
             <trigger cron="cronExpr"/>

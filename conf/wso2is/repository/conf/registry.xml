@@ -71,7 +71,7 @@
            <property name="mediaType">application/x-xsd+xml</property>
        </filter>
    </handler> -->
-    
+
     <dbConfig name="remote_registry">
       <dataSource>jdbc/WSO2CarbonDB_GREG</dataSource>
     </dbConfig>
@@ -79,11 +79,17 @@
     <remoteInstance url="https://greg:9443/registry">
       <id>instanceid</id>
       <dbConfig>remote_registry</dbConfig>
-      <cacheId>root@jdbc:mysql://wso2mysql:3306/registrydb</cacheId>
+      <cacheId>wso2user@jdbc:postgresql://wso2postgres:5432/registrydb</cacheId>
       <readOnly>false</readOnly>
       <enableCache>false</enableCache>
       <registryRoot>/</registryRoot>
     </remoteInstance>
+
+    <!-- TODO: This messes up SSO until I figure out how to put that data in the registry -->
+    <!-- <mount path="/_system/config" overwrite="true">
+        <instanceId>mountInstance</instanceId>
+        <targetPath>/_system/config</targetPath>
+    </mount> -->
 
     <mount path="/_system/governance" overwrite="true">
       <instanceId>instanceid</instanceId>

@@ -12,7 +12,17 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 ## Custom Images
 
-- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality.
+- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality. This currently has to be done manually.
+- The IS image is custom. I load all the applications up as service providers for SSO and then wrap up the result as an image. This should be able to be done with the sso-idp-config.xml file but it is not parsing the file correctly. Here is the service provider data:
+
+Application  |  Service Provider Name |  Assertion Consumer Service Url
+--|---|--
+ ESB | service-provider-esb  |  https://localhost:9444/acs
+GREG  | service-provider-greg  |  https://localhost:9445/acs
+BRS  | service-provider-brs  |  https://localhost:9446/acs
+DSS  | service-provider-dss  |  https://localhost:9447/acs
+AM  | service-provider-apim  |  https://localhost:9448/acs
+AS  | service-provider-as  |  https://localhost:9449/acs
 
 ## Getting Started
 
@@ -83,14 +93,6 @@ Because stuff happens.
 - To restart docker running in RancherOS: `sudo ros service restart`
 - Stop all containers: `docker stop $(docker ps -a -q)`
 - Remove all containers: `docker rm $(docker ps -a -q)`
-
-### Configuring an insecure registry in Rancher
-
-Normally you would edit the config file at `/etc/default/docker`. Not so in RancherOS. It has a configuration file at `/var/lib/rancher/conf/docker`. You will add this line to that file: `--insecure-registry 192.168.99.100:5000` and then restart docker with the command listed above.
-
-Searching 'Registry' in Rancher's catalog will bring up a registry stack. Set the FDQN to the IP of Rancher, which in my case was `192.168.99.100`. Let it do it's thing after it launches. It takes quite a while, 5-10 minutes locally. I tried clicking things during the process because I thought I had to, but that broke the container.
-
-You may have to stop the virtualbox image and up the memory if it crashes.
 
 ## Volumes in Environments Other Than Local
 
@@ -165,25 +167,59 @@ SEE:
 
 ## EC2 Deployment
 
+For ECS deployment, I wrapped up the configuration files into new docker images, since it seems that AWS only allows you to sync folders and not single files. The other option was syncing whole folders and the repository folder is not that small. And since these files should not have to be touched that often after initial configuration, it seemed the best route.
+
+Running `./build_push_all.sh` will build all docker images for deployment and push them to docker hub except for:
+
+- ESB
+- IS
+
+which I currently custom build to include HL7 and SSO. I am working on an automated build for those 2.
+
 ### Using ecs-cli
 
-For this use the `docker-compose-rancher-dev.yml` file.
+For this use the `docker-compose-aws-dev.yml` file.
 
 SEE: https://github.com/aws/amazon-ecs-cli
 
-### Converting the configuration to a task definition
+#### Running
 
-NOTE: This should not be necessary with ecs-cli
+Running an instance with `ecs-cli compose` has its limitations. Since you are using a docker-compose file, you can't set the `confdata` container's `essential` key to false or set the memory limit on the containers even though there is a `memory_limit` key you can add to the compose file. So the containers come up and then go back down since the default memory limit is 512 and essential is set true by default.
 
-I found this library that will convert between various container configurations: https://github.com/micahhausler/container-transform
+I got around this by launching the instance with `ecs-cli compose` and then going to the aws website and modifying the task definition to up the memory and set the confdata container to non-essential and relaunching, so going forward it will be better to use `aws cli` and the task definition json file so these settings can be used. Giving the wso2 containers 1gb memory each allowed them to run.
 
-I used it to convert the `docker-compose.yml` file to the `dev-aws-ecs-task-definition.json` file by running the following command (using Docker, without installing anything, because it requires Python 3 if installed locally):
+You will also have to set up a security group for all the ports you need open to the outside world or modify the one that gets created when launched.
+
+1. Configure the cli:
+
 ```
-cat docker-compose-rancher-dev.yml | docker run --rm -i micahhausler/container-transform > dev-aws-ecs-task-definition.json
+ecs-cli configure --region us-west-2 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster bardavon-wso2-cluster
 ```
 
-Notice I used the Rancher configuration file, because it uses configuration files from the confdata volume. I then had to modify the result:
-- I removed the Rancher specific tags
-- I set the `essential` parameter of the confdata container to false because it comes up, creates it's volumes and then stops.
+2. Create a cluster:
 
-The aws task definition spec does have other parameters which aren't in the docker-compose file and are optional. SEE: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+```
+ecs-cli up --keypair id_rsa --capability-iam --size 1 --instance-type t2.medium
+```
+
+3. Bring up the containers:
+
+```
+ecs-cli compose --file docker-compose-aws-dev.yml up
+```
+
+#### Stopping
+
+I kept killing my instance and it would only respawn. I even delete the cluster and task definitions from the web interface and the instance would not die. The important step was setting the cluster size to zero.
+
+1. Scale down the cluster:
+
+```
+ecs-cli up --keypair id_rsa --capability-iam --size 0 --instance-type t2.medium
+```
+
+2. Bring the cluster down
+
+```
+ecs-cli down --force
+```
