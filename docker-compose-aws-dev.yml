@@ -1,0 +1,61 @@
+version: '2'
+services:
+    confdata:
+        container_name: confdata
+        image: eristoddle/wso2-dev-config
+        volumes:
+            - /tmp/wso2scripts:/conf/wso2scripts
+
+    wso2postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=wso2user
+        volumes:
+            - /tmp/wso2scripts/postgres-init:/docker-entrypoint-initdb.d
+            - /var/lib/postgresql/data:/var/lib/postgresql/data
+            - /tmp/wso2scripts/postgres-sql:/tmp/postgres-sql
+
+    is:
+        image: eristoddle/wso2is_final
+        hostname: wso2identity
+        ports:
+            - 9443:9443
+            - 9763:9763
+
+    esb:
+        image: eristoddle/wso2esb_final
+        ports:
+            - 9444:9444
+            - 9764:9764
+
+    greg:
+        image: eristoddle/wso2greg_final
+        command: -Dsetup
+        ports:
+            - 9445:9445
+            - 9765:9765
+
+    brs:
+        image: eristoddle/wso2brs_final
+        ports:
+            - 9446:9446
+            - 9766:9766
+
+    dss:
+        image: eristoddle/wso2dss_final
+        ports:
+            - 9447:9447
+            - 9767:9767
+
+    # apim:
+    #     image: eristoddle/wso2am_final
+    #     ports:
+    #         - 9448:9448
+    #         - 9768:9768
+
+    as:
+        image: eristoddle/wso2as_final
+        ports:
+            - 9449:9449
+            - 9769:9769
