@@ -210,15 +210,7 @@ ecs-cli compose --file docker-compose-aws-dev.yml up
 
 #### Stopping
 
-I kept killing my instance and it would only respawn. I even delete the cluster and task definitions from the web interface and the instance would not die. The important step was setting the cluster size to zero.
-
-1. Scale down the cluster:
-
-```
-ecs-cli up --keypair id_rsa --capability-iam --size 0 --instance-type t2.medium
-```
-
-2. Bring the cluster down
+I kept killing my instance and it would only respawn. I even delete the cluster and task definitions from the web interface and the instance would not die. This command seemed to finally do the job.
 
 ```
 ecs-cli down --force
