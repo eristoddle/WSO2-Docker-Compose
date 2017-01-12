@@ -6,7 +6,7 @@ docker push eristoddle/wso2-dev-config
 
 docker-compose build -f docker-compose-build
 
-# docker push eristoddle/wso2is_final
+docker push eristoddle/wso2is_final
 # docker push eristoddle/wso2esb_final
 # docker push eristoddle/wso2am_final
 docker push eristoddle/wso2as_final
