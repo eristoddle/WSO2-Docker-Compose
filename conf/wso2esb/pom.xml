@@ -1,5 +1,4 @@
 <!-- SEE https://docs.wso2.com/display/Carbon440/Installing+Features+using+pom+Files -->
-<!-- NOTE: Not currently being used. Here for experiments -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.sample</groupId>
@@ -15,6 +14,27 @@
                 <artifactId>carbon-p2-plugin</artifactId>
                 <version>1.5.4</version>
                 <executions>
+
+                    <execution>
+                        <id>p2-repo-generation</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-repo-gen</goal>
+                        </goals>
+                        <configuration>
+                            <p2AgentLocation>${basedir}/target/p2-agent</p2AgentLocation>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <publishArtifacts>true</publishArtifacts>
+                            <publishArtifactRepository>true</publishArtifactRepository>
+                            <featureArtifacts>
+
+                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.hl7.feature:4.2.1</featureArtifactDef>
+
+                            </featureArtifacts>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>feature-install</id>
                         <phase>package</phase>
@@ -22,19 +42,22 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>$profile</profile>
-                            <metadataRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</metadataRepository>
-                            <artifactRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</artifactRepository>
-                            <destination>repository/components</destination>
+                            <profile>default</profile>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <destination>${basedir}/repository/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
+
                                 <feature>
-                                    <id>org.wso2.carbon.hl7.feature.group</id>
-                                    <version>4.6.6</version>
+                                    <id>org.wso2.carbon.transports.hl7.feature.group</id>
+                                    <version>4.2.1</version>
                                 </feature>
+
                             </features>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
             <plugin>
@@ -46,7 +69,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true" dir="repository/components/$profile/configuration/org.eclipse.equinox.simpleconfigurator">
+                                <replace token="false" value="true" dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>

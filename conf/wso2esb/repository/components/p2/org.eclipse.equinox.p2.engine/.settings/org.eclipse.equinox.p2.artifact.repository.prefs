@@ -1,0 +1,11 @@
+#Fri Jan 13 08:57:12 CST 2017
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/type=org.eclipse.equinox.p2.artifact.repository.simpleRepository
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/suffix=artifacts.xml
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/enabled=true
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/version=1.0.0
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/description=
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/name=download cache
+eclipse.preferences.version=1
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/isSystem=true
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/uri=file\:/Users/smillerbardavon.com/code/wso2docker/conf/wso2esb/repository/components/p2/org.eclipse.equinox.p2.core/cache/
+repositories/file\:_Users_smillerbardavon.com_code_wso2docker_conf_wso2esb_repository_components_p2_org.eclipse.equinox.p2.core_cache/provider=
