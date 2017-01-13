@@ -1,3 +1,4 @@
+<!-- TODO: Work in Progress. Correct format but dependency problems in wso2 maven repo -->
 <!-- SEE https://docs.wso2.com/display/Carbon440/Installing+Features+using+pom+Files -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -31,7 +32,11 @@
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
 
-                                <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.hl7.feature:4.2.1</featureArtifactDef>
+                                <!-- <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.hl7.feature:4.2.1</featureArtifactDef> -->
+
+                                <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.business.messaging.hl7.transport:4.6.6</featureArtifactDef>
+
+                                <!-- <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.hl7.feature:4.6.10-SNAPSHOT</featureArtifactDef> -->
 
                             </featureArtifacts>
                         </configuration>
@@ -51,10 +56,20 @@
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
 
-                                <feature>
+                                <!-- <feature>
                                     <id>org.wso2.carbon.transports.hl7.feature.group</id>
                                     <version>4.2.1</version>
+                                </feature> -->
+
+                                <feature>
+                                    <id>org.wso2.carbon.business.messaging.hl7.transport</id>
+                                    <version>4.6.6</version>
                                 </feature>
+
+                                <!-- <feature>
+                                    <id>org.wso2.carbon.hl7.feature.group</id>
+                                    <version>4.6.10-SNAPSHOT</version>
+                                </feature> -->
 
                             </features>
                         </configuration>
@@ -146,8 +161,14 @@
         <!-- <dependency>
             <groupId>org.apache.ws.commons.axiom</groupId>
             <artifactId>axiom-api</artifactId>
-            <version>${axiom.api.wso2.version}</version>
-        </dependency> -->
+            <version>${axiom.osgi.version.range}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom</groupId>
+            <artifactId>axiom-impl</artifactId>
+            <version>${axiom.osgi.version.range}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.ws.commons.axiom</groupId>
@@ -165,14 +186,14 @@
             <groupId>org.apache.ws.commons.axiom.wso2</groupId>
             <artifactId>axiom</artifactId>
             <version>${axiom.wso2.version}</version>
-        </dependency>
+        </dependency> -->
 
     </dependencies>
 
     <properties>
-        <axiom.api.wso2.version>1.2.11-wso2v2</axiom.api.wso2.version>
+        <!-- <axiom.api.wso2.version>1.2.11-wso2v2</axiom.api.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v2</axiom.wso2.version>
-        <axiom.osgi.version.range>[1.2.11.wso2v2, 1.3.0)</axiom.osgi.version.range>
+        <axiom.osgi.version.range>[1.2.11.wso2v2, 1.3.0)</axiom.osgi.version.range> -->
     </properties>
 
 </project>
