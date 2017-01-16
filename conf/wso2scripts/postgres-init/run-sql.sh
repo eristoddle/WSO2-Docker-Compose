@@ -20,9 +20,17 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE brscarbondb TO wso2user;
     CREATE DATABASE dsscarbondb;
     GRANT ALL PRIVILEGES ON DATABASE dsscarbondb TO wso2user;
+    CREATE DATABASE gregcarbondb;
+    GRANT ALL PRIVILEGES ON DATABASE gregcarbondb TO wso2user;
+    CREATE DATABASE gregmetricsdb;
+    GRANT ALL PRIVILEGES ON DATABASE gregmetricsdb TO wso2user;
+    CREATE DATABASE gregbpeldb;
+    GRANT ALL PRIVILEGES ON DATABASE gregbpeldb TO wso2user;
+    CREATE DATABASE gregsocialdb;
+    GRANT ALL PRIVILEGES ON DATABASE gregsocialdb TO wso2user;
 EOSQL
 
-echo "Initializing database WSO2 databases mbstoredb, registrydb and identitydb"
+echo "Initializing database WSO2 databases"
 psql --username="$POSTGRES_USER" -d mbstoredb -f /tmp/postgres-sql/apim-init.sql
 psql --username="$POSTGRES_USER" -d identitydb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d registrydb -f /tmp/postgres-sql/carbon-init.sql
@@ -32,6 +40,10 @@ psql --username="$POSTGRES_USER" -d identitybpeldb -f /tmp/postgres-sql/bpel-ini
 psql --username="$POSTGRES_USER" -d esbcarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d brscarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d dsscarbondb -f /tmp/postgres-sql/carbon-init.sql
+psql --username="$POSTGRES_USER" -d gregcarbondb -f /tmp/postgres-sql/carbon-init.sql
+psql --username="$POSTGRES_USER" -d gregmetricsdb -f /tmp/postgres-sql/metrics-init.sql
+psql --username="$POSTGRES_USER" -d gregbpeldb -f /tmp/postgres-sql/bpel-init.sql
+psql --username="$POSTGRES_USER" -d gregsocialdb -f /tmp/postgres-sql/social-init.sql
 
 # Add conf
 cp /tmp/postgres-sql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
