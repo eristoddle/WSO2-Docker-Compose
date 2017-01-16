@@ -14,6 +14,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE identitycarbondb TO wso2user;
     CREATE DATABASE identitybpeldb;
     GRANT ALL PRIVILEGES ON DATABASE identitybpeldb TO wso2user;
+    CREATE DATABASE esbcarbondb;
+    GRANT ALL PRIVILEGES ON DATABASE esbcarbondb TO wso2user;
 EOSQL
 
 echo "Initializing database WSO2 databases mbstoredb, registrydb and identitydb"
@@ -23,6 +25,7 @@ psql --username="$POSTGRES_USER" -d registrydb -f /tmp/postgres-sql/carbon-init.
 psql --username="$POSTGRES_USER" -d identitymetricsdb -f /tmp/postgres-sql/metrics-init.sql
 psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d identitybpeldb -f /tmp/postgres-sql/bpel-init.sql
+psql --username="$POSTGRES_USER" -d esbcarbondb -f /tmp/postgres-sql/carbon-init.sql
 
 # Add conf
 cp /tmp/postgres-sql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
