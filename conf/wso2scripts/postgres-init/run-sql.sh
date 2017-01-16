@@ -10,8 +10,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE identitydb TO wso2user;
     CREATE DATABASE identitymetricsdb;
     GRANT ALL PRIVILEGES ON DATABASE identitymetricsdb TO wso2user;
-    CREATE DATABASE identitycarbondb;
-    GRANT ALL PRIVILEGES ON DATABASE identitycarbondb TO wso2user;
+    -- CREATE DATABASE identitycarbondb;
+    -- GRANT ALL PRIVILEGES ON DATABASE identitycarbondb TO wso2user;
     CREATE DATABASE identitybpeldb;
     GRANT ALL PRIVILEGES ON DATABASE identitybpeldb TO wso2user;
     CREATE DATABASE esbcarbondb;
@@ -20,8 +20,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE brscarbondb TO wso2user;
     CREATE DATABASE dsscarbondb;
     GRANT ALL PRIVILEGES ON DATABASE dsscarbondb TO wso2user;
-    CREATE DATABASE gregcarbondb;
-    GRANT ALL PRIVILEGES ON DATABASE gregcarbondb TO wso2user;
+    -- CREATE DATABASE gregcarbondb;
+    -- GRANT ALL PRIVILEGES ON DATABASE gregcarbondb TO wso2user;
     CREATE DATABASE gregmetricsdb;
     GRANT ALL PRIVILEGES ON DATABASE gregmetricsdb TO wso2user;
     CREATE DATABASE gregbpeldb;
@@ -44,10 +44,10 @@ psql --username="$POSTGRES_USER" -d identitydb -f /tmp/postgres-sql/carbon-init.
 psql --username="$POSTGRES_USER" -d registrydb -f /tmp/postgres-sql/carbon-init.sql
 
 psql --username="$POSTGRES_USER" -d identitymetricsdb -f /tmp/postgres-sql/metrics-init.sql
-# psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-is-init.sql
+# psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d identitybpeldb -f /tmp/postgres-sql/bpel-init.sql
 
-# psql --username="$POSTGRES_USER" -d gregcarbondb -f /tmp/postgres-sql/carbon-greg-init.sql
+# psql --username="$POSTGRES_USER" -d gregcarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d gregmetricsdb -f /tmp/postgres-sql/metrics-init.sql
 psql --username="$POSTGRES_USER" -d gregbpeldb -f /tmp/postgres-sql/bpel-init.sql
 psql --username="$POSTGRES_USER" -d gregsocialdb -f /tmp/postgres-sql/social-init.sql
