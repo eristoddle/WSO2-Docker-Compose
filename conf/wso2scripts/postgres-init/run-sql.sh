@@ -20,8 +20,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE brscarbondb TO wso2user;
     CREATE DATABASE dsscarbondb;
     GRANT ALL PRIVILEGES ON DATABASE dsscarbondb TO wso2user;
-    -- CREATE DATABASE gregcarbondb;
-    -- GRANT ALL PRIVILEGES ON DATABASE gregcarbondb TO wso2user;
     CREATE DATABASE gregmetricsdb;
     GRANT ALL PRIVILEGES ON DATABASE gregmetricsdb TO wso2user;
     CREATE DATABASE gregbpeldb;
@@ -47,7 +45,6 @@ psql --username="$POSTGRES_USER" -d identitymetricsdb -f /tmp/postgres-sql/metri
 # psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d identitybpeldb -f /tmp/postgres-sql/bpel-init.sql
 
-# psql --username="$POSTGRES_USER" -d gregcarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d gregmetricsdb -f /tmp/postgres-sql/metrics-init.sql
 psql --username="$POSTGRES_USER" -d gregbpeldb -f /tmp/postgres-sql/bpel-init.sql
 psql --username="$POSTGRES_USER" -d gregsocialdb -f /tmp/postgres-sql/social-init.sql
