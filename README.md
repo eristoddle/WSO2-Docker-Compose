@@ -2,7 +2,7 @@
 
 ## TODO and BUGS
 
-- The first time you call `docker-compose up` or when you call it after you call `docker-compose down`, the mysql container will have to build the database. Sometimes, various wso2 apps will crash because the data provider is not ready in time. `Ctrl C` to kill the process and then running `docker-compose up` again will fix this, because by then the databases have been built. There is a way to have the other containers wait until the mysql container is ready. I get that fix in eventually.
+- The first time you call `docker-compose up` or when you call it after you call `docker-compose down`, the postgres container will have to build the database. Sometimes, various wso2 apps will crash because the data provider is not ready in time. `Ctrl C` to kill the process and then running `docker-compose up` again will fix this, because by then the databases have been built. There is a way to have the other containers wait until the postgres container is ready. I get that fix in eventually.
 
 ## Docker base images
 
@@ -12,28 +12,18 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 ## Custom Images
 
-- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality. This currently has to be done manually.
-- The IS image is custom. I load all the applications up as service providers for SSO and then wrap up the result as an image. This should be able to be done with the sso-idp-config.xml file but it is not parsing the file correctly. Here is the service provider data:
+- The ESB image with the features postfix had the HL7 feature built in and the axis2.xml file in this project is configured for that image to activate HL7 functionality. This currently has to be done manually. It is possible to do this with maven but the most current HL7 feature in not yet in the wso2 feature repo.
 
-Application  |  Service Provider Name |  Assertion Consumer Service Url
---|---|--
- ESB | service-provider-esb  |  https://localhost:9444/acs
-GREG  | service-provider-greg  |  https://localhost:9445/acs
-BRS  | service-provider-brs  |  https://localhost:9446/acs
-DSS  | service-provider-dss  |  https://localhost:9447/acs
-AM  | service-provider-apim  |  https://localhost:9448/acs
-AS  | service-provider-as  |  https://localhost:9449/acs
+## Getting Started with Docker-compose
 
-## Getting Started
-
-**For a local dev environment, all you have to worry about is the docker-compose section**
+**For a local dev environment, all you have to worry about is this section**
 
 ### Running with docker-compose
 
 - Make sure you have docker installed.
-- Run `docker-compose up`
-- To manage the boxes through a UI on your dev machine, check out http://portainer.io/. Or just run this `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer` and Portainer will be accessible at http://localhost:9000. I added this to the docker-compose file.
-- This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 6gb and it seems to run fine.
+- Run `docker-compose up` in main directory
+- To manage the boxes through a UI on your dev machine, I added a Portainer image that will be accessible at http://localhost:9000.
+- This brings up 8 boxes running wso2 applications. For Docker on Mac, you will have to set the memory up a little from the default 2gb or one of the  boxes will crash because it ran out of memory. I set mine up to 4gb and it seems to run fine.
 - The esb has the business rules server built in and the brs component is just another esb instance.
 - The ports for each box can be found in the `docker-compose.yml` file.
 - For SSO, you will have to edit the /etc/hosts file on your laptop and add the host `wso2identity` to `127.0.0.1`.
@@ -55,11 +45,11 @@ Default password: admin
 
 Just comment out the images you don't want to run in the docker-compose.yml file. The following you will need to have running due to configuration files looking for them:
 
-- wso2mysql
+- wso2postgres
 - is
 - greg
 
-## Running with Rancher
+## Running with Rancher - Can Be Skipped
 
 NOTE: Not necessary for local development, but for playing with a production level environment locally.
 
@@ -94,17 +84,19 @@ Because stuff happens.
 - Stop all containers: `docker stop $(docker ps -a -q)`
 - Remove all containers: `docker rm $(docker ps -a -q)`
 
-## Volumes in Environments Other Than Local
+## Building the Final Images for Deployment
 
-Locally we can sync the volumes to our development machine. On remote hosts, we have to wrap the configuration files into container that will sync the files to the host machine for the other containers to use. That is the reason for the Dockerfile in this project and the difference between the various docker-compose files. The standard docker-compose.yml file is for local development.
+There is a `Dockerfile` in each `/conf/wso2*` folder that will take the files that are being synced through volumes in your local environment and wrap them up in a new image that requires no volumes for deployment.
 
-This means the image created from this docker file must be pushed to a private repo and tagged. Then referenced in the docker compose yaml file for that environment.
+The `docker-compose-build.yml` file will build all these images in one shot when you run:
 
-This is an old method for doing this and probably should be changed to use volume drivers like:
-- Flocker
-- Convoy
-- NFS
-  After some research on the what would work best for us.
+```shell
+docker-compose -f docker-compose-build.yml build --no-cache
+```
+
+There is also a `Dockerfile` in the main directory of this project. It builds the `wso2-dev-config` image which may not be required once/if we get a dedicated Postgres instance for dev. It contains configuration files and database creation scripts for the Postgres image.
+
+The `build_push_all.sh` script will create all of these images as well as push them to the image repo.
 
 ## More Docker Reading
 
@@ -115,30 +107,42 @@ This is an old method for doing this and probably should be changed to use volum
 
 ### Governance Registry Persistance
 
-The [Governance Registry](http://wso2.com/products/governance-registry/) is used to provide a shared governance partition backed by a MySQL database, as documented [here](https://docs.wso2.com/display/ESB490/Governance+Partition+in+a+Remote+Registry). The database `registrydb` is created by the `scripts/mysql/greg-init.sql` script on-start.
+The [Governance Registry](http://wso2.com/products/governance-registry/) is used to provide a shared governance partition backed by a Postgres database, as documented [here](https://docs.wso2.com/display/ESB490/Governance+Partition+in+a+Remote+Registry). The database `registrydb` is created by the `wso2scripts/postgres-sql/carbon-init.sql` script on-start.
 
 To test the shared governance partition set-up, navigate to the `/_system/governance` registry from any of the web consoles. Add or modify some resources, and expect the changes to be seen in the web consoles of other components. Note that caching is disabled in the `registry.xml` file of each component.
 
-There are two others adjustments I had to make to get this to work:
-
-1. Override the default MySQL `sql-mode` using the `conf/mysql/my.cnf` script to remove the [`NO_ZERO_IN_DATE`](http://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_in_date) and [`NO_ZERO_DATE`](http://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_date) restrictions. WSO2 uses `DEFAULT 0` in some of their timestamp queries.
-2. Disable SSL by setting the `useSSL` parameter in the JDBC connection string as seen in the `conf//master-datasources.xml` scripts.
-
 ### Single Sign-On
 
-The [Identity Server](http://wso2.com/products/identity-server/) is configured to support web browser-based SSO across all the components based on the steps described [here](https://docs.wso2.com/display/IS510/Configuring+SAML2+Single-Sign-On+Across+Different+WSO2+Products). A MySQL database is used as the [backing data source to store registry and user manager data](https://docs.wso2.com/display/IS510/Setting+up+MySQL). The database `identitydb` is created by the `scripts/mysql/is-init.sql` script on-start.
+The [Identity Server](http://wso2.com/products/identity-server/) is configured to support web browser-based SSO across all the components based on the steps described [here](https://docs.wso2.com/display/IS510/Configuring+SAML2+Single-Sign-On+Across+Different+WSO2+Products). A Postgres database is used as the [backing data source to store registry and user manager data](https://docs.wso2.com/display/IS510/Setting+up+MySQL). The database `identitydb` is created by the `wso2scripts/postgres-sql/carbon-init.sql` script on-start.
 
 Instead of defining the service provider for each component via the administrator console, I specified them in the `sso-idp-config.xml` file in accordance to this [example](https://docs.wso2.com/display/IS510/Configuring+a+SP+and+IdP+Using+Configuration+Files). There is an issue with logout where the Identity Server throws an `ERROR {org.wso2.carbon.identity.sso.saml.processors.LogoutRequestProcessor} - No Established Sessions corresponding to Session Indexes provided.` exception.
 
 Since I am using Docker machine, I have to add the Identity Server hostname (`wso2identity`) to my `/etc/hosts` file. Refer to [Usage](https://github.com/ihcsim/compose-wso2#usage) section on the updates necessary for the `/etc/hosts` file. Otherwise, by default, all the Identity Server SSO web applications will redirect SAML requests back to `localhost`.
 
-*NOTE*: I still had to login to the Identity Server and add the service provider there. For some reason I have yet to get the sso-idp-config.xml file in the wso2is conf to load these on launch. See details [here](https://docs.wso2.com/display/IS500/Enabling+SSO+for+WSO2+Servers).
+##### Service Providers for SSO
 
-I have created an image which has these service providers set up already, but it's a manually built image. I plan on scripting this by populating the correct tables in the database.
+| Application | Service Provider Name | Assertion Consumer Service Url |
+| ----------- | --------------------- | ------------------------------ |
+| ESB         | service-provider-esb  | https://localhost:9444/acs     |
+| GREG        | service-provider-greg | https://localhost:9445/acs     |
+| BRS         | service-provider-brs  | https://localhost:9446/acs     |
+| DSS         | service-provider-dss  | https://localhost:9447/acs     |
+| AM          | service-provider-apim | https://localhost:9448/acs     |
+| AS          | service-provider-as   | https://localhost:9449/acs     |
 
 ### Port Offsets
 
 I am using port offsets in the carbon.xml files to prevent ports from colliding internally when doing SSO. You will also notice this in the docker-compose.yml file.
+
+| Application | Port Offset (Standard Ports: 9443, 9763) |
+| ----------- | ---------------------------------------- |
+| IS          | 0                                        |
+| ESB         | 1                                        |
+| GREG        | 2                                        |
+| BRS         | 3                                        |
+| DSS         | 4                                        |
+| AM          | 5                                        |
+| AS          | 6                                        |
 
 ### Connecting the ESB and DSS
 
@@ -172,9 +176,8 @@ For ECS deployment, I wrapped up the configuration files into new docker images,
 Running `./build_push_all.sh` will build all docker images for deployment and push them to docker hub except for:
 
 - ESB
-- IS
 
-which I currently custom build to include HL7 and SSO. I am working on an automated build for those 2.
+which I currently custom build to include HL7 features.
 
 ### Using ecs-cli
 
@@ -215,3 +218,9 @@ I kept killing my instance and it would only respawn. I even delete the cluster 
 ```
 ecs-cli down --force
 ```
+
+### Using the aws cli
+
+WIP
+
+I added a task definition, `dev-aws-ecs-task-definition.json` for use with the aws cli based off of my experiences and settings used with the ecs-cli.
