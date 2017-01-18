@@ -26,6 +26,7 @@ services:
     is:
         image: eristoddle/wso2is:5.3.0
         hostname: wso2identity
+        command: -Dsetup
         ports:
             - 9443:9443
             - 9763:9763
@@ -56,7 +57,7 @@ services:
 
     greg:
         image: eristoddle/wso2greg:5.3.0
-        command: -Dsetup
+        # command: -Dsetup
         ports:
             - 9445:9445
             - 9765:9765
