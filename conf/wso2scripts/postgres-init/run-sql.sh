@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+#
+# Create databases
+#
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     CREATE DATABASE mbstoredb;
     GRANT ALL PRIVILEGES ON DATABASE mbstoredb TO wso2user;
@@ -34,33 +37,45 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     GRANT ALL PRIVILEGES ON DATABASE ammetricsdb TO wso2user;
     CREATE DATABASE ascarbondb;
     GRANT ALL PRIVILEGES ON DATABASE ascarbondb TO wso2user;
+    ALTER ROLE wso2user CONNECTION LIMIT -1;
 EOSQL
 
+#
+# Create Tables
+#
 echo "Initializing database WSO2 databases"
 psql --username="$POSTGRES_USER" -d mbstoredb -f /tmp/postgres-sql/mb-init.sql
 psql --username="$POSTGRES_USER" -d identitydb -f /tmp/postgres-sql/carbon-init.sql
+#Yes, two scripts, one database
 psql --username="$POSTGRES_USER" -d registrydb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d registrydb -f /tmp/postgres-sql/identity-init.sql
 
+
 psql --username="$POSTGRES_USER" -d identitymetricsdb -f /tmp/postgres-sql/metrics-init.sql
-# psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-init.sql
-# psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/identity-init.sql
+#Yes, two scripts, one database
+psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/carbon-init.sql
+psql --username="$POSTGRES_USER" -d identitycarbondb -f /tmp/postgres-sql/identity-init.sql
 psql --username="$POSTGRES_USER" -d identitybpeldb -f /tmp/postgres-sql/bpel-init.sql
+
 
 psql --username="$POSTGRES_USER" -d gregmetricsdb -f /tmp/postgres-sql/metrics-init.sql
 psql --username="$POSTGRES_USER" -d gregbpeldb -f /tmp/postgres-sql/bpel-init.sql
 psql --username="$POSTGRES_USER" -d gregsocialdb -f /tmp/postgres-sql/social-init.sql
 
+
 psql --username="$POSTGRES_USER" -d apimgtdb -f /tmp/postgres-sql/apimgt-init.sql
 psql --username="$POSTGRES_USER" -d amcarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d ammetricsdb -f /tmp/postgres-sql/metrics-init.sql
+
 
 psql --username="$POSTGRES_USER" -d esbcarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d brscarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d dsscarbondb -f /tmp/postgres-sql/carbon-init.sql
 psql --username="$POSTGRES_USER" -d ascarbondb -f /tmp/postgres-sql/carbon-init.sql
 
-# Add conf
+#
+# Add postgres conf
+#
 cp /tmp/postgres-sql/postgresql.conf /var/lib/postgresql/data/postgresql.conf
 
 pg_createcluster 9.6 main --start

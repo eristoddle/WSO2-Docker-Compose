@@ -12,16 +12,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <!-- TODO: Missing fields in sql script to build tables - fix this and use postgres -->
-                    <!-- <url>jdbc:postgresql://wso2postgres:5432/identitycarbondb?useSSL=false</url>
+                    <url>jdbc:postgresql://wso2postgres:5432/identitycarbondb?useSSL=false</url>
                     <username>wso2user</username>
                     <password>password</password>
-                    <driverClassName>org.postgresql.Driver</driverClassName> -->
-                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <driverClassName>org.postgresql.Driver</driverClassName>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -43,7 +38,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>300</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -64,7 +59,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>

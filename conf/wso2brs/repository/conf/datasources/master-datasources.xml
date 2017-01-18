@@ -16,7 +16,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <maxActive>300</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -38,7 +38,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>

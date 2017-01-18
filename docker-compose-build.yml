@@ -27,13 +27,13 @@ services:
             - 9763:9763
 
     # TODO: Custom manually built image
-    esb:
-        image: eristoddle/wso2esb_final
-        # build:
-        #     context: ./conf/wso2esb
-        ports:
-            - 9444:9444
-            - 9764:9764
+    # esb:
+    #     image: eristoddle/wso2esb_final
+    #     # build:
+    #     #     context: ./conf/wso2esb
+    #     ports:
+    #         - 9444:9444
+    #         - 9764:9764
 
     greg:
         image: eristoddle/wso2greg_final
