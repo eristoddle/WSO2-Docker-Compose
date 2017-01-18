@@ -4,7 +4,7 @@ docker build . -t wso2-dev-config
 docker tag wso2-dev-config eristoddle/wso2-dev-config
 docker push eristoddle/wso2-dev-config
 
-docker-compose build -f docker-compose-build
+docker-compose -f docker-compose-build.yml build
 
 docker push eristoddle/wso2is_final
 # ESB is a custom manual build for HL7 due to dependency issues in the scripted process
