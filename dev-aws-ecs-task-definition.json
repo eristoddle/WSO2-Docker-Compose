@@ -175,6 +175,11 @@
           "hostPort": 9764,
           "containerPort": 9764,
           "protocol": "tcp"
+      },
+      {
+          "hostPort": 8281,
+          "containerPort": 8281,
+          "protocol": "tcp"
         }
       ],
       "hostname": null,

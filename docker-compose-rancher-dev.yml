@@ -49,6 +49,8 @@ services:
         ports:
             - 9444:9444
             - 9764:9764
+            # NOTE: API and Proxy Service Ports
+            - 8281:8281
         volumes:
             - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
             - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml
