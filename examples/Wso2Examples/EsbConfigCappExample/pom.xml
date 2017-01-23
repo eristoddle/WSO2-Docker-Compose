@@ -9,9 +9,10 @@
   <name>EsbConfigCappExample</name>
   <description>EsbConfigCappExample</description>
   <properties>
+    <maven.car.deploy.skip>false</maven.car.deploy.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <com.bardavon.esbconfigexample.proxy-service_._HCCProxyService>capp/EnterpriseServiceBus</com.bardavon.esbconfigexample.proxy-service_._HCCProxyService>
     <com.bardavon.esbconfigexample.endpoint_._HCFacilityLocatorServiceEP>capp/EnterpriseServiceBus</com.bardavon.esbconfigexample.endpoint_._HCFacilityLocatorServiceEP>
-    <maven.car.deploy.skip>false</maven.car.deploy.skip>
     <com.bardavon.esbconfigexample.sequence_._hciRequest>capp/EnterpriseServiceBus</com.bardavon.esbconfigexample.sequence_._hciRequest>
     <com.bardavon.esbconfigexample.sequence_._hcfRequest>capp/EnterpriseServiceBus</com.bardavon.esbconfigexample.sequence_._hcfRequest>
     <com.bardavon.esbconfigexample.endpoint_._HCInformationService>capp/EnterpriseServiceBus</com.bardavon.esbconfigexample.endpoint_._HCInformationService>
