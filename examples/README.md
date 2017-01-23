@@ -1,17 +1,15 @@
 # Example WSO2 Maven Project
 
-I build this project based on the following two articles. Each is doing the same thing, but each had missing instructions. One shows using Eclipse for development. The other shows using the ESB web interface.
+I build this project based on the following two articles. Each is doing the same thing, but each had missing instructions. One shows using Eclipse for development. The other shows using the ESB web interface. I did most of the development in Developer Studio since it makes things simpler in the graphical interface and then I fine tuned things with direct editing of the xml files.
 
 - http://wso2.com/library/articles/2014/06/develop-and-deploy-esb-artifacts-using-wso2-developer-studio/
 - http://dakshithar.blogspot.com/2012/06/routing-and-service-chaining-with-wso2.html
 
-## Development notes
+## Build and deploy with Maven
 
-I developed the Capp in WSO2 Developer Studio. When I went to run the deploy command, maven couldn't find the dependencies in the other project. It tried to check the online Maven repo.
-
-So I added the maven plugin to Atom and started developing there. Magically, that plugin created the effective.pom files, .classpath files and the target folders and found the artifacts when I opened the project. Not asking questions. I was able to deploy after adding the TrustStore as explained below.
-
-But I did research the issue with the pom.xml created by Developer Studio. I just had to signify that the dependencies were local and their path. Or create a local repo to store them once built. Haven't tested yet.
+```
+mvn clean deploy
+```
 
 ## TrustStore
 
@@ -39,6 +37,10 @@ SEE: https://docs.wso2.com/display/IS500/Creating+New+Keystores
 
 ## Testing
 
+The api port for the ESB is normally 8280 but the ESB in this project is running with a port offset of 1, so it is at 8281.
+
+You can find the WSDL at http://localhost:8281/services/HCCProxyService?wsdl2
+
 Here is a soap call:
 
 ```Xml
@@ -47,9 +49,9 @@ Here is a soap call:
    <soapenv:Body>
       <heal:getHealthcareCenterInfo>
          <!--Optional:-->
-         <heal:longitude>3</heal:longitude>
+         <heal:longitude>-94</heal:longitude>
          <!--Optional:-->
-         <heal:latitude>4</heal:latitude>
+         <heal:latitude>39</heal:latitude>
       </heal:getHealthcareCenterInfo>
    </soapenv:Body>
 </soapenv:Envelope>
@@ -60,8 +62,9 @@ Here is a soap call:
 ### Projects
 
 - Start by creating a Multi Maven Project to hold the subprojects. The one in this project consists only of the pom.xml file in the Wso2Examples folder. This will be the parent of the projects it contains. Make no other projects parents. (i.e I made the Capp project a parent of the config project. Messed me up for about an hour while the project wouldn't compile.)
-- Each MM project will have a Capp project to wrap up everything in a deployable Carbon app. This project is in the EsbConfigCappExample folder. Again, this is not a parent project.
-- Each MM project will have one or multiple other artifact projects that will be included in the Capp. This project is the EsbConfigExample folder.
+- Each MM project will have at least one Capp project to wrap up everything in a deployable Carbon app. This project is in the EsbConfigCappExample folder. Again, this is not a parent project.
+- Each MM project will have one or multiple other artifact projects that will be included in a Capp. This project is the EsbConfigExample folder.
+- Each Capp and artifact project will target a specific WSO2 server type (i.e. ESB, BRS), so a Multi Module Project could have more than one Capp when functionality touches more than one WSO2 application.
 
 SEE link 1 in further reading.
 

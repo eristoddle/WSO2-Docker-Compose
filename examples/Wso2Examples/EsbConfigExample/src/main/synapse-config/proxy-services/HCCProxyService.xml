@@ -5,13 +5,13 @@
     <inSequence>
       <property description="extract longitude"
         expression="//heal:getHealthcareCenterInfo/heal:longitude/text()"
-        name="longitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2/"/>
+        name="longitude" scope="default" xmlns:heal="http://healthcare.wso2/"/>
       <property description="extract latitude"
         expression="//heal:getHealthcareCenterInfo/heal:latitude/text()"
-        name="latitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2"/>
+        name="latitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
       <log description="debug">
-        <property expression="$ctx:longitude" name="longitude"/>
-        <property expression="$ctx:latitude" name="latitude"/>
+        <property expression="$ctx:longitude" name="Longitude"/>
+        <property expression="$ctx:latitude" name="Latitude"/>
       </log>
       <enrich description="construct message">
         <source clone="true" type="inline">
@@ -23,18 +23,20 @@
         <target type="body"/>
       </enrich>
       <enrich description="set latitude">
-        <source clone="true" property="latititude" type="property"/>
-        <target xpath="//geo:getZipCode/geo:latitude/text()"/>
+        <source clone="true" property="latitude" type="property"/>
+        <target xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
       </enrich>
       <enrich description="set longitude">
         <source clone="true" property="longitude" type="property"/>
-        <target xpath="//geo:getZipCode/geo:longitude/text()"/>
+        <target xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
       </enrich>
       <log description="request debug">
         <property expression="$ctx:latitude" name="latitude"/>
         <property expression="$ctx:longitude" name="longitude"/>
       </log>
-      <send receive="hcfRequest"/>
+      <send receive="hcfRequest">
+        <endpoint key="GeoEP" />
+      </send>
     </inSequence>
     <outSequence>
       <log level="full"/>
@@ -44,6 +46,7 @@
         </completeCondition>
         <onComplete expression="//hcc:getHCCenterInfoResponse" xmlns:hcc="http://healthcare.wso2">
           <log level="full"/>
+          <send />
         </onComplete>
       </aggregate>
     </outSequence>
