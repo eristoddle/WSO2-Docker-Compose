@@ -41,6 +41,12 @@ The api port for the ESB is normally 8280 but the ESB in this project is running
 
 You can find the WSDL at http://localhost:8281/services/HCCProxyService?wsdl2
 
+If you use Postman:
+
+- Use POST
+- Set the url to the WSDL file location
+- Set the body type to text/xml
+
 Here is a soap call:
 
 ```Xml
@@ -48,9 +54,7 @@ Here is a soap call:
    <soapenv:Header />
    <soapenv:Body>
       <heal:getHealthcareCenterInfo>
-         <!--Optional:-->
          <heal:longitude>-94</heal:longitude>
-         <!--Optional:-->
          <heal:latitude>39</heal:latitude>
       </heal:getHealthcareCenterInfo>
    </soapenv:Body>
