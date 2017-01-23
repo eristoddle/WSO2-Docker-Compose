@@ -59,9 +59,13 @@ Here is a soap call:
 
 ### Projects
 
-- Start by creating a Multi Maven Project to hold the subprojects
-- Each MM project will have a Capp project to wrap up everything in a deployable Carbon app
-- Each MM project will have one or multiple other artifact projects that will be included in the Capp
+- Start by creating a Multi Maven Project to hold the subprojects. The one in this project consists only of the pom.xml file in the Wso2Examples folder. This will be the parent of the projects it contains. Make no other projects parents. (i.e I made the Capp project a parent of the config project. Messed me up for about an hour while the project wouldn't compile.)
+- Each MM project will have a Capp project to wrap up everything in a deployable Carbon app. This project is in the EsbConfigCappExample folder. Again, this is not a parent project.
+- Each MM project will have one or multiple other artifact projects that will be included in the Capp. This project is the EsbConfigExample folder.
+
+SEE link 1 in further reading.
+
+### Further Reading
 
 - http://wso2.com/library/articles/2015/10/article-wso2-developer-studio-development-and-deployment-best-practices/
 - http://muthulee.blogspot.com/2016/06/continuous-integration-for-wso2.html
