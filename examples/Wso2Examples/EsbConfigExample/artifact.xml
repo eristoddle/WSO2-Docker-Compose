@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="HCCProxyService" groupId="com.bardavon.esbconfigexample.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/HCCProxyService.xml</file>
+    </artifact>
+    <artifact name="HCInformationService" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/HCInformationService.xml</file>
+    </artifact>
+    <artifact name="HCFacilityLocatorServiceEP" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/HCFacilityLocatorServiceEP.xml</file>
+    </artifact>
+    <artifact name="GeoEp" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GeoEp.xml</file>
+    </artifact>
+    <artifact name="hcfRequest" groupId="com.bardavon.esbconfigexample.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/hcfRequest.xml</file>
+    </artifact>
+    <artifact name="hciRequest" groupId="com.bardavon.esbconfigexample.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/hciRequest.xml</file>
+    </artifact>
+</artifacts>

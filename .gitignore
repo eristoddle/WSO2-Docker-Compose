@@ -6,3 +6,8 @@
 !.elasticbeanstalk/*.global.yml
 
 target
+*.metadata
+*.tmp
+*.classpath
+*.project
+effective.pom

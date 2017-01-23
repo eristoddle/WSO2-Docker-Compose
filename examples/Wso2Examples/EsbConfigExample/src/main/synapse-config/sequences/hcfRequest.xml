@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="hcfRequest" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <log description="response from GeoService" level="full" separator=","/>
+  <property description="get zipcode"
+    expression="//geo:getZipCodeResponse/geo:return/text()"
+    name="zipcode" scope="default" type="STRING"/>
+  <log description="log zipcode" level="custom" separator=",">
+    <property expression="$ctx:zipcode" name="zipocode"/>
+  </log>
+  <payloadFactory description="construct request" media-type="xml">
+    <format>
+      <heal:getHCCenters xmlns:heal="http://healthcare.wso2">
+        <heal:postalCode>$1</heal:postalCode>
+      </heal:getHCCenters>
+    </format>
+    <args>
+      <arg evaluator="xml" expression="$ctx:zipcode"/>
+    </args>
+  </payloadFactory>
+  <log description="log request payload" level="full" separator=","/>
+  <send receive="hciRequest">
+    <endpoint key="HCFacilityLocatorServiceEP"/>
+  </send>
+</sequence>
