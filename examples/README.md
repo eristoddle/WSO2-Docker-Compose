@@ -5,6 +5,8 @@ I build this project based on the following two articles. Each is doing the same
 - http://wso2.com/library/articles/2014/06/develop-and-deploy-esb-artifacts-using-wso2-developer-studio/
 - http://dakshithar.blogspot.com/2012/06/routing-and-service-chaining-with-wso2.html
 
+Also: http://wso2.com/library/articles/2012/11/enterprise-service-integration-wso2-esb/
+
 ## Build and deploy with Maven
 
 ```

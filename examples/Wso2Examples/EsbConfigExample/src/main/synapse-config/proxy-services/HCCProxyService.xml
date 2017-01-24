@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy name="HCCProxyService" startOnLoad="true" trace="disable" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="HCCProxyService" statistics="disable" trace="disable" transports="https http">
     <target>
         <inSequence>
-            <property description="extract longitude" expression="//heal:getHealthcareCenterInfo/heal:longitude/text()" name="longitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
-            <property description="extract latitude" expression="//heal:getHealthcareCenterInfo/heal:latitude/text()" name="latitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
-            <log description="debug">
+            <property action="set" expression="//heal:getHealthcareCenterInfo/heal:longitude/text()" name="longitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2"/>
+            <property action="set" expression="//heal:getHealthcareCenterInfo/heal:latitude/text()" name="latitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2"/>
+            <log category="INFO" level="custom" separator=",">
                 <property expression="$ctx:longitude" name="Longitude"/>
                 <property expression="$ctx:latitude" name="Latitude"/>
             </log>
-            <enrich description="construct message">
+            <enrich>
                 <source clone="true" type="inline">
                     <geo:getZipCode xmlns:geo="http://geo.wso2">
                         <geo:longitude>0</geo:longitude>
@@ -17,38 +17,40 @@
                 </source>
                 <target action="replace" type="body"/>
             </enrich>
-            <enrich description="set latitude">
-                <source clone="true" property="latitude" type="property"/>
-                <target action="replace" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
-            </enrich>
-            <enrich description="set longitude">
+            <enrich>
                 <source clone="true" property="longitude" type="property"/>
-                <target action="replace" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
+                <target action="replace" type="custom" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
             </enrich>
-            <log level="full"/>
+            <enrich>
+                <source clone="true" property="latitude" type="property"/>
+                <target action="replace" type="custom" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
+            </enrich>
+            <log category="INFO" level="custom" separator=",">
+                <property name="MessageFlow" value="======================= Sending Request To : GeoWS ======================="/>
+            </log>
+            <log category="INFO" level="full" separator=","/>
             <send receive="hcfRequest">
                 <endpoint key="GeoEP"/>
             </send>
         </inSequence>
         <outSequence>
-            <log level="full"/>
+            <log category="INFO" level="custom" separator=",">
+                <property name="MessageFlow" value="---------------------------------------------- Response Received - From : HCInformationService ----------------------------------"/>
+            </log>
+            <log category="INFO" level="full" separator=","/>
             <aggregate>
-                <completeCondition>
+                <completeCondition timeout="0">
                     <messageCount max="-1" min="-1"/>
                 </completeCondition>
                 <onComplete expression="//hcc:getHCCenterInfoResponse" xmlns:hcc="http://healthcare.wso2">
-                    <log level="full"/>
+                    <log category="INFO" level="custom" separator=",">
+                        <property name="MessageFlow" value="======================= Sending Back the Aggregated Responses. ==============="/>
+                    </log>
+                    <log category="INFO" level="full" separator=","/>
                     <send/>
                 </onComplete>
             </aggregate>
         </outSequence>
-        <faultSequence>
-            <makefault version="soap11">
-                <code xmlns:soap11Env="http://schemas.xmlsoap.org/soap/envelope/" value="soap11Env:Client"/>
-                <reason expression="$ctx:ERROR_MESSAGE"/>
-                <role/>
-            </makefault>
-            <send/>
-        </faultSequence>
     </target>
-</proxy>s
+    <!-- <publishWSDL key="gov:service_integration/wsdls/HCCService.wsdl"/> -->
+</proxy>

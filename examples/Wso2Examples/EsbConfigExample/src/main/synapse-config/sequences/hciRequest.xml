@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="hciRequest" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="hciRequest">
     <log category="INFO" level="custom" separator=",">
         <property name="MessageFlow" value="----------------------------------------------  Response Received - From : HCFacilityLocatorService -----------------------------"/>
     </log>
     <log category="INFO" level="simple" separator=","/>
-    <iterate
-        attachPath="//hfs:getHCCentersResponse"
-        description="Iterate HC Codes"
-        expression="//hfs:getHCCentersResponse/hfs:return"
-        xmlns:hfs="http://healthcare.wso2"
-        xmlns:ns="http://org.apache.synapse/xsd"
-        xmlns:ns3="http://org.apache.synapse/xsd"
-        preservePayload="true">
+    <iterate attachPath="//hfs:getHCCentersResponse" expression="//hfs:getHCCentersResponse/hfs:return" preservePayload="true" xmlns:hfs="http://healthcare.wso2" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd">
         <target>
             <sequence>
                 <payloadFactory>
@@ -27,12 +20,13 @@
                 <log category="INFO" level="custom" separator=",">
                     <property name="MessageFlow" value="============== Splitting and Sending Request To : HCInformationService ================"/>
                 </log>
-                <log level="full" separator=","/>
+                <log category="INFO" level="full" separator=","/>
                 <send>
                     <endpoint key="HCInformationService"/>
                 </send>
             </sequence>
         </target>
     </iterate>
+    <log category="INFO" level="simple" separator=","/>
     <log category="INFO" level="simple" separator=","/>
 </sequence>
