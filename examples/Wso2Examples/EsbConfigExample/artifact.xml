@@ -8,8 +8,8 @@
     <artifact name="HCFacilityLocatorServiceEP" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/endpoints/HCFacilityLocatorServiceEP.xml</file>
     </artifact>
-    <artifact name="GeoEp" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/endpoints/GeoEp.xml</file>
+    <artifact name="GeoEP" groupId="com.bardavon.esbconfigexample.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/GeoEP.xml</file>
     </artifact>
     <artifact name="hcfRequest" groupId="com.bardavon.esbconfigexample.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/hcfRequest.xml</file>

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<endpoint name="GeoEp" xmlns="http://ws.apache.org/ns/synapse">
-  <address trace="disable" uri="http://localhost:9764/services/GeoService/"/>
+<endpoint name="GeoEP" xmlns="http://ws.apache.org/ns/synapse">
+  <address uri="http://localhost:9764/services/GeoService/" format="soap11"/>
 </endpoint>

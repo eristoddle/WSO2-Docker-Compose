@@ -1,55 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy name="HCCProxyService" startOnLoad="true" trace="disable"
-  transports="http https" xmlns="http://ws.apache.org/ns/synapse">
-  <target>
-    <inSequence>
-      <property description="extract longitude"
-        expression="//heal:getHealthcareCenterInfo/heal:longitude/text()"
-        name="longitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
-      <property description="extract latitude"
-        expression="//heal:getHealthcareCenterInfo/heal:latitude/text()"
-        name="latitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
-      <log description="debug">
-        <property expression="$ctx:longitude" name="Longitude"/>
-        <property expression="$ctx:latitude" name="Latitude"/>
-      </log>
-      <enrich description="construct message">
-        <source clone="true" type="inline">
-          <geo:getZipCode xmlns:geo="http://geo.wso2">
-            <geo:longitude>0</geo:longitude>
-            <geo:latitude>0</geo:latitude>
-          </geo:getZipCode>
-        </source>
-        <target type="body"/>
-      </enrich>
-      <enrich description="set latitude">
-        <source clone="true" property="latitude" type="property"/>
-        <target xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
-      </enrich>
-      <enrich description="set longitude">
-        <source clone="true" property="longitude" type="property"/>
-        <target xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
-      </enrich>
-      <log description="request debug">
-        <property expression="$ctx:latitude" name="Latitude"/>
-        <property expression="$ctx:longitude" name="Longitude"/>
-      </log>
-      <send receive="hcfRequest">
-        <endpoint key="GeoEP" />
-      </send>
-    </inSequence>
-    <outSequence>
-      <log level="full"/>
-      <aggregate>
-        <completeCondition>
-          <messageCount max="-1" min="-1"/>
-        </completeCondition>
-        <onComplete expression="//hcc:getHCCenterInfoResponse" xmlns:hcc="http://healthcare.wso2">
-          <log level="full"/>
-          <send />
-        </onComplete>
-      </aggregate>
-    </outSequence>
-    <faultSequence/>
-  </target>
-</proxy>
+<proxy name="HCCProxyService" startOnLoad="true" trace="disable" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <property description="extract longitude" expression="//heal:getHealthcareCenterInfo/heal:longitude/text()" name="longitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
+            <property description="extract latitude" expression="//heal:getHealthcareCenterInfo/heal:latitude/text()" name="latitude" scope="default" xmlns:heal="http://healthcare.wso2"/>
+            <log description="debug">
+                <property expression="$ctx:longitude" name="Longitude"/>
+                <property expression="$ctx:latitude" name="Latitude"/>
+            </log>
+            <enrich description="construct message">
+                <source clone="true" type="inline">
+                    <geo:getZipCode xmlns:geo="http://geo.wso2">
+                        <geo:longitude>0</geo:longitude>
+                        <geo:latitude>0</geo:latitude>
+                    </geo:getZipCode>
+                </source>
+                <target action="replace" type="body"/>
+            </enrich>
+            <enrich description="set latitude">
+                <source clone="true" property="latitude" type="property"/>
+                <target action="replace" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
+            </enrich>
+            <enrich description="set longitude">
+                <source clone="true" property="longitude" type="property"/>
+                <target action="replace" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
+            </enrich>
+            <log level="full"/>
+            <send receive="hcfRequest">
+                <endpoint key="GeoEP"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <log level="full"/>
+            <aggregate>
+                <completeCondition>
+                    <messageCount max="-1" min="-1"/>
+                </completeCondition>
+                <onComplete expression="//hcc:getHCCenterInfoResponse" xmlns:hcc="http://healthcare.wso2">
+                    <log level="full"/>
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </outSequence>
+        <faultSequence>
+            <makefault version="soap11">
+                <code xmlns:soap11Env="http://schemas.xmlsoap.org/soap/envelope/" value="soap11Env:Client"/>
+                <reason expression="$ctx:ERROR_MESSAGE"/>
+                <role/>
+            </makefault>
+            <send/>
+        </faultSequence>
+    </target>
+</proxy>s

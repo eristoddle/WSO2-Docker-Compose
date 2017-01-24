@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="hcfRequest" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-  <log description="response from GeoService" level="full" separator=","/>
-  <property description="get zipcode"
-    expression="//geo:getZipCodeResponse/geo:return/text()"
-    name="zipcode" scope="default" type="STRING"/>
-  <log description="log zipcode" level="custom" separator=",">
-    <property expression="$ctx:zipcode" name="zipocode"/>
-  </log>
-  <payloadFactory description="construct request" media-type="xml">
-    <format>
-      <heal:getHCCenters xmlns:heal="http://healthcare.wso2">
-        <heal:postalCode>$1</heal:postalCode>
-      </heal:getHCCenters>
-    </format>
-    <args>
-      <arg evaluator="xml" expression="$ctx:zipcode"/>
-    </args>
-  </payloadFactory>
-  <log description="log request payload" level="full" separator=","/>
-  <send receive="hciRequest">
-    <endpoint key="HCFacilityLocatorServiceEP"/>
-  </send>
+    <log category="INFO" level="custom" separator=",">
+        <property name="MessageFlow" value="-------------------------------------------------- Response Received - From : GeoWS ---------------------------------------------------"/>
+    </log>
+    <log level="full"  separator=","/>
+    <property action="set" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" xmlns:geo="http://geo.wso2" name="zipcode" expression="//geo:getZipCodeResponse/geo:return/text()" scope="default"/>
+    <log level="custom">
+        <property xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" name="zipcode" expression="$ctx:zipcode"/>
+    </log>
+    <payloadFactory description="construct request" media-type="xml">
+        <format>
+            <heal:getHCCenters xmlns:heal="http://healthcare.wso2">
+                <heal:postalCode>$1</heal:postalCode>
+            </heal:getHCCenters>
+        </format>
+        <args>
+            <arg xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$ctx:zipcode"/>
+        </args>
+    </payloadFactory>
+    <log category="INFO" level="custom" separator=",">
+        <property name="MessageFlow" value="==================== Sending Request To : HCFacilityLocatorService ================"/>
+    </log>
+    <log description="log request payload" level="full"/>
+    <send receive="hciRequest">
+        <endpoint key="HCFacilityLocatorServiceEP"/>
+    </send>
 </sequence>
