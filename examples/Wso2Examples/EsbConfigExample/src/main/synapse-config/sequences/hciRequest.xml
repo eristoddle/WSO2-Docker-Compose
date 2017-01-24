@@ -4,7 +4,14 @@
         <property name="MessageFlow" value="----------------------------------------------  Response Received - From : HCFacilityLocatorService -----------------------------"/>
     </log>
     <log category="INFO" level="simple" separator=","/>
-    <iterate attachPath="//hfs:getHCCentersResponse" description="Iterate HC Codes" expression="//hfs:getHCCentersResponse/hfs:return" preservePayload="true">
+    <iterate
+        attachPath="//hfs:getHCCentersResponse"
+        description="Iterate HC Codes"
+        expression="//hfs:getHCCentersResponse/hfs:return"
+        xmlns:hfs="http://healthcare.wso2"
+        xmlns:ns="http://org.apache.synapse/xsd"
+        xmlns:ns3="http://org.apache.synapse/xsd"
+        preservePayload="true">
         <target>
             <sequence>
                 <payloadFactory>
