@@ -4,7 +4,7 @@ All of these projects use a Maven Multi Module project structure with child Capp
 
 ## WsoSamples
 
-For this project I used some of the WSO2 samples to create various types of artifacts in the applications.
+For this project I used some of the WSO2 samples to build and deploy various types of artifacts in the applications.
 
 ### Working examples
 
@@ -60,7 +60,7 @@ Here is a soap call:
 
 ### Build and deploy with Maven
 
-Run this in a parent app directory:
+Run this in a parent multi module app directory:
 ```
 mvn clean deploy
 ```

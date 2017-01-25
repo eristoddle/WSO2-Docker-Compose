@@ -228,10 +228,10 @@
       <registryRoot>/</registryRoot>
     </remoteInstance>
 
-    <!-- <mount path="/_system/config" overwrite="true">
+    <mount path="/_system/config" overwrite="true">
         <instanceId>mountInstance</instanceId>
         <targetPath>/_system/config</targetPath>
-    </mount> -->
+    </mount>
 
     <!-- This defines the mount configuration to be used with the remote instance and the target path for the mount -->
     <mount path="/_system/governance" overwrite="true">
