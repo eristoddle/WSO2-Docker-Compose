@@ -1,43 +1,36 @@
-# Example WSO2 Maven Project
+# Example WSO2 Maven Projects
+
+All of these projects use a Maven Multi Module project structure with child Capp projects that wrap the child artifact projects into a Carbon App.
+
+## WsoSamples
+
+For this project I used some of the WSO2 samples to create various types of artifacts in the applications.
+
+### Working examples
+
+- ESB: [Inbound HL7 with Automatic Acknowledgement](https://docs.wso2.com/display/ESB500/Sample+905%3A+Inbound+HL7+with+Automatic+Acknowledgement) - Port 55971
+
+### Samples Links
+
+- [ESB Samples](https://docs.wso2.com/display/ESB500/Samples)
+- [GREG Samples](https://docs.wso2.com/display/Governance530/Samples)
+- [BRS Samples](https://docs.wso2.com/display/BRS220/Samples)
+- [DSS Samples](https://docs.wso2.com/display/DSS351/Samples)
+
+## WSOMavenMultiModuleExample
+
+NOTE: This project will build and deploy and log things but the zip code service is not working. But along with the articles below, it explains the process of building a Capp, so I left it here.
 
 I build this project based on the following two articles. Each is doing the same thing, but each had missing instructions. One shows using Eclipse for development. The other shows using the ESB web interface. I did most of the development in Developer Studio since it makes things simpler in the graphical interface and then I fine tuned things with direct editing of the xml files.
+
+### Articles on this example
 
 - http://wso2.com/library/articles/2014/06/develop-and-deploy-esb-artifacts-using-wso2-developer-studio/
 - http://dakshithar.blogspot.com/2012/06/routing-and-service-chaining-with-wso2.html
 
 Also: http://wso2.com/library/articles/2012/11/enterprise-service-integration-wso2-esb/
 
-## Build and deploy with Maven
-
-```
-mvn clean deploy
-```
-
-## TrustStore
-
-You will notice at the bottom of the pom.xml file in the ESBCappExample project, the carbonServers section. Here is where you put the servers to deploy the artifact to. It can accept multiple servers. Here is a server config:
-
-```xml
-<CarbonServer>
-  <trustStorePath>${basedir}/src/main/resources/security/wso2-local-docker.jks</trustStorePath>
-  <trustStorePassword>wso2carbon</trustStorePassword>
-  <trustStoreType>JKS</trustStoreType>
-  <serverUrl>https://localhost:9444</serverUrl>
-  <userName>admin</userName>
-  <password>admin</password>
-  <operation>deploy</operation>
-</CarbonServer>
-```
-
-Without the trustStore file, this will not work. There are two ways of getting this file explained in the following article:
-
-- https://pragmaticintegrator.wordpress.com/2013/04/09/deploying-the-wso2-car-file-with-maven/
-
-I used method 1 and copied the jks file from the docker image and added it to the correct location. Which does bring up the need to research this truststore more in a deployment scenario (i.e regenerating it on public facing servers).
-
-SEE: https://docs.wso2.com/display/IS500/Creating+New+Keystores
-
-## Testing
+### Testing this example
 
 The api port for the ESB is normally 8280 but the ESB in this project is running with a port offset of 1, so it is at 8281.
 
@@ -62,6 +55,39 @@ Here is a soap call:
    </soapenv:Body>
 </soapenv:Envelope>
 ```
+
+## General
+
+### Build and deploy with Maven
+
+Run this in a parent app directory:
+```
+mvn clean deploy
+```
+
+### TrustStore
+
+You will notice at the bottom of the pom.xml file in the Capp projects, the carbonServers section. Here is where you put the servers to deploy the artifact to. It can accept multiple servers. Here is a server config:
+
+```xml
+<CarbonServer>
+  <trustStorePath>${basedir}/src/main/resources/security/wso2-local-docker.jks</trustStorePath>
+  <trustStorePassword>wso2carbon</trustStorePassword>
+  <trustStoreType>JKS</trustStoreType>
+  <serverUrl>https://localhost:9444</serverUrl>
+  <userName>admin</userName>
+  <password>admin</password>
+  <operation>deploy</operation>
+</CarbonServer>
+```
+
+Without the trustStore file, this will not work. There are two ways of getting this file explained in the following article:
+
+- https://pragmaticintegrator.wordpress.com/2013/04/09/deploying-the-wso2-car-file-with-maven/
+
+I used method 1 and copied the jks file from the docker image and added it to the correct location. Which does bring up the need to research this truststore more in a deployment scenario (i.e regenerating it on public facing servers).
+
+SEE: https://docs.wso2.com/display/IS500/Creating+New+Keystores
 
 ## WSO2 project structure, deployment and continuous integration
 
