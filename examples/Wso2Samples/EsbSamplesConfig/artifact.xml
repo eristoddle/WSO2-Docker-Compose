@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="main" groupId="com.bardavon.examples.EsbSamplesConfig.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/main.xml</file>
+    </artifact>
+    <artifact name="fault" groupId="com.bardavon.examples.EsbSamplesConfig.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/fault.xml</file>
+    </artifact>
+    <artifact name="hl7Acknowledge" groupId="com.bardavon.examples.EsbSamplesConfig.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/hl7Acknowledge.xml</file>
+    </artifact>
+</artifacts>

@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence xmlns="http://ws.apache.org/ns/synapse" name="hcfRequest">
-    <log category="INFO" level="custom" separator=",">
-        <property name="MessageFlow" value="-------------------------------------------------- Response Received - From : GeoWS ---------------------------------------------------"/>
-    </log>
-    <log category="INFO" level="full" separator=","/>
-    <property action="set" expression="//geo:getZipCodeResponse/geo:return/text()" name="zipcode" scope="default" type="STRING" xmlns:geo="http://geo.wso2" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
-    <log category="INFO" level="custom" separator=",">
-        <property expression="$ctx:zipcode" name="zipcode" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
-    </log>
-    <payloadFactory>
-        <format>
-            <heal:getHCCenters xmlns:heal="http://healthcare.wso2">
-                <heal:postalCode>$1</heal:postalCode>
-            </heal:getHCCenters>
-        </format>
-        <args>
-            <arg expression="$ctx:zipcode" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
-        </args>
-    </payloadFactory>
-    <log category="INFO" level="custom" separator=",">
-        <property name="MessageFlow" value="==================== Sending Request To : HCFacilityLocatorService ================"/>
-    </log>
-    <log category="INFO" level="full" separator=","/>
-    <send receive="hciRequest">
-        <endpoint key="HCFacilityLocatorServiceEP"/>
-    </send>
+<sequence name="hcfRequest" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <log level="custom" separator=",">
+    <property name="MessageFlow" value="-------------------------------------------------- Response Received - From : GeoWS ---------------------------------------------------"/>
+  </log>
+  <log level="full" separator=","/>
+  <property expression="//geo:getZipCodeResponse/geo:return/text()"
+    name="zipcode" scope="default" type="STRING"
+    xmlns:geo="http://geo.wso2" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
+  <log level="custom" separator=",">
+    <property expression="$ctx:zipcode" name="zipcode"
+      xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
+  </log>
+  <payloadFactory media-type="xml">
+    <format>
+      <heal:getHCCenters xmlns:heal="http://healthcare.wso2">
+        <heal:postalCode>$1</heal:postalCode>
+      </heal:getHCCenters>
+    </format>
+    <args>
+      <arg evaluator="xml" expression="$ctx:zipcode"
+        xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
+    </args>
+  </payloadFactory>
+  <log level="custom" separator=",">
+    <property name="MessageFlow" value="==================== Sending Request To : HCFacilityLocatorService ================"/>
+  </log>
+  <log level="full" separator=","/>
+  <send receive="hciRequest"/>
 </sequence>
