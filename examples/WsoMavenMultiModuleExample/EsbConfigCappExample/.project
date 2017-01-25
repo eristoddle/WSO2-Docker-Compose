@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>EsbConfigCappExample</name>
+  <comment>EsbConfigCappExample. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects/>
+  <buildSpec/>
+  <natures>
+    <nature>org.wso2.developerstudio.eclipse.distribution.project.nature</nature>
+  </natures>
+</projectDescription>

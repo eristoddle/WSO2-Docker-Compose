@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/rest" name="restApiUsingGovernance" xmlns="http://ws.apache.org/ns/synapse">
+  <resource methods="POST" protocol="http" uri-template="/test/">
+    <inSequence>
+      <log description="log incoming" level="full" separator=","/>
+    </inSequence>
+    <outSequence>
+      <send/>
+    </outSequence>
+    <faultSequence>
+      <send/>
+    </faultSequence>
+  </resource>
+</api>
