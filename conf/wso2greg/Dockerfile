@@ -6,3 +6,6 @@ COPY /repository/conf/carbon.xml /mnt/wso2greg/repository/conf/carbon.xml
 COPY /repository/conf/registry.xml /mnt/wso2greg/repository/conf/registry.xml
 COPY /repository/conf/axis2/axis2.xml /mnt/wso2greg/repository/conf/axis2/axis2.xml
 COPY /repository/resources/lifecycles/ServiceLifeCycle.xml /mnt/wso2greg/repository/resources/lifecycles/ServiceLifeCycle.xml
+COPY /repository/conf/datasources/metrics-datasources.xml /mnt/wso2greg/repository/conf/datasources/metrics-datasources.xml
+COPY /repository/conf/datasources/bps-datasources.xml /mnt/wso2greg/repository/conf/datasources/bps-datasources.xml
+COPY /repository/conf/datasources/social-datasources.xml /mnt/wso2greg/repository/conf/datasources/social-datasources.xml

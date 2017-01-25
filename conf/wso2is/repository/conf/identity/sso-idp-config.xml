@@ -19,142 +19,93 @@
     <ServiceProviders>
         <ServiceProvider>
             <Issuer>wso2.my.dashboard</Issuer>
-            <AssertionConsumerService>https://localhost:9443/dashboard/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>${carbon.protocol}://${carbon.host}:${carbon.management.port}/dashboard/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>${carbon.protocol}://${carbon.host}:${carbon.management.port}/dashboard/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>false</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-apim</Issuer>
-            <AssertionConsumerService>https://localhost:9448/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9448/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9448/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-esb</Issuer>
-            <AssertionConsumerService>https://localhost:9444/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9444/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9444/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-as</Issuer>
-            <AssertionConsumerService>https://localhost:9449/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9449/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9449/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-brs</Issuer>
-            <AssertionConsumerService>https://localhost:9446/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9446/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9446/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-dss</Issuer>
-            <AssertionConsumerService>https://localhost:9447/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9447/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9447/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
         <ServiceProvider>
             <Issuer>service-provider-greg</Issuer>
-            <AssertionConsumerService>https://localhost:9445/acs</AssertionConsumerService>
-            <SignAssertion>true</SignAssertion>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL>https://localhost:9445/acs</AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9445/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
-            <EnableAttributeProfile>false</EnableAttributeProfile>
-            <IncludeAttributeByDefault>false</IncludeAttributeByDefault>
-            <Claims>
-                <Claim>http://wso2.org/claims/role</Claim>
-                <Claim>http://wso2.org/claims/emailaddress</Claim>
-            </Claims>
-            <EnableSingleLogout>true</EnableSingleLogout>
-            <SingleLogoutUrl></SingleLogoutUrl>
             <EnableAudienceRestriction>true</EnableAudienceRestriction>
             <AudiencesList>
                 <Audience>carbonServer</Audience>
             </AudiencesList>
-            <ConsumingServiceIndex></ConsumingServiceIndex>
         </ServiceProvider>
 
     </ServiceProviders>

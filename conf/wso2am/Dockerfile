@@ -5,3 +5,4 @@ COPY /repository/conf/carbon.xml /mnt/wso2am/repository/conf/carbon.xml
 COPY /repository/conf/registry.xml /mnt/wso2am/repository/conf/registry.xml
 COPY /repository/conf/axis2/axis2.xml /mnt/wso2am/repository/conf/axis2/axis2.xml
 COPY /repository/conf/security/authenticators.xml /mnt/wso2am/repository/conf/security/authenticators.xml
+COPY /repository/conf/datasources/metrics-datasources.xml /mnt/wso2am/repository/conf/datasources/metrics-datasources.xml

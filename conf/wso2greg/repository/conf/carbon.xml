@@ -640,11 +640,11 @@
         name="trace" - Print additional trace information; for all servers
         name="baseDir" - The base directory for H2 databases; for all servers
     -->
-    <!--H2DatabaseConfiguration>
+    <H2DatabaseConfiguration>
         <property name="web" />
         <property name="webPort">8082</property>
         <property name="webAllowOthers" />
-        <property name="webSSL" />
+        <!-- <property name="webSSL" />
         <property name="tcp" />
         <property name="tcpPort">9092</property>
         <property name="tcpAllowOthers" />
@@ -653,8 +653,8 @@
         <property name="pgPort">5435</property>
         <property name="pgAllowOthers" />
         <property name="trace" />
-        <property name="baseDir">${carbon.home}</property>
-    </H2DatabaseConfiguration-->
+        <property name="baseDir">${carbon.home}</property> -->
+    </H2DatabaseConfiguration>
     <!--Disabling statistics reporter by default-->
     <StatisticsReporterDisabled>true</StatisticsReporterDisabled>
 

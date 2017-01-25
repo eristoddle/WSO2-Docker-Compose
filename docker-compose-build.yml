@@ -17,24 +17,23 @@ services:
             - /tmp/postgresql/data:/var/lib/postgresql/data
             - /tmp/wso2scripts/postgres-sql:/tmp/postgres-sql
 
-    # TODO: Custom manually built image
     is:
         image: eristoddle/wso2is_final
-        # build:
-        #     context: ./conf/wso2is
+        build:
+            context: ./conf/wso2is
         hostname: wso2identity
         ports:
             - 9443:9443
             - 9763:9763
 
     # TODO: Custom manually built image
-    esb:
-        image: eristoddle/wso2esb_final
-        # build:
-        #     context: ./conf/wso2esb
-        ports:
-            - 9444:9444
-            - 9764:9764
+    # esb:
+    #     image: eristoddle/wso2esb_final
+    #     # build:
+    #     #     context: ./conf/wso2esb
+    #     ports:
+    #         - 9444:9444
+    #         - 9764:9764
 
     greg:
         image: eristoddle/wso2greg_final

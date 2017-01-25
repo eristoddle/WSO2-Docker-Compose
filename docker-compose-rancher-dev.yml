@@ -31,7 +31,7 @@ services:
             - /opt/wso2scripts/postgres-sql:/tmp/postgres-sql
 
     is:
-        image: eristoddle/wso2is_features:5.2.0
+        image: eristoddle/wso2is:5.3.0
         hostname: wso2identity
         ports:
             - 9443:9443
@@ -41,7 +41,7 @@ services:
             - /opt/wso2is/repository/conf/carbon.xml:/mnt/wso2is/repository/conf/carbon.xml
             - /opt/wso2is/repository/conf/registry.xml:/mnt/wso2is/repository/conf/registry.xml
             - /opt/wso2is/repository/conf/user-mgt.xml:/mnt/wso2is/repository/conf/user-mgt.xml
-            # - /opt/wso2is/repository/conf/identity/sso-idp-config.xml:/mnt/wso2is/repository/conf/identity/sso-idp-config.xml
+            - /opt/wso2is/repository/conf/identity/sso-idp-config.xml:/mnt/wso2is/repository/conf/identity/sso-idp-config.xml
             - /opt/wso2is/repository/conf/axis2/axis2.xml:/mnt/wso2is/repository/conf/axis2/axis2.xml
 
     esb:
@@ -49,6 +49,8 @@ services:
         ports:
             - 9444:9444
             - 9764:9764
+            # NOTE: API and Proxy Service Ports
+            - 8281:8281
         volumes:
             - /opt/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
             - /opt/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml

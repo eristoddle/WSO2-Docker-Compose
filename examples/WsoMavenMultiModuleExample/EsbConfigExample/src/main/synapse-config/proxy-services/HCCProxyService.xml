@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="HCCProxyService" statistics="disable" trace="disable" transports="https http">
+    <target>
+        <inSequence>
+            <property action="set" expression="//heal:getHealthcareCenterInfo/heal:longitude/text()" name="longitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2"/>
+            <property action="set" expression="//heal:getHealthcareCenterInfo/heal:latitude/text()" name="latitude" scope="default" type="STRING" xmlns:heal="http://healthcare.wso2"/>
+            <log category="INFO" level="custom" separator=",">
+                <property expression="$ctx:longitude" name="Longitude"/>
+                <property expression="$ctx:latitude" name="Latitude"/>
+            </log>
+            <enrich>
+                <source clone="true" type="inline">
+                    <geo:getZipCode xmlns:geo="http://geo.wso2">
+                        <geo:longitude>0</geo:longitude>
+                        <geo:latitude>0</geo:latitude>
+                    </geo:getZipCode>
+                </source>
+                <target action="replace" type="body"/>
+            </enrich>
+            <enrich>
+                <source clone="true" property="longitude" type="property"/>
+                <target action="replace" type="custom" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:longitude/text()"/>
+            </enrich>
+            <enrich>
+                <source clone="true" property="latitude" type="property"/>
+                <target action="replace" type="custom" xmlns:geo="http://geo.wso2" xpath="//geo:getZipCode/geo:latitude/text()"/>
+            </enrich>
+            <log category="INFO" level="custom" separator=",">
+                <property name="MessageFlow" value="======================= Sending Request To : GeoWS ======================="/>
+            </log>
+            <log category="INFO" level="full" separator=","/>
+            <send receive="hcfRequest">
+                <endpoint key="GeoEP"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <log category="INFO" level="custom" separator=",">
+                <property name="MessageFlow" value="---------------------------------------------- Response Received - From : HCInformationService ----------------------------------"/>
+            </log>
+            <log category="INFO" level="full" separator=","/>
+            <aggregate>
+                <completeCondition timeout="0">
+                    <messageCount max="-1" min="-1"/>
+                </completeCondition>
+                <onComplete expression="//hcc:getHCCenterInfoResponse" xmlns:hcc="http://healthcare.wso2">
+                    <log category="INFO" level="custom" separator=",">
+                        <property name="MessageFlow" value="======================= Sending Back the Aggregated Responses. ==============="/>
+                    </log>
+                    <log category="INFO" level="full" separator=","/>
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </outSequence>
+    </target>
+    <!-- <publishWSDL key="gov:service_integration/wsdls/HCCService.wsdl"/> -->
+</proxy>

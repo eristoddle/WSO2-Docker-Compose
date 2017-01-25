@@ -1,5 +1,5 @@
+<!-- TODO: Work in Progress. Correct format but dependency problems in wso2 maven repo -->
 <!-- SEE https://docs.wso2.com/display/Carbon440/Installing+Features+using+pom+Files -->
-<!-- NOTE: Not currently being used. Here for experiments -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.sample</groupId>
@@ -8,13 +8,40 @@
     <packaging>pom</packaging>
     <name>Bardavon ESB Profile</name>
     <url>http://wso2.org</url>
+
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
                 <version>1.5.4</version>
                 <executions>
+
+                    <execution>
+                        <id>p2-repo-generation</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-repo-gen</goal>
+                        </goals>
+                        <configuration>
+                            <p2AgentLocation>${basedir}/target/p2-agent</p2AgentLocation>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <publishArtifacts>true</publishArtifacts>
+                            <publishArtifactRepository>true</publishArtifactRepository>
+                            <featureArtifacts>
+
+                                <!-- <featureArtifactDef>org.wso2.carbon:org.wso2.carbon.transports.hl7.feature:4.2.1</featureArtifactDef> -->
+
+                                <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.business.messaging.hl7.transport:4.6.6</featureArtifactDef>
+
+                                <!-- <featureArtifactDef>org.wso2.carbon.mediation:org.wso2.carbon.hl7.feature:4.6.10-SNAPSHOT</featureArtifactDef> -->
+
+                            </featureArtifacts>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>feature-install</id>
                         <phase>package</phase>
@@ -22,31 +49,46 @@
                             <goal>p2-profile-gen</goal>
                         </goals>
                         <configuration>
-                            <profile>$profile</profile>
-                            <metadataRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</metadataRepository>
-                            <artifactRepository>http://product-dist.wso2.com/p2/carbon/releases/wilkes/</artifactRepository>
-                            <destination>repository/components</destination>
+                            <profile>default</profile>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <destination>${basedir}/repository/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
+
+                                <!-- <feature>
+                                    <id>org.wso2.carbon.transports.hl7.feature.group</id>
+                                    <version>4.2.1</version>
+                                </feature> -->
+
                                 <feature>
-                                    <id>org.wso2.carbon.hl7.feature.group</id>
+                                    <id>org.wso2.carbon.business.messaging.hl7.transport</id>
                                     <version>4.6.6</version>
                                 </feature>
+
+                                <!-- <feature>
+                                    <id>org.wso2.carbon.hl7.feature.group</id>
+                                    <version>4.6.10-SNAPSHOT</version>
+                                </feature> -->
+
                             </features>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.1</version>
                 <executions>
+
                     <execution>
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace token="false" value="true" dir="repository/components/$profile/configuration/org.eclipse.equinox.simpleconfigurator">
+                                <replace token="false" value="true" dir="repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
                             </tasks>
@@ -55,11 +97,14 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+
                 </executions>
             </plugin>
         </plugins>
     </build>
+
     <repositories>
+
         <repository>
             <id>wso2-nexus</id>
             <name>WSO2 internal Repository</name>
@@ -70,15 +115,85 @@
                 <checksumPolicy>ignore</checksumPolicy>
             </releases>
         </repository>
+
+        <repository>
+            <id>wso2.releases</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>wso2.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+
     </repositories>
+
     <pluginRepositories>
+
         <pluginRepository>
             <id>wso2-maven-releases-repository</id>
             <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
         </pluginRepository>
+
         <pluginRepository>
             <id>wso2-maven-snapshots-repository</id>
             <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
         </pluginRepository>
+
     </pluginRepositories>
+
+    <dependencies>
+
+        <!-- <dependency>
+            <groupId>org.apache.ws.commons.axiom</groupId>
+            <artifactId>axiom-api</artifactId>
+            <version>${axiom.osgi.version.range}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom</groupId>
+            <artifactId>axiom-impl</artifactId>
+            <version>${axiom.osgi.version.range}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom</groupId>
+            <artifactId>axiom-api</artifactId>
+            <version>${axiom.osgi.version.range}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom.wso2</groupId>
+            <artifactId>axiom</artifactId>
+            <version>${axiom.wso2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom.wso2</groupId>
+            <artifactId>axiom</artifactId>
+            <version>${axiom.wso2.version}</version>
+        </dependency> -->
+
+    </dependencies>
+
+    <properties>
+        <!-- <axiom.api.wso2.version>1.2.11-wso2v2</axiom.api.wso2.version>
+        <axiom.wso2.version>1.2.11.wso2v2</axiom.wso2.version>
+        <axiom.osgi.version.range>[1.2.11.wso2v2, 1.3.0)</axiom.osgi.version.range> -->
+    </properties>
+
 </project>

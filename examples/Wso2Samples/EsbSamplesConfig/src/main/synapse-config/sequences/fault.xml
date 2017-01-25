@@ -1,0 +1,6 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="fault">
+    <!-- Generate a NACK containing an error -->
+    <property name="HL7_RESULT_MODE" value="NACK"/>
+    <property name="HL7_NACK_MESSAGE" expression="get-property('ERROR_MESSAGE')"/>
+    <respond/>
+</sequence>

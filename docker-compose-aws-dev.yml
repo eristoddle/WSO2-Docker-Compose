@@ -28,6 +28,8 @@ services:
         ports:
             - 9444:9444
             - 9764:9764
+            # NOTE: API and Proxy Service Ports
+            - 8281:8281
 
     greg:
         image: eristoddle/wso2greg_final

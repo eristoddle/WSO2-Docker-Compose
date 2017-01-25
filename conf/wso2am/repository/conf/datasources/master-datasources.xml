@@ -12,11 +12,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <url>jdbc:postgresql://wso2postgres:5432/amcarbondb?useSSL=false</url>
+                    <username>wso2user</username>
+                    <password>password</password>
+                    <driverClassName>org.postgresql.Driver</driverClassName>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -34,12 +34,11 @@
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <defaultAutoCommit>false</defaultAutoCommit>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <url>jdbc:postgresql://wso2postgres:5432/apimgtdb?useSSL=false</url>
+                    <username>wso2user</username>
+                    <password>password</password>
+                    <driverClassName>org.postgresql.Driver</driverClassName>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -60,7 +59,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>300</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
@@ -105,7 +104,7 @@
                     <username>wso2user</username>
                     <password>password</password>
                     <driverClassName>org.postgresql.Driver</driverClassName>
-                    <maxActive>80</maxActive>
+                    <maxActive>200</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1</validationQuery>
