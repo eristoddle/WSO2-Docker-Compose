@@ -46,6 +46,8 @@ services:
             - 9764:9764
             # NOTE: API and Proxy Service Ports
             - 8281:8281
+            # NOTE: HL7 port for examples
+            - 55971:55971
         volumes:
             - ./conf/wso2esb/repository/conf/datasources/master-datasources.xml:/mnt/wso2esb/repository/conf/datasources/master-datasources.xml
             - ./conf/wso2esb/repository/conf/registry.xml:/mnt/wso2esb/repository/conf/registry.xml

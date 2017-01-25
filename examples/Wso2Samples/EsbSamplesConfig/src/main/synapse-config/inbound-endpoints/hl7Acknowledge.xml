@@ -2,6 +2,7 @@
 <inboundEndpoint name="hl7Acknowledge" onError="fault" protocol="hl7"
   sequence="main" suspend="false" xmlns="http://ws.apache.org/ns/synapse">
   <parameters>
+    <parameter name="inbound.hl7.Port">55971</parameter>
     <parameter name="inbound.hl7.AutoAck">true</parameter>
     <parameter name="inbound.hl7.TimeOut">10000</parameter>
     <parameter name="inbound.hl7.CharSet">UTF-8</parameter>
