@@ -9,5 +9,4 @@ target
 *.metadata
 *.tmp
 *.classpath
-*.project
 effective.pom

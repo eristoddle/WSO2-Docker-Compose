@@ -8,4 +8,7 @@
     <artifact name="hl7Acknowledge" groupId="com.bardavon.examples.EsbSamplesConfig.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/inbound-endpoints/hl7Acknowledge.xml</file>
     </artifact>
+    <artifact name="restApiUsingGovernance" groupId="com.bardavon.examples.EsbSamplesConfig.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/restApiUsingGovernance.xml</file>
+    </artifact>
 </artifacts>
