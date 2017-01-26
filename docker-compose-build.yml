@@ -68,10 +68,10 @@ services:
             - 9448:9448
             - 9768:9768
 
-    as:
-        image: eristoddle/wso2as_final
-        build:
-            context: ./conf/wso2as
-        ports:
-            - 9449:9449
-            - 9769:9769
+    # as:
+    #     image: eristoddle/wso2as_final
+    #     build:
+    #         context: ./conf/wso2as
+    #     ports:
+    #         - 9449:9449
+    #         - 9769:9769

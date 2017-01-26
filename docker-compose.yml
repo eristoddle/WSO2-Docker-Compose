@@ -96,26 +96,26 @@ services:
             - ./conf/wso2dss/repository/conf/carbon.xml:/mnt/wso2dss/repository/conf/carbon.xml
             - ./conf/wso2dss/repository/conf/axis2/axis2.xml:/mnt/wso2dss/repository/conf/axis2/axis2.xml
 
-    # apim:
-    #     image: eristoddle/wso2am:2.0.0
-    #     ports:
-    #         - 9448:9448
-    #         - 9768:9768
-    #     volumes:
-    #         - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
-    #         - ./conf/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
-    #         - ./conf/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
-    #         - ./conf/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
-    #         - ./conf/wso2am/repository/conf/axis2/axis2.xml:/mnt/wso2am/repository/conf/axis2/axis2.xml
-
-    as:
-        image: eristoddle/wso2as:5.3.0
+    apim:
+        image: eristoddle/wso2am:2.0.0
         ports:
-            - 9449:9449
-            - 9769:9769
+            - 9448:9448
+            - 9768:9768
         volumes:
-            - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
-            - ./conf/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
-            - ./conf/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
-            - ./conf/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
-            - ./conf/wso2as/repository/conf/axis2/axis2.xml:/mnt/wso2as/repository/conf/axis2/axis2.xml
+            - ./conf/wso2am/repository/conf/datasources/master-datasources.xml:/mnt/wso2am/repository/conf/datasources/master-datasources.xml
+            - ./conf/wso2am/repository/conf/registry.xml:/mnt/wso2am/repository/conf/registry.xml
+            - ./conf/wso2am/repository/conf/security/authenticators.xml:/mnt/wso2am/repository/conf/security/authenticators.xml
+            - ./conf/wso2am/repository/conf/carbon.xml:/mnt/wso2am/repository/conf/carbon.xml
+            - ./conf/wso2am/repository/conf/axis2/axis2.xml:/mnt/wso2am/repository/conf/axis2/axis2.xml
+
+    # as:
+    #     image: eristoddle/wso2as:5.3.0
+    #     ports:
+    #         - 9449:9449
+    #         - 9769:9769
+    #     volumes:
+    #         - ./conf/wso2as/repository/conf/datasources/master-datasources.xml:/mnt/wso2as/repository/conf/datasources/master-datasources.xml
+    #         - ./conf/wso2as/repository/conf/registry.xml:/mnt/wso2as/repository/conf/registry.xml
+    #         - ./conf/wso2as/repository/conf/security/authenticators.xml:/mnt/wso2as/repository/conf/security/authenticators.xml
+    #         - ./conf/wso2as/repository/conf/carbon.xml:/mnt/wso2as/repository/conf/carbon.xml
+    #         - ./conf/wso2as/repository/conf/axis2/axis2.xml:/mnt/wso2as/repository/conf/axis2/axis2.xml

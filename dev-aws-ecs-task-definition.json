@@ -257,45 +257,6 @@
     },
     {
       "volumesFrom": [],
-      "memory": 1024,
-      "extraHosts": [],
-      "dnsServers": [],
-      "disableNetworking": null,
-      "dnsSearchDomains": [],
-      "portMappings": [
-        {
-          "hostPort": 9449,
-          "containerPort": 9449,
-          "protocol": "tcp"
-        },
-        {
-          "hostPort": 9769,
-          "containerPort": 9769,
-          "protocol": "tcp"
-        }
-      ],
-      "hostname": null,
-      "essential": true,
-      "entryPoint": [],
-      "mountPoints": [],
-      "name": "as",
-      "ulimits": [],
-      "dockerSecurityOptions": [],
-      "environment": [],
-      "links": [],
-      "workingDirectory": null,
-      "readonlyRootFilesystem": false,
-      "image": "eristoddle/wso2as_final",
-      "command": [],
-      "user": null,
-      "dockerLabels": {},
-      "logConfiguration": null,
-      "cpu": 0,
-      "privileged": false,
-      "memoryReservation": null
-    },
-    {
-      "volumesFrom": [],
       "memory": 256,
       "extraHosts": [],
       "dnsServers": [],

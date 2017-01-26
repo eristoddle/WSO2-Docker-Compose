@@ -50,14 +50,14 @@ services:
             - 9447:9447
             - 9767:9767
 
-    # apim:
-    #     image: eristoddle/wso2am_final
-    #     ports:
-    #         - 9448:9448
-    #         - 9768:9768
-
-    as:
-        image: eristoddle/wso2as_final
+    apim:
+        image: eristoddle/wso2am_final
         ports:
-            - 9449:9449
-            - 9769:9769
+            - 9448:9448
+            - 9768:9768
+
+    # as:
+    #     image: eristoddle/wso2as_final
+    #     ports:
+    #         - 9449:9449
+    #         - 9769:9769
