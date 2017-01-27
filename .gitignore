@@ -11,3 +11,4 @@ target
 *.classpath
 effective.pom
 node_modules
+template/node_modules
