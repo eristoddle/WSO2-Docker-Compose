@@ -10,3 +10,4 @@ target
 *.tmp
 *.classpath
 effective.pom
+node_modules
