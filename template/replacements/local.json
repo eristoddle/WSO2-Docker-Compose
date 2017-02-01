@@ -1,0 +1,63 @@
+{
+    "srcPath": "build/local/conf",
+    "destPath": "build/local/conf",
+    "wso2Gateway": "localhost",
+    "databaseDriver": "org.postgresql.Driver",
+
+    "isPortOffset": 0,
+    "esbPortOffset": 1,
+    "gregPortOffset": 2,
+    "brsPortOffset": 3,
+    "dssPortOffset": 4,
+    "amPortOffset": 5,
+
+    "gregUrl": "https://greg:9443/registry",
+
+    "esbCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/esbcarbondb?useSSL=false",
+    "esbCarbonUsername": "wso2user",
+    "esbCarbonPassword": "password",
+
+    "amCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/amcarbondb?useSSL=false",
+    "amCarbonUsername": "wso2user",
+    "amCarbonPassword": "password",
+    "amMetricsConnectionString": "jdbc:postgresql://wso2postgres:5432/ammetricsdb?useSSL=false",
+    "amMetricsUsername": "wso2user",
+    "amMetricsPassword": "password",
+    "amApiManagementConnectionString": "jdbc:postgresql://wso2postgres:5432/apimgtdb?useSSL=false",
+    "amApiManagementUsername": "wso2user",
+    "amApiManagementPassword": "password",
+    "amMbStoreConnectionString": "jdbc:postgresql://wso2postgres:5432/mbstoredb?useSSL=false",
+    "amMbStoreUsername": "wso2user",
+    "amMbStorePassword": "password",
+
+    "brsCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/brscarbondb?useSSL=false",
+    "brsCarbonUsername": "wso2user",
+    "brsCarbonPassword": "password",
+
+    "dssCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/dsscarbondb?useSSL=false",
+    "dssCarbonUsername": "wso2user",
+    "dssCarbonPassword": "password",
+
+    "gregCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/registrydb?useSSL=false",
+    "gregCarbonUsername": "wso2user",
+    "gregCarbonPassword": "password",
+    "gregMetricsConnectionString": "jdbc:postgresql://wso2postgres:5432/gregmetricsdb?useSSL=false",
+    "gregMetricsUsername": "wso2user",
+    "gregMetricsPassword": "password",
+    "gregBpsConnectionString": "jdbc:postgresql://wso2postgres:5432/gregbpeldb?useSSL=false",
+    "gregBpsUsername": "wso2user",
+    "gregBpsPassword": "password",
+    "gregSocialConnectionString": "jdbc:postgresql://wso2postgres:5432/gregsocialdb?useSSL=false",
+    "gregSocialUsername": "wso2user",
+    "gregSocialPassword": "password",
+
+    "isCarbonConnectionString": "jdbc:postgresql://wso2postgres:5432/identitycarbondb?useSSL=false",
+    "isCarbonUsername": "wso2user",
+    "isCarbonPassword": "password",
+    "isMetricsConnectionString": "jdbc:postgresql://wso2postgres:5432/identitymetricsdb?useSSL=false",
+    "isMetricsUsername": "wso2user",
+    "isMetricsPassword": "password",
+    "isBpsConnectionString": "jdbc:postgresql://wso2postgres:5432/identitybpeldb?useSSL=false",
+    "isBpsUsername": "wso2user",
+    "isBpsPassword": "password"
+}
