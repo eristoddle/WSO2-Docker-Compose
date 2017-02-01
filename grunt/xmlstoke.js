@@ -76,7 +76,7 @@ module.exports = {
             ]
         },
         files: {
-            '<%= destPath %>/wso2<%= wso2app %>/repository/conf/datasources/master-datasources.xml': 'customXml/master-datasources.xml'
+            '<%= destPath %>/wso2<%= wso2app %>/repository/conf/datasources/master-datasources.xml': 'template/customXml/master-datasources.xml'
         }
     },
     removeUnnecessaryConnections: {
@@ -224,7 +224,7 @@ module.exports = {
             actions: []
         },
         files: {
-            '<%= destPath %>/wso2<%= wso2app %>/repository/conf/axis2/axis2.xml': 'customXml/hl7-axis2.xml'
+            '<%= destPath %>/wso2<%= wso2app %>/repository/conf/axis2/axis2.xml': 'template/customXml/hl7-axis2.xml'
         }
     },
     metricsDataSources: {
@@ -319,7 +319,7 @@ module.exports = {
                 }
             ],
             files: {
-                "customXml/sso-idp-config.xml": "customXml/sso-idp-config.xml"
+                "template/customXml/sso-idp-config.xml": "template/customXml/sso-idp-config.xml"
             }
             // files: {
             //     'build/local/conf/wso2is/repository/conf/identity/sso-idp-config.xml': '<%= srcPath %>/wso2is/repository/conf/identity/sso-idp-config.xml'

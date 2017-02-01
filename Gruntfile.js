@@ -100,7 +100,7 @@ module.exports = (grunt) => {
 
     //Main function i.e grunt buildAll:local, grunt buildAll:prod
     grunt.registerTask('buildAll', (env) => {
-        let globals = grunt.file.readJSON(`replacements/${env}.json`);
+        let globals = grunt.file.readJSON(`template/replacements/${env}.json`);
 
         global['env'] = env;
         //Set globals based on json config file

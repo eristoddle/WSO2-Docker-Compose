@@ -3,7 +3,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ['conf/**'],
+                src: ['template/conf/**'],
                 dest: 'build/local/'
             }
         ]
@@ -12,7 +12,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ['conf/**'],
+                src: ['template/conf/**'],
                 dest: 'build/dev/'
             }
         ]
@@ -21,7 +21,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ['conf/**'],
+                src: ['template/conf/**'],
                 dest: 'build/qa/'
             }
         ]
@@ -30,7 +30,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ['conf/**'],
+                src: ['template/conf/**'],
                 dest: 'build/stage/'
             }
         ]
@@ -39,7 +39,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ['conf/**'],
+                src: ['template/conf/**'],
                 dest: 'build/prod/'
             }
         ]
@@ -48,7 +48,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2esb/',
+                cwd: 'template/conf/wso2esb/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2brs/'
             }
@@ -58,7 +58,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2esb/',
+                cwd: 'template/conf/wso2esb/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2esb/'
             }
@@ -68,7 +68,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2am/',
+                cwd: 'template/conf/wso2am/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2am/'
             }
@@ -78,7 +78,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2dss/',
+                cwd: 'template/conf/wso2dss/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2dss/'
             }
@@ -88,7 +88,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2greg/',
+                cwd: 'template/conf/wso2greg/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2greg/'
             }
@@ -98,7 +98,7 @@ module.exports = {
         files: [
             {
                 expand: true,
-                cwd: 'conf/wso2is/',
+                cwd: 'template/conf/wso2is/',
                 src: ['**'],
                 dest: 'build/<%= env %>/conf/wso2is/'
             }
@@ -108,7 +108,7 @@ module.exports = {
         files: [
             {
                 cwd: '',
-                src: 'customXml/sso-idp-config.xml',
+                src: 'template/customXml/sso-idp-config.xml',
                 dest: 'build/<%= env %>/conf/wso2is/repository/conf/identity/sso-idp-config.xml'
             }
         ]

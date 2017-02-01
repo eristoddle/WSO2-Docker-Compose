@@ -18,7 +18,7 @@ VOLUME ["/mnt/wso2is/repository/conf"]
 VOLUME ["/mnt/wso2scripts/"]
 
 COPY build/local/conf /mnt
-COPY conf/wso2scripts /mnt/wso2scripts
+COPY template/conf/wso2scripts /mnt/wso2scripts
 
 # Key to creating container for data
 CMD ["true"]
