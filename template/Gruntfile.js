@@ -110,7 +110,6 @@ module.exports = (grunt) => {
 
         grunt.task.run(
             `clean:${env}`,
-            //`build:${env}:is`,
             `build:${env}:esb`,
             `build:${env}:brs`,
             `build:${env}:am`,

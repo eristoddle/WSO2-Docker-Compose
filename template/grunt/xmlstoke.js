@@ -11,6 +11,9 @@ module.exports = {
                 }, {
                     xpath: '/Authenticators/Authenticator[2]/Config//Parameter[2]',
                     value: '<%= serviceProviderId %>'
+                }, {
+                    xpath: '/Authenticators/Authenticator[2]/@disabled',
+                    value: 'false'
                 }
             ]
         },
@@ -106,7 +109,7 @@ module.exports = {
                     value: 'remote_registry'
                 }, {
                     type: 'I',
-                    xpath: '/wso2registry/dbConfig',
+                    xpath: '/wso2registry/dbConfig[2]',
                     node: 'dataSource',
                     value: 'jdbc/WSO2CarbonDB_GREG'
                 }, {

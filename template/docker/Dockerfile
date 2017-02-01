@@ -6,20 +6,19 @@
 # AND: https://blog.codeship.com/orchestrate-containers-for-development-with-docker-compose/
 # AND: https://howchoo.com/g/y2y1mtkznda/getting-started-with-docker-compose-and-django
 
-FROM busybox:latest
-VOLUME ["/mnt"]
-COPY build/local/conf /tmp-conf
-CMD mv -R /tmp-conf/wso2am/* /mnt/wso2am/
-CMD mv -R /tmp-conf/wso2as/* /mnt/wso2as/
-CMD mv -R /tmp-conf/wso2brs/* /mnt/wso2brs/
-CMD mv -R /tmp-conf/wso2dss/* /mnt/wso2dss/
-CMD mv -R /tmp-conf/wso2esb/* /mnt/wso2esb/
-CMD mv -R /tmp-conf/wso2greg/* /mnt/wso2greg/
-CMD mv -R /tmp-conf/wso2is/* /mnt/wso2is/
+FROM alpine:latest
 
-CMD mkdir /var/lib/postgresql/data
-CMD mv -R /tmp-conf/wso2scripts/postgres-sql/* /tmp/postgres-sql/
-CMD mv -R /tmp-conf/wso2scripts/postgres-init/* /docker-entrypoint-initdb.d/
+VOLUME ["/mnt/wso2am/repository/conf"]
+VOLUME ["/mnt/wso2as/repository/conf"]
+VOLUME ["/mnt/wso2brs/repository/conf"]
+VOLUME ["/mnt/wso2dss/repository/conf"]
+VOLUME ["/mnt/wso2esb/repository/conf"]
+VOLUME ["/mnt/wso2greg/repository/conf"]
+VOLUME ["/mnt/wso2is/repository/conf"]
+VOLUME ["/mnt/wso2scripts/"]
+
+COPY build/local/conf /mnt
+COPY conf/wso2scripts /mnt/wso2scripts
 
 # Key to creating container for data
 CMD ["true"]
