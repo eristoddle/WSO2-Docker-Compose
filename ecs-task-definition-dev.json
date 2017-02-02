@@ -1,0 +1,163 @@
+{
+    "containerDefinitions": [
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2am:2.0.0",
+            "name": "am",
+            "portMappings": [
+                {
+                    "containerPort": 9448,
+                    "hostPort": 9448
+                },
+                {
+                    "containerPort": 9768,
+                    "hostPort": 9768
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2esb:5.0.0",
+            "name": "brs",
+            "portMappings": [
+                {
+                    "containerPort": 9446,
+                    "hostPort": 9446
+                },
+                {
+                    "containerPort": 9766,
+                    "hostPort": 9766
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "essential": false,
+            "memory": 256,
+            "image": "eristoddle/wso2-config-dev",
+            "name": "confdata"
+        },
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2dss:3.5.1",
+            "name": "dss",
+            "portMappings": [
+                {
+                    "containerPort": 9447,
+                    "hostPort": 9447
+                },
+                {
+                    "containerPort": 9767,
+                    "hostPort": 9767
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2esb_final",
+            "name": "esb",
+            "portMappings": [
+                {
+                    "containerPort": 9444,
+                    "hostPort": 9444
+                },
+                {
+                    "containerPort": 9764,
+                    "hostPort": 9764
+                },
+                {
+                    "containerPort": 8281,
+                    "hostPort": 8281
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2greg:5.3.0",
+            "name": "greg",
+            "portMappings": [
+                {
+                    "containerPort": 9445,
+                    "hostPort": 9445
+                },
+                {
+                    "containerPort": 9765,
+                    "hostPort": 9765
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "essential": true,
+            "memory": 1024,
+            "image": "eristoddle/wso2is:5.3.0",
+            "name": "is",
+            "portMappings": [
+                {
+                    "containerPort": 9443,
+                    "hostPort": 9443
+                },
+                {
+                    "containerPort": 9763,
+                    "hostPort": 9763
+                }
+            ],
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        },
+        {
+            "environment": [
+                {
+                    "name": "POSTGRES_USER",
+                    "value": "wso2user"
+                },
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "password"
+                }
+            ],
+            "essential": true,
+            "memory": 1024,
+            "image": "postgres:9.6",
+            "name": "wso2postgres",
+            "volumesFrom": [
+                {
+                    "sourceContainer": "confdata"
+                }
+            ]
+        }
+    ],
+    "family": "",
+    "volumes": []
+}

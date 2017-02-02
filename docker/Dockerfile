@@ -15,10 +15,15 @@ VOLUME ["/mnt/wso2dss/repository/conf"]
 VOLUME ["/mnt/wso2esb/repository/conf"]
 VOLUME ["/mnt/wso2greg/repository/conf"]
 VOLUME ["/mnt/wso2is/repository/conf"]
-VOLUME ["/mnt/wso2scripts/"]
+
+VOLUME ["/tmp/postgres-sql"]
+VOLUME ["/docker-entrypoint-initdb.d"]
 
 COPY build/local/conf /mnt
-COPY template/conf/wso2scripts /mnt/wso2scripts
+
+COPY template/conf/wso2scripts/postgres-init /docker-entrypoint-initdb.d
+COPY template/conf/wso2scripts/postgres-sql /tmp/postgres-sql
+CMD mkdir /var/lib/postgresql/data
 
 # Key to creating container for data
 CMD ["true"]
