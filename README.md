@@ -18,7 +18,7 @@ Run this command in the main directory of the project
 docker-compose up
 ```
 
-**NOTE: On a local environment, the postgres container must build the databases for wso2. This will take about a minute or less. While this is happening, the wso2 apps will crash if they can't connect. So run the command once and then kill the process with ctrl-c (not `docker-compose down`) and the run the up command again. You will have to do this also after running `docker-compose down`**
+**NOTE: On a local environment, the postgres container must build the databases for wso2. This will take about a minute or less. While this is happening, the wso2 apps will crash if they can't connect. So run the command once and then kill the process with ctrl-c (not `docker-compose down`) after the postgres image says it has restarted and is ready for connections and the run the up command again. You will have to do this also after running `docker-compose down`**
 
 ### Running with docker-compose
 
@@ -105,7 +105,7 @@ There are a few files in template/customXml that I inject into the process becau
 
 I have seperated the configuration file creation from the docker image creation in grunt because of this. So that you can create the configuration files, then modify build/{env}/wso2is/repository/conf/identity/sso-idp-config.xml file to your needs and then run the command to create the docker image.
 
-You will have to modify the Issuer, AssertionConsumerServiceURL and DefaultAssertionConsumerServiceURL to the same values in the generated build/{env}/{app}/repository/conf/security/authenticators.xml of each application. If you didn't change any port offsets, this should only involve changing the host name in each url since I programmatically create the  service provider names (Issuer).
+**You will have to modify the Issuer, AssertionConsumerServiceURL and DefaultAssertionConsumerServiceURL to the same values in the generated build/{env}/{app}/repository/conf/security/authenticators.xml of each application. If you didn't change any port offsets, this should only involve changing the host name in each url since I programmatically create the  service provider names (Issuer).**
 
 It may be good for now just to create one of these files for each environment instance once we get that locked down and then copy the right one into the final configuration files. Then all would be automated.
 
@@ -330,4 +330,4 @@ ecs-cli down --force
 
 WIP
 
-I added a task definition, `ecs-task-definition-dev.json` for use with the aws cli based off of my experiences and settings used with the ecs-cli.
+I added a task definition, `ecs-task-definition-dev.json` for use with the aws cli based off of my  experiences and settings used with the ecs-cli.
