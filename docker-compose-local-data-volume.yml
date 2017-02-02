@@ -20,10 +20,8 @@ services:
         # NOTE: Port forwarded for local development
         ports:
             - 5432:5432
-        volumes:
-            - ./template/conf/wso2scripts/postgres-init:/docker-entrypoint-initdb.d
-            - /var/lib/postgresql/data
-            - ./template/conf/wso2scripts/postgres-sql:/tmp/postgres-sql
+        volumes_from:
+            - confdata
 
     is:
         image: eristoddle/wso2is:5.3.0
