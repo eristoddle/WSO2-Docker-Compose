@@ -299,8 +299,8 @@ module.exports = {
             actions: [
                 {
                     xpath: '/SSOIdentityProviderConfig/ServiceProviders[1]/ServiceProvider[<%= parseInt(ssoSlot) %>]/Issuer[1]',
-                    //value: '<%= serviceProviderId %>'
-                    value: 'test'
+                    value: '<%= serviceProviderId %>'
+                    // value: 'test'
                 }, {
                     xpath: '/SSOIdentityProviderConfig/ServiceProviders[1]/ServiceProvider[<%= ssoSlot %>]/AssertionConsumerServiceURLs[1]/AssertionConsumerServiceURL[1]',
                     value: 'https://<%= wso2Gateway %>:<%= parseInt(9443) + parseInt(portOffset) %>/acs'

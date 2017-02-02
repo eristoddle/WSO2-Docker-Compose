@@ -12,4 +12,7 @@ target
 effective.pom
 node_modules
 template/node_modules
-build
+build/dev
+build/qa
+build/stage
+build/prod
