@@ -1,0 +1,89 @@
+version: '2'
+services:
+    # Portainer to manage your containers locally
+    # Interface located at http://localhost:9000
+    portainer:
+        image: portainer/portainer:latest
+        ports:
+            - 9000:9000
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
+    confdata:
+        image: eristoddle/wso2-config-local
+
+    wso2postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=wso2user
+        # NOTE: Port forwarded for local development
+        ports:
+            - 5432:5432
+        volumes:
+            - ./template/conf/wso2scripts/postgres-init:/docker-entrypoint-initdb.d
+            - /var/lib/postgresql/data
+            - ./template/conf/wso2scripts/postgres-sql:/tmp/postgres-sql
+
+    is:
+        image: eristoddle/wso2is:5.3.0
+        hostname: wso2identity
+        ports:
+            - 9443:9443
+            - 9763:9763
+        volumes_from:
+            - confdata
+
+    esb:
+        # TODO: Script building this image with HL7 connector
+        image: eristoddle/wso2esb_final
+        ports:
+            - 9444:9444
+            - 9764:9764
+            # NOTE: API and Proxy Service Ports
+            - 8281:8281
+            # NOTE: HL7 port for examples
+            - 55971:55971
+        volumes_from:
+            - confdata
+
+    greg:
+        image: eristoddle/wso2greg:5.3.0
+        ports:
+            - 9445:9445
+            - 9765:9765
+        volumes_from:
+            - confdata
+
+    # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
+    brs:
+        image: eristoddle/wso2esb:5.0.0
+        ports:
+            - 9446:9446
+            - 9766:9766
+        volumes_from:
+            - confdata
+
+    dss:
+        image: eristoddle/wso2dss:3.5.1
+        ports:
+            - 9447:9447
+            - 9767:9767
+        volumes_from:
+            - confdata
+
+    am:
+        image: eristoddle/wso2am:2.0.0
+        ports:
+            - 9448:9448
+            - 9768:9768
+        volumes_from:
+            - confdata
+
+    # as:
+    #     image: eristoddle/wso2as:5.3.0
+    #     ports:
+    #         - 9449:9449
+    #         - 9769:9769
+    #     volumes_from:
+    #         - confdata

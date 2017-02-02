@@ -1,0 +1,14 @@
+FROM alpine:latest
+
+VOLUME ["/mnt/wso2am/repository/conf"]
+VOLUME ["/mnt/wso2as/repository/conf"]
+VOLUME ["/mnt/wso2brs/repository/conf"]
+VOLUME ["/mnt/wso2dss/repository/conf"]
+VOLUME ["/mnt/wso2esb/repository/conf"]
+VOLUME ["/mnt/wso2greg/repository/conf"]
+VOLUME ["/mnt/wso2is/repository/conf"]
+
+COPY build/prod/conf /mnt
+
+# Key to creating container for data
+CMD ["true"]

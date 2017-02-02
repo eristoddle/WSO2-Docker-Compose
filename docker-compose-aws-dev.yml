@@ -1,10 +1,17 @@
 version: '2'
 services:
     confdata:
-        container_name: confdata
         image: eristoddle/wso2-dev-config
-        volumes:
-            - /tmp/wso2scripts:/conf/wso2scripts
+        # volumes:
+        #     - /tmp/wso2am:/conf/wso2am
+        #     - /tmp/wso2as:/conf/wso2as
+        #     - /tmp/wso2brs:/conf/wso2brs
+        #     - /tmp/wso2dss:/conf/wso2dss
+        #     - /tmp/wso2esb:/conf/wso2esb
+        #     - /tmp/wso2greg:/conf/wso2greg
+        #     - /tmp/wso2is:/conf/wso2is
+        #     - /tmp/wso2mysql:/conf/wso2mysql
+        #     - /tmp/wso2scripts:/conf/wso2scripts
 
     wso2postgres:
         image: postgres:9.6
@@ -23,13 +30,13 @@ services:
             - 9443:9443
             - 9763:9763
 
-    esb:
-        image: eristoddle/wso2esb_final
-        ports:
-            - 9444:9444
-            - 9764:9764
-            # NOTE: API and Proxy Service Ports
-            - 8281:8281
+    # esb:
+    #     image: eristoddle/wso2esb_final
+    #     ports:
+    #         - 9444:9444
+    #         - 9764:9764
+    #         # NOTE: API and Proxy Service Ports
+    #         - 8281:8281
 
     greg:
         image: eristoddle/wso2greg_final
@@ -38,17 +45,17 @@ services:
             - 9445:9445
             - 9765:9765
 
-    brs:
-        image: eristoddle/wso2brs_final
-        ports:
-            - 9446:9446
-            - 9766:9766
+    # brs:
+    #     image: eristoddle/wso2brs_final
+    #     ports:
+    #         - 9446:9446
+    #         - 9766:9766
 
-    dss:
-        image: eristoddle/wso2dss_final
-        ports:
-            - 9447:9447
-            - 9767:9767
+    # dss:
+    #     image: eristoddle/wso2dss_final
+    #     ports:
+    #         - 9447:9447
+    #         - 9767:9767
 
     # apim:
     #     image: eristoddle/wso2am_final
@@ -56,8 +63,8 @@ services:
     #         - 9448:9448
     #         - 9768:9768
 
-    as:
-        image: eristoddle/wso2as_final
-        ports:
-            - 9449:9449
-            - 9769:9769
+    # as:
+    #     image: eristoddle/wso2as_final
+    #     ports:
+    #         - 9449:9449
+    #         - 9769:9769
