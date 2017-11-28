@@ -1,8 +1,9 @@
-version: '2'
+version: '2.1'
 services:
     # Portainer to manage your containers locally
     # Interface located at http://localhost:9000
     portainer:
+        command: ["--no-auth"]
         image: portainer/portainer:latest
         ports:
             - 9000:9000
@@ -22,6 +23,12 @@ services:
             - 5432:5432
         volumes_from:
             - confdata
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -h localhost"]
+            interval: 10s
+            timeout: 10s
+            retries: 3
+        restart: always
 
     is:
         image: eristoddle/wso2is:5.3.0
@@ -44,6 +51,9 @@ services:
             - 55971:55971
         volumes_from:
             - confdata
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
 
     greg:
         image: eristoddle/wso2greg:5.3.0
@@ -61,6 +71,9 @@ services:
             - 9766:9766
         volumes_from:
             - confdata
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
 
     dss:
         image: eristoddle/wso2dss:3.5.1
@@ -69,6 +82,9 @@ services:
             - 9767:9767
         volumes_from:
             - confdata
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
 
     am:
         image: eristoddle/wso2am:2.0.0
@@ -77,6 +93,9 @@ services:
             - 9768:9768
         volumes_from:
             - confdata
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
 
     # as:
     #     image: eristoddle/wso2as:5.3.0
