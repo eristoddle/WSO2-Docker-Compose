@@ -12,13 +12,15 @@ I used that repo to build the base image and wso2 images and push the images to 
 
 ## Getting Started with Docker-compose
 
+It's recommended to allocate at least 4 GB of memory to the docker vm.
+
 Run this command in the main directory of the project
 
 ```sh
 docker-compose up
 ```
 
-**NOTE: On a local environment, the postgres container must build the databases for wso2. This will take about a minute or less. While this is happening, the wso2 apps will crash if they can't connect. So run the command once and then kill the process with ctrl-c (not `docker-compose down`) after the postgres image says it has restarted and is ready for connections and the run the up command again. You will have to do this also after running `docker-compose down`**
+**NOTE: The first build of the docker image, postgres takes a while to load so other instances may fail multiple times before working in the first few minutes. **
 
 ### Running with docker-compose
 
