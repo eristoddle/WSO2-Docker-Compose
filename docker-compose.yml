@@ -3,7 +3,7 @@ services:
     # Portainer to manage your containers locally
     # Interface located at http://localhost:9000
     portainer:
-        command: ["--no-auth"]
+        command: ["--no-auth", "-H", "unix:///var/run/docker.sock"]
         image: portainer/portainer:latest
         ports:
             - 9000:9000
