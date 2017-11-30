@@ -28,6 +28,8 @@ services:
             timeout: 10s
             retries: 3
         restart: always
+        logging:
+            driver: none
 
     is:
         image: eristoddle/wso2is:5.3.0
