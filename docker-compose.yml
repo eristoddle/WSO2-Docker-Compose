@@ -1,8 +1,9 @@
-version: '2'
+version: '2.1'
 services:
     # Portainer to manage your containers locally
     # Interface located at http://localhost:9000
     portainer:
+        command: ["--no-auth", "-H", "unix:///var/run/docker.sock"]
         image: portainer/portainer:latest
         ports:
             - 9000:9000
@@ -21,10 +22,21 @@ services:
             - ./template/conf/wso2scripts/postgres-init:/docker-entrypoint-initdb.d
             - /var/lib/postgresql/data
             - ./template/conf/wso2scripts/postgres-sql:/tmp/postgres-sql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -h localhost"]
+            interval: 10s
+            timeout: 10s
+            retries: 3
+        restart: always
+        logging:
+            driver: none
 
     is:
         image: eristoddle/wso2is:5.3.0
         hostname: wso2identity
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9443:9443
             - 9763:9763
@@ -34,6 +46,9 @@ services:
     esb:
         # TODO: Script building this image with HL7 connector
         image: eristoddle/wso2esb_final
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9444:9444
             - 9764:9764
@@ -46,15 +61,21 @@ services:
 
     greg:
         image: eristoddle/wso2greg:5.3.0
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9445:9445
             - 9765:9765
         volumes:
             - ./build/local/conf/wso2greg/repository/conf:/mnt/wso2greg/repository/conf/
-
-    # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
+    #
+    # # NOTE: There is no standalone BRS any more. So this is another ESB but uses configs from the /conf/wso2brs folder
     brs:
         image: eristoddle/wso2esb:5.0.0
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9446:9446
             - 9766:9766
@@ -63,6 +84,9 @@ services:
 
     dss:
         image: eristoddle/wso2dss:3.5.1
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9447:9447
             - 9767:9767
@@ -71,6 +95,9 @@ services:
 
     am:
         image: eristoddle/wso2am:2.0.0
+        depends_on:
+            wso2postgres:
+                condition: service_healthy
         ports:
             - 9448:9448
             - 9768:9768
